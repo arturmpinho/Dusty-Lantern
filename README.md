@@ -119,6 +119,17 @@ The icons used are self-explanatory and aid the navigation of the user, bringing
 
 #9A031E: 
 
+While creating this color scheme, I have used the [Contrast-Checker](https://coolors.co/contrast-checker "Contrast Checker") tool to assure a good readability across the website and decide between different color-pairings to be used in the apps.
+
+|Text color  	|Background color  	|Result   	|
+|---	        |---	            |---	    |
+|#393E46|#EEEEEE|Very good|
+|~~#393E46~~|~~#9A031E~~|~~Very poor~~|
+|#EEEEEE|#393E46|Very good|
+|#EEEEEE|#9A031E|Very good|
+|~~#9A031E~~|~~#393E46~~|~~Very poor~~|
+|#9A031E|#EEEEEE|Very good|
+
 [[Back to top]](#table-of-contents)
 
 #### Structure
