@@ -102,7 +102,7 @@ As a user, I want to:
 
 ### **Design Choices**
 #### Fonts
-![Mockup Image](wireframes/dusty_lantern_fonts.png)
+![Fonts](wireframes/dusty_lantern_fonts.png)
 
 #### Icons
 Throughout out the website, I will be using icons provided by [FontAwesome](https://fontawesome.com/ "FontAwesome").
@@ -215,6 +215,7 @@ The icons used are self-explanatory and aid the navigation of the user, bringing
 * [Coolors](https://coolors.co/ "Coolors")
 * [Contrast-Checker](https://coolors.co/contrast-checker "Contrast Checker")
 * [Free Logo Design](https://www.freelogodesign.org "Free Logo Design")
+* [Font Joy](https://fontjoy.com/ "Font Joy")
 * [TinyPNG](https://tinypng.com/ "Tiny PNG")
 * [Favicon](https://favicon.io/favicon-converter/ "Favcicon")
 * [RandomKeygen](https://randomkeygen.com/ "RandomKeygen")
