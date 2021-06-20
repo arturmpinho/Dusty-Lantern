@@ -105,12 +105,13 @@ As a user, I want to:
 ![Fonts](wireframes/dusty_lantern_fonts.png)
 
 #### Icons
+
 Throughout out the website, I will be using icons provided by [FontAwesome](https://fontawesome.com/ "FontAwesome").
 
 The icons used are self-explanatory and aid the navigation of the user, bringing an intuitive imagery to the website.
 
 #### Colors
-![Mockup Image](wireframes/dusty_lantern_color_palette.png)
+![Colors](wireframes/dusty_lantern_color_palette.png)
 
 [[Back to top]](#table-of-contents)
 
