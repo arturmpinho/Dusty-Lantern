@@ -1,4 +1,4 @@
-![DB Structure](static/images/dusty_lantern_logo.png)
+![Logo](static/images/dusty_lantern_logo.png)
 # **DUSTY LANTERN**
 
 ![Mockup Image](wireframes/mockup.png)
@@ -6,7 +6,13 @@
 ---
 
 ## **Project Goal** 
+***Dusty Lantern*** aims to be the market reference in the auction of second-hand products/belongings.
 
+It intends to provide buyers and sellers with an intuitive and appealing platform to trade their used belongings.
+
+With sustainability being the key-driver of innovation and the second-hand market increasing substantially during the past years, combining both contexts generates a great opportunity that must be addressed.
+
+With this in mind the ***Dusty Lantern*** will provide like-minded people the best platform so they can give second-hand products/belongings a new life and start contributing to a more sustainable society, monetizing their own old and unused items.
 
 ---
 <a></a>
