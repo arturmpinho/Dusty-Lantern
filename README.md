@@ -113,6 +113,12 @@ The icons used are self-explanatory and aid the navigation of the user, bringing
 #### Colors
 ![Colors](wireframes/dusty_lantern_color_palette.png)
 
+#393E46: 
+
+#EEEEEE: 
+
+#9A031E: 
+
 [[Back to top]](#table-of-contents)
 
 #### Structure
