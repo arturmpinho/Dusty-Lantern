@@ -78,8 +78,32 @@ With this in mind the ***Dusty Lantern*** will provide like-minded people the be
 
 
 #### **Stories**
-As a user, I want to:
-* 
+User stories are divided into buyer/seller as the user will have the option to choose which status he wants to interact with the platform with.
+
+Therefore,
+
+As a **buyer**:
+
+1. I want to see second-hand articles of my interest
+1. I want to place bids on auctions of my interest
+1. I want to have a a good overview of the most poplar auctions
+1. I want to add to a watchlist the auctions I want to follow/participate
+1. I want to have a full overview of how much I will pay for the won auction
+1. I want to see my outstanding open balance
+1. I want to see when the auctions will start
+1. I want to see how long until the auction closes
+1. I want to see my history of won auctions
+
+
+As a **seller**:
+
+1. As a seller, I want to add items to auctions
+1. As a seller, I want to delete auctions created if these did not start or up to 24hrs before auction starting date & time
+1. As a seller, I want to edit auctions created if these did not start or up to 24hrs before auction starting date & time
+1. As a seller, I want to see my outstanding receivables
+1. As a seller, I want to follow my auctions bids live
+1. As a seller, I want to have an overview of my items sold
+1. As a seller, I want to receive my payments via a secure platform
 
 [[Back to top]](#table-of-contents)
 
