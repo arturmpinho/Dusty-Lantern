@@ -69,8 +69,13 @@ With this in mind the ***Dusty Lantern*** will provide like-minded people the be
 
 ### **User Goals and Stories**
 #### **Goals**
-As a user I aim for:
-* 
+
+* The homepage must be clear, intuitive and self-explanatory about the purpose of the marketplace
+* The marketplace must be attractive and entice user to participate in the auctions
+* The entire website must be fully responsive on every device
+* The website must give the user the ability to bid/sell second-hand articles
+* The marketplace must display auctions categorised
+
 
 #### **Stories**
 As a user, I want to:
