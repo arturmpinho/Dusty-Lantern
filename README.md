@@ -111,10 +111,23 @@ As a **seller**:
 
 ### **User Requirements and Expectations**
 #### **Requirements**
-* 
+
+* Easy and intuitive navigation system across pages through a navbar
+* Efficient way of finding auctions of interest as a buyer
+* Possibility of adding items for sale according to my own requirements (date, base amount, level of bid increments, etc.)
+* Check my auctions history
+* Easy switch between my seller/buyer profiles
+* Contact information easy to find
 
 #### **Expectations**
-* 
+
+* Strong connections with the platform with via a welcoming landing page
+* Links to external pages must open in a new browser tab
+* Navigation system must be working properly
+* When auction is finished, as a buyer, I want to receive a confirmation email if I won the auction
+* For the auctions won as a buyer, I want to have the immeadiate option of proceeding with the payment of the item
+* As a buyer I want to have a clear overview of the total cost of the purchase item, including any additional fees
+* As a seller, a transparent transaction between the buyer and me with the platform as an intermediate for a safer transaction
 
 [[Back to top]](#table-of-contents)
 
