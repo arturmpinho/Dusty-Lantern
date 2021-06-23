@@ -25,7 +25,7 @@ With this in mind the ***Dusty Lantern*** will provide like-minded people the be
 
     1.2 [User Requirements and Expectations](#user-requirements-and-expectations)
     
-    1.3 [Company Goals](#company-goals)
+    1.3 [Site Owners Goals](#company-goals)
     
     1.4 [Design Choices](#design-choices)
 
@@ -97,13 +97,13 @@ As a **buyer**:
 
 As a **seller**:
 
-1. As a seller, I want to add items to auctions
-1. As a seller, I want to delete auctions created if these did not start or up to 24hrs before auction starting date & time
-1. As a seller, I want to edit auctions created if these did not start or up to 24hrs before auction starting date & time
-1. As a seller, I want to see my outstanding receivables
-1. As a seller, I want to follow my auctions bids live
-1. As a seller, I want to have an overview of my items sold
-1. As a seller, I want to receive my payments via a secure platform
+1. I want to add items to auctions
+1. I want to delete auctions created if these did not start or up to 24hrs before auction starting date & time
+1. I want to edit auctions created if these did not start or up to 24hrs before auction starting date & time
+1. I want to see my outstanding receivables
+1. I want to follow my auctions bids live
+1. I want to have an overview of my items sold
+1. I want to receive my payments via a secure platform
 
 [[Back to top]](#table-of-contents)
 
@@ -120,10 +120,11 @@ As a **seller**:
 
 <a></a>
 
-### **Company Goals**
+### **Site Owners Goals**
 
-* 
-
+1. Monetize the auction marketplace by collecting a percentage fee from the seller/buyer via STRIPE
+1. Promote the auction platform to captivate new users
+1. Full overview of all the ongoing and finished auctions
 
 [[Back to top]](#table-of-contents)
 
