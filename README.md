@@ -6,7 +6,7 @@
 ---
 
 ## **Project Goal** 
-***Dusty Lantern*** aims to be the market reference in the auction of second-hand products/belongings.
+***Dusty Lantern*** aims to be the marketplace of reference in the auction of second-hand products.
 
 It intends to provide buyers and sellers with an intuitive and appealing platform to trade their used belongings.
 
@@ -135,7 +135,7 @@ As a **seller**:
 
 ### **Site Owners Goals**
 
-1. Monetize the auction marketplace by collecting a percentage fee from the seller/buyer via STRIPE
+1. Monetize the auction marketplace by collecting a percentage fee from the seller/buyer via [Stripe](https://stripe.com/ "Stripe")
 1. Promote the auction platform to captivate new users
 1. Full overview of all the ongoing and finished auctions
 
@@ -175,13 +175,68 @@ While creating this color scheme, I have used the [Contrast-Checker](https://coo
 
 [[Back to top]](#table-of-contents)
 
-#### Structure
+#### **Structure**
 
-***Here comes the structure intro***
+The structure of the Dusty Lantern auction marketplace will devided into 6 pages:
 
-##### Page/Component/Feature
+##### **Landing Page**
 
-##### Page/Component/Feature
+Regardless of the user being authenticate or not, this page will display a small introduction of the ***Dusty Lantern***, with an appealing design to make the user feel confortable naviating throughout the platform. 
+
+It will display the current most popular ongoing auctions in order to captivate and engage the user to register/sign in. It will be accompanied by a button for this purpose, if user is not logged in or a "See all auctions" if it is.
+
+#### **Auctions**
+
+The auctions page is intended to list all the ongoing/future auctions. It will only be availabe to the user if it is logged in as a buyer (logged in as seller will not display the page to the user).
+
+This page will be powered by a search bar and filter system in order to aid the navigation of the user in finding the desired auction to participate in.
+
+Moreover, the auctions page will have the watchlist functionality in order for the user to follow closely on the auctions of interest. 
+
+#### **Bidding**
+
+The bidding page will maintain the basic structure of the auctions page but will enable the user to place bids on the selected auctions. 
+
+The auctions cards will have an intuitive 'place bid' system where the buyer can place the bid, incrementing the previous highest bid by the amount selected by the seller as the increment for the auction.
+
+#### **Create auctions page (exclusively for sellers)**
+
+As a seller, the user will have a dedicated page, powered by 2 forms, in order to create through a single page an auction and the corresponding article in the database.
+
+The form will give the user the following options in order to promote the item:
+
+**Form 1: Item**
+1. Title
+1. Description (short/full)
+1. Category
+1. Measurements
+1. Brand
+1. Image
+1. Condition
+
+**Form 2: Auction**
+1. Starting date & time
+1. Base amount
+1. Increment level
+
+#### **User's Dashboard**
+
+The user's dashboard will be the page resuming the actions taken by the user across the other pages.
+
+As a buyer, the page will display the watchlist and the participating auctions, as well as the corresponding payment status of the won auctions.
+
+As a seller, this page will display the items created for auction and the corresponding receivables status.
+
+#### **Payment**
+
+The payment page will be powered by the multiparty payment system provided by [Stripe](https://stripe.com/ "Stripe"): **Stripe Connect**.
+
+This systems will allow the auction payment directly from the buyer to the seller, discounting the acution fee, transfering it straight to the site owner's account.
+
+Nontheless, if you interact with the platform as a seller, you will have to proceed with the verification of your [Stripe](https://stripe.com/ "Stripe") Connect Account in order to comply with [Stripe](https://stripe.com/ "Stripe") safety procedures. This step can be seen as tedious, especially if your intention is to list an auction of a small amount.
+
+ On the other hand, it provides the buyer and the site owner with an extra security feature, generating extra confidence in the auction platform usage.
+
 
 [[Back to top]](#table-of-contents)
 
@@ -254,6 +309,7 @@ While creating this color scheme, I have used the [Contrast-Checker](https://coo
 * [FontAwesome](https://fontawesome.com/ "FontAwesome")
 * [Google Fonts](https://fonts.google.com/ "Google Fonts")
 * [Unsplash](https://unsplash.com/ "Unsplash")
+* [Stripe](https://stripe.com/ "Stripe")
 
 [[Back to top]](#table-of-contents)
 
@@ -278,6 +334,7 @@ While creating this color scheme, I have used the [Contrast-Checker](https://coo
 * [Free Logo Design](https://www.freelogodesign.org "Free Logo Design")
 * [Font Joy](https://fontjoy.com/ "Font Joy")
 * [Lorem Ipsum Generator](https://loremipsum.io/ "Lorem Ipsum Generator")
+* [Draw.io](https://draw.io/ "Draw.io")
 * [TinyPNG](https://tinypng.com/ "Tiny PNG")
 * [Favicon](https://favicon.io/favicon-converter/ "Favcicon")
 * [RandomKeygen](https://randomkeygen.com/ "RandomKeygen")
