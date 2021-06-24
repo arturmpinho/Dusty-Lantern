@@ -86,7 +86,7 @@ As a **buyer**:
 
 1. I want to see second-hand articles of my interest
 1. I want to place bids on auctions of my interest
-1. I want to have a a good overview of the most poplar auctions
+1. I want to have a a good overview of the most popular auctions
 1. I want to add to a watchlist the auctions I want to follow/participate
 1. I want to have a full overview of how much I will pay for the won auction
 1. I want to see my outstanding open balance
@@ -272,7 +272,12 @@ Nontheless, if you interact with the platform as a seller, you will have to proc
 
 ### **Existing Features**
 
-* 
+* Sign In and Registration functionalities by Django allauth package (including social accounts)
+* Search engine and filtering so user can refine its search for a specific auction
+* Bidding system that allow the buyer to increment the current highest bid for any given auction
+* Possibility for seller to create items in the database without being the admin
+* Add auctions to a watchlist functionality so user can follow-up on the auctions of interest straight from its dashboard.
+* Follow-up on payables/receivables according to payment status.
 
 [[Back to top]](#table-of-contents)
 
@@ -280,7 +285,10 @@ Nontheless, if you interact with the platform as a seller, you will have to proc
 
 ### **Future Features**
 
-* 
+* Courier's APIs in order to automatically generate a shipping label to the seller and  the tracking number to the auction winner
+* Share a specific auction on social networks
+* Auction suggestion based on previous search results / watchlist
+
 
 [[Back to top]](#table-of-contents)
 
