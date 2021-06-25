@@ -1,4 +1,4 @@
-![Logo](static/images/dusty_lantern_logo.png)
+![Logo](media/images/dusty_lantern_logo.png)
 # **DUSTY LANTERN**
 
 ![Mockup Image](wireframes/mockup.png)
