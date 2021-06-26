@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home',
+    'profiles'
     # 'allauth.socialaccount.providers.facebook', # check in the end if it has been used
 ]
 
