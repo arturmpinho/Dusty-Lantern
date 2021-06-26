@@ -5,22 +5,28 @@
 
     {% include 'components/navigation/navbar.html' %}
     
-    <div class="p-5 mb-4 bg-light rounded-3">
+    <!-- Jumbotron -->
+    <div class="p-5 m-4 rounded-3">
         <div class="container-fluid py-5">
             <div class="row align-items-md-stretch">
                 <div class="col-lg-4">
-                    <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <div class="h-100 p-5 rounded-3 text-center">
+                        <img src="media/images/dusty_lantern_logo.png" alt="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div class="h-100 p-5 bg-light border rounded-3">
-                        <h1 class="display-4 fw-bold">Welcome to the Dusty Lantern®</h1>
+                    <div class="h-100 p-5 rounded-3">
+                        <h2 class="display-4 fw-bold">Welcome to the Dusty Lantern®</h2>
                         <p class="col-md-8 fs-4">Because (re)New is always better!</p>
                         <div>
-                            <button class="btn btn-primary btn-lg" type="button">Sign In</button>
-                            <button class="btn btn-primary btn-lg" type="button">Register</button>
+                            {% if request.user.is_authenticated %}
+                            
+                                <button class="btn btn-danger btn-lg mt-3" type="button">See all auctions</button>
+                            {% else %}
+                                <a href="{% url 'account_signup' %}" class="btn btn-danger btn-lg" type="button">Register</a>
+                                <a href="{% url 'account_login' %}" class="btn btn-danger btn-lg" type="button">Login</a>
+                            {% endif %}              
                         </div>
-                        <button class="btn btn-primary btn-lg mt-3" type="button">See all auctions</button>
                     </div>
                 </div>
             </div>

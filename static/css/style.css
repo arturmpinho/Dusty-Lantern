@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Montserrat+Alternates&family=Vast+Shadow&display=swap');
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: "Montserrat", Impact, Haettenschweiler, sans-serif;
+    color: #393E46;
+}
+
+h1 {
+    font-family: 'Vast Shadow', Impact, Haettenschweiler, sans-serif;
+    color: #EEEEEE;
+    font-size: 6rem;
+}
+
+.btn-danger,
+.btn-outline-danger{
+    background-color:#9A031E;
+    border-color: #9A031E;
+}
+
+.btn-outline-danger{
+    color: #EEEEEE;
+}
