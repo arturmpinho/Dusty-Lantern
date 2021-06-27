@@ -1,0 +1,50 @@
+[
+	{
+		"pk": "1",
+		"model": "products.condition",
+		"fields":{
+			"description": "brand_new",
+			"friendly_descritpion": "Brand New"
+		}
+	},
+	{
+		"pk": "2",
+		"model": "products.condition",
+		"fields":{
+			"description": "like_new",
+			"friendly_descritpion": "Like New"
+		}
+	},
+	{
+		"pk": "3",
+		"model": "products.condition",
+		"fields":{
+			"description": "very_good",
+			"friendly_descritpion": "Very Good"
+		}
+	},
+	{
+		"pk": "4",
+		"model": "products.condition",
+		"fields":{
+			"description": "good",
+			"friendly_descritpion": "Good"
+		}
+	},
+	{
+		"pk": "5",
+		"model": "products.condition",
+		"fields":{
+			"description": "acceptable",
+			"friendly_descritpion": "Acceptable"
+		}
+	},
+	{
+		"pk": "6",
+		"model": "products.condition",
+		"fields":{
+			"description": "needs_fix",
+			"friendly_descritpion": "Needs to be fixed"
+		}
+	}
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "model": "products.image",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "image": "DL0000AA0001.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "image": "DL0000AA0002.jpg",
+      "main_image": false
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "image": "DL0000AA0003.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "image": "DL0000AA0004.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 5,
+    "fields": {
+      "product": 3,
+      "image": "DL0000AA0005.jpg",
+      "main_image": false
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 7,
+    "fields": {
+      "product": 4,
+      "image": "DL0000AA0006.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 8,
+    "fields": {
+      "product": 5,
+      "image": "DL0000AA0007.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 9,
+    "fields": {
+      "product": 6,
+      "image": "DL0000AA0008.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 10,
+    "fields": {
+      "product": 7,
+      "image": "DL0000AA0009.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 11,
+    "fields": {
+      "product": 8,
+      "image": "DL0000AA0016.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 12,
+    "fields": {
+      "product": 9,
+      "image": "DL0000AA0017.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 13,
+    "fields": {
+      "product": 10,
+      "image": "DL0000AA0010.jpg",
+      "main_image": false
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 14,
+    "fields": {
+      "product": 10,
+      "image": "DL0000AA0011.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 15,
+    "fields": {
+      "product": 11,
+      "image": "DL0000AA0012.jpg",
+      "main_image": false
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 16,
+    "fields": {
+      "product": 11,
+      "image": "DL0000AA0013.jpg",
+      "main_image": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 17,
+    "fields": {
+      "product": 12,
+      "image": "DL0000AA0014.jpg",
+      "main_image": false
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 18,
+    "fields": {
+      "product": 12,
+      "image": "DL0000AA0015.jpg",
+      "main_image": true
+    }
+  }
+]

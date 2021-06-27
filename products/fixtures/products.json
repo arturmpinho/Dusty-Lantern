@@ -1,0 +1,170 @@
+﻿[
+	{
+		"pk": "1",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Bicycle",
+			"description": "",
+			"category (fk)": "9",
+			"measurments": "",
+			"brand": "Gazelle",
+			"image": "",
+			"condition (fk)": "4",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "2",
+		"model": "products.product",
+			"fields":{
+			"username (fk)": "1",
+			"title": "Car",
+			"description": "MGB GT from 1975. Motor is damaged and with oil leaks. Needs to be repaired",
+			"category (fk)": "9",
+			"measurments": "",
+			"brand": "MGB GT",
+			"image": "",
+			"condition (fk)": "6",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "3",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Ring",
+			"description": "",
+			"category (fk)": "10",
+			"measurments": "# 9",
+			"brand": "Cartier",
+			"image": "",
+			"condition (fk)": "2",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "4",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Laptop",
+			"description": "",
+			"category (fk)": "5",
+			"measurments": "",
+			"brand": "Dell",
+			"image": "",
+			"condition (fk)": "4",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "5",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Dining table",
+			"description": "",
+			"category (fk)": "6",
+			"measurments": "120cm lenght x 90cm width & 90cm height",
+			"brand": "",
+			"image": "",
+			"condition (fk)": "1",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "6",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Painting",
+			"description": "Alcazar",
+			"category (fk)": " Segovia",
+			"measurments": " Spain",
+			"brand": " 1836 By David Roberts. Frame not included",
+			"image": "1",
+			"condition (fk)": "90cm x 45cm",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "7",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Harry Potter books",
+			"description": "Complete collection in english of the Harry Potter",
+			"category (fk)": "2",
+			"measurments": "",
+			"brand": "",
+			"image": "",
+			"condition (fk)": "5",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "8",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Coffee Machine",
+			"description": "",
+			"category (fk)": "7",
+			"measurments": "",
+			"brand": "Krups",
+			"image": "",
+			"condition (fk)": "4",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "9",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Rug",
+			"description": "",
+			"category (fk)": "4",
+			"measurments": "150cm x 90cm",
+			"brand": "",
+			"image": "",
+			"condition (fk)": "5",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "10",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Watch",
+			"description": "",
+			"category (fk)": "10",
+			"measurments": "",
+			"brand": "Rolex",
+			"image": "",
+			"condition (fk)": "2",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "11",
+		"model": "products.product",
+		"fields":{
+			"username (fk)": "1",
+			"title": "Jeans",
+			"description": "",
+			"category (fk)": "3",
+			"measurments": "M",
+			"brand": "Levi's",
+			"image": "",
+			"condition (fk)": "4",
+			"creation_date": "06/27/2021"}
+	},
+	{
+		"pk": "12",
+		"model": "products.product",
+		"fields":{
+		"username (fk)": "1",
+			"title": "Wing Piano",
+			"description": "",
+			"category (fk)": "8",
+			"measurments": "",
+			"brand": "",
+			"image": "",
+			"condition (fk)": "3",
+			"creation_date": "06/27/2021"}
+	}
+]

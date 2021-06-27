@@ -1,0 +1,82 @@
+[
+	{
+		"pk": "1",
+		"model": "products.category",
+		"fields":{
+			"description": "art",
+			"friendly_description": "Art"
+		}
+	},
+	{
+		"pk": "2",
+		"model": "products.category",
+		"fields":{
+			"description": "books",
+			"friendly_description": "Books"
+		}
+	},
+	{
+		"pk": "3",
+		"model": "products.category",
+		"fields":{
+			"description": "clothes",
+			"friendly_description": "Clothes"
+		}
+	},
+	{
+		"pk": "4",
+		"model": "products.category",
+		"fields":{
+			"description": "decoration",
+			"friendly_description": "Decoration"
+		}
+	},
+	{
+		"pk": "5",
+		"model": "products.category",
+		"fields":{
+			"description": "electronics",
+			"friendly_description": "Electronics"
+		}
+	},
+	{
+		"pk": "6",
+		"model": "products.category",
+		"fields":{
+			"description": "furniture",
+			"friendly_description": "Furniture"
+		}
+	},
+	{
+		"pk": "7",
+		"model": "products.category",
+		"fields":{
+			"description": "home_appliances",
+			"friendly_description": "Home Appliances"
+		}
+	},
+	{
+		"pk": "8",
+		"model": "products.category",
+		"fields":{
+			"description": "music",
+			"friendly_description": "Music"
+		}
+	},
+	{
+		"pk": "9",
+		"model": "products.category",
+		"fields":{
+			"description": "vehicles",
+			"friendly_description": "Vehicles"
+		}
+	},
+	{
+		"pk": "10",
+		"model": "products.category",
+		"fields":{
+			"description": "accessories",
+			"friendly_description": "Accessories"
+		}
+	}
+]
