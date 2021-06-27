@@ -4,7 +4,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "brand_new",
-			"friendly_descritpion": "Brand New"
+			"friendly_description": "Brand New"
 		}
 	},
 	{
@@ -12,7 +12,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "like_new",
-			"friendly_descritpion": "Like New"
+			"friendly_description": "Like New"
 		}
 	},
 	{
@@ -20,7 +20,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "very_good",
-			"friendly_descritpion": "Very Good"
+			"friendly_description": "Very Good"
 		}
 	},
 	{
@@ -28,7 +28,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "good",
-			"friendly_descritpion": "Good"
+			"friendly_description": "Good"
 		}
 	},
 	{
@@ -36,7 +36,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "acceptable",
-			"friendly_descritpion": "Acceptable"
+			"friendly_description": "Acceptable"
 		}
 	},
 	{
@@ -44,7 +44,7 @@
 		"model": "products.condition",
 		"fields":{
 			"description": "needs_fix",
-			"friendly_descritpion": "Needs to be fixed"
+			"friendly_description": "Needs to be fixed"
 		}
 	}
 ]

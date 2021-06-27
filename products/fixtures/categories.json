@@ -3,80 +3,80 @@
 		"pk": "1",
 		"model": "products.category",
 		"fields":{
-			"description": "art",
-			"friendly_description": "Art"
+			"name": "art",
+			"friendly_name": "Art"
 		}
 	},
 	{
 		"pk": "2",
 		"model": "products.category",
 		"fields":{
-			"description": "books",
-			"friendly_description": "Books"
+			"name": "books",
+			"friendly_name": "Books"
 		}
 	},
 	{
 		"pk": "3",
 		"model": "products.category",
 		"fields":{
-			"description": "clothes",
-			"friendly_description": "Clothes"
+			"name": "clothes",
+			"friendly_name": "Clothes"
 		}
 	},
 	{
 		"pk": "4",
 		"model": "products.category",
 		"fields":{
-			"description": "decoration",
-			"friendly_description": "Decoration"
+			"name": "decoration",
+			"friendly_name": "Decoration"
 		}
 	},
 	{
 		"pk": "5",
 		"model": "products.category",
 		"fields":{
-			"description": "electronics",
-			"friendly_description": "Electronics"
+			"name": "electronics",
+			"friendly_name": "Electronics"
 		}
 	},
 	{
 		"pk": "6",
 		"model": "products.category",
 		"fields":{
-			"description": "furniture",
-			"friendly_description": "Furniture"
+			"name": "furniture",
+			"friendly_name": "Furniture"
 		}
 	},
 	{
 		"pk": "7",
 		"model": "products.category",
 		"fields":{
-			"description": "home_appliances",
-			"friendly_description": "Home Appliances"
+			"name": "home_appliances",
+			"friendly_name": "Home Appliances"
 		}
 	},
 	{
 		"pk": "8",
 		"model": "products.category",
 		"fields":{
-			"description": "music",
-			"friendly_description": "Music"
+			"name": "music",
+			"friendly_name": "Music"
 		}
 	},
 	{
 		"pk": "9",
 		"model": "products.category",
 		"fields":{
-			"description": "vehicles",
-			"friendly_description": "Vehicles"
+			"name": "vehicles",
+			"friendly_name": "Vehicles"
 		}
 	},
 	{
 		"pk": "10",
 		"model": "products.category",
 		"fields":{
-			"description": "accessories",
-			"friendly_description": "Accessories"
+			"name": "accessories",
+			"friendly_name": "Accessories"
 		}
 	}
 ]
