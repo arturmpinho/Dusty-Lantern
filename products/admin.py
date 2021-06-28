@@ -1,7 +1,44 @@
 from django.contrib import admin
 from .models import Category, Condition, Product, Image
 
-admin.site.register(Category)
-admin.site.register(Condition)
-admin.site.register(Product)
-admin.site.register(Image)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'friendly_name',
+    )
+
+
+class ConditionAdmin(admin.ModelAdmin):
+    list_display = (
+        'friendly_description',
+    )
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'username',
+        'title',
+        'category',
+        'condition',
+    )
+
+
+class ImageAdmin(admin.ModelAdmin):
+
+    def get_product(self, obj):
+        """ Function to display attribute from ForeignKey """
+        return obj.product.id, obj.product.username, obj.product.title
+
+    get_product.admin = 'product_id',
+
+    list_display = (
+        'product_id',
+        'image',
+    )
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Condition, ConditionAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Image, ImageAdmin)
