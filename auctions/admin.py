@@ -12,5 +12,7 @@ class AuctionAdmin(admin.ModelAdmin):
         'end_date_time',
     )
 
+    ordering = ('start_date_time',)
+
 
 admin.site.register(Auction, AuctionAdmin)
