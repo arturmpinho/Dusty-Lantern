@@ -17,8 +17,8 @@ class ConditionAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'username',
         'title',
+        'username',
         'category',
         'condition',
     )
@@ -33,8 +33,10 @@ class ImageAdmin(admin.ModelAdmin):
     get_product.admin = 'product_id',
 
     list_display = (
-        'product_id',
+        'id',
         'image',
+        'main_image',
+        'product',
     )
 
 

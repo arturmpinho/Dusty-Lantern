@@ -7,6 +7,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254)
 
@@ -30,12 +31,12 @@ class Condition(models.Model):
 
 class Product(models.Model):
     username = models.ForeignKey(User,
-                                 null=True, blank=True,
+                                 null=True, blank=False,
                                  on_delete=models.SET_NULL)
     title = models.CharField(max_length=50)
     description = models.TextField()
     category = models.ForeignKey(Category,
-                                 null=True, blank=True,
+                                 null=True, blank=False,
                                  on_delete=models.SET_NULL)
     measurements = models.CharField(max_length=150, null=True, blank=True)
     brand = models.CharField(max_length=50, null=True, blank=True)
@@ -48,6 +49,7 @@ class Product(models.Model):
 
 
 class Image(models.Model):
+
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
                                 related_name="images")
