@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import Product, Image
+from products.models import Product
 
 
 class Auction(models.Model):
@@ -12,4 +12,4 @@ class Auction(models.Model):
     end_date_time = models.DateTimeField()
 
     def __str__(self):
-        return self.product
+        return self.product.title
