@@ -14,23 +14,9 @@ class ConditionAdmin(admin.ModelAdmin):
     )
 
 
-class ProductAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'title',
-        'username',
-        'category',
-        'condition',
-    )
+class ImageAdmin(admin.TabularInline):
 
-
-class ImageAdmin(admin.ModelAdmin):
-
-    def get_product(self, obj):
-        """ Function to display attribute from ForeignKey """
-        return obj.product.id, obj.product.username, obj.product.title
-
-    get_product.admin = 'product_id',
+    model = Image
 
     list_display = (
         'id',
@@ -40,7 +26,18 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
 
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ImageAdmin]
+  
+    list_display = (
+        'id',
+        'title',
+        'username',
+        'category',
+        'condition',
+    )
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Condition, ConditionAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Image, ImageAdmin)
