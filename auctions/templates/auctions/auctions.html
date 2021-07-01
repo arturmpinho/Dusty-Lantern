@@ -7,25 +7,44 @@
     
     <div class="p-5 m-5 rounded-3">
         <div class="container-fluid py-5 m-5">
-            <div class="col-sm-6 col-md-4 col-lg-3">
-
-                {% for auction in auctions %}
-                    <div class="card h-100">
-                        <div class="card-body">
-                            {% for image in auction.product.images.all %}
-                                {% if image.main_image %}
-                                    <img class = "card-img-top img-fluid" src="{{image.image.url}}" alt="{{ product.title }}">
-                                {% endif %}
-                            {% endfor %}
-                            <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
-                            <p class="card-text">{{ auction.product.description}}</p>
-                            <p><i class="far fa-clock"></i></p>
-                            <a href="#" class="btn btn-outline-danger">See details</a>
-                        </div>
-                    </div>
-                {% endfor %}
-
-            </div>
-        </div>        
+            <h2>Ongoing Auctions</h2>
+            <hr>
+        </div>
     </div>
+
+    <!-- Search and filter -->
+
+
+
+    <!-- Auction Cards -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for auction in auctions %}
+            <div class="col col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        {% for image in auction.product.images.all %}
+                            {% if image.main_image %}
+                                <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
+                            {% endif %}
+                        {% endfor %}
+                        <hr>
+                        <p class="text-end">
+                            <a href="#"><i class="far fa-star fa-2x"></i></a>
+                        </p>
+                        <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+                        <p class="card-text">{{ auction.product.description}}</p>
+                        <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>
+                        <p><i class="fas fa-gavel fa-2x"></i> Here comes the current bid</p>
+                        <!-- If starting_date is after current date, show countdown until the start of the auction -->
+                        <p><i class="far fa-clock fa-2x"></i> Here comes the countdown timer</p>
+                        <!-- Else, countdown until ending_date -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-danger">See details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock%}
