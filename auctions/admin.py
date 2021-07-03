@@ -1,8 +1,22 @@
 from django.contrib import admin
-from .models import Auction
+from .models import Auction, Bid
+
+
+class BidAdmin(admin.TabularInline):
+
+    model = Bid
+
+    list_display = (
+        'id',
+        'bidder',
+        'bidding_time',
+        'bid',
+    )
 
 
 class AuctionAdmin(admin.ModelAdmin):
+    inlines = [BidAdmin]
+
     list_display = (
         'id',
         'product',
