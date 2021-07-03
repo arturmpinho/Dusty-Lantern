@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'components/navigation/navbar.html' %}
+    
+    <div class="p-5 m-5 rounded-3">
+        <div class="container-fluid py-5 m-5">
+            <h2>{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Auction Cards -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col-lg-4">
+            <div class="h-100 p-5 rounded-3 text-center">
+                {% for image in auction.product.images.all %}
+                    {% if image.main_image %}
+                        <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <p class="card-text">{{ auction.product.description}}</p>
+            <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>
+            <p><i class="fas fa-gavel fa-2x"></i> Here comes the current bid</p>
+            <!-- If starting_date is after current date, show countdown until the start of the auction -->
+            <p><i class="far fa-clock fa-2x"></i> Here comes the countdown timer</p>
+            <!-- Else, countdown until ending_date -->
+            <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
+        </div>
+    </div>
+
+{% endblock%}
