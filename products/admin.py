@@ -28,7 +28,7 @@ class ImageAdmin(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ImageAdmin]
-  
+
     list_display = (
         'id',
         'title',
