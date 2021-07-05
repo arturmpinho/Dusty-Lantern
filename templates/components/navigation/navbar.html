@@ -10,8 +10,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDustyLantern">
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search Auctions" aria-label="Search Auctions">
+            <form method="GET" action="{% url 'auctions' %}" class="d-flex">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search Auctions" aria-label="Search Auctions">
                 <button class="btn btn-outline-danger" type="submit">Search</button>
             </form>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
