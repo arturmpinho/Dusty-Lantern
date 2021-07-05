@@ -5,8 +5,8 @@
 
     {% include 'components/navigation/navbar.html' %}
     
-    <div class="p-5 m-5 rounded-3">
-        <div class="container-fluid py-5 m-5">
+    <div class="pt-5 mt-5 rounded-3">
+        <div class="container-fluid py-5 mt-5">
             <h2>Ongoing Auctions</h2>
             <hr>
         </div>
@@ -16,34 +16,34 @@
     <div class="container">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=accessories"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=vehicles"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-music fa-2x"></i> Music</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=music"><i class="fas fa-music fa-2x"></i> Music</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  category-filter" href="#"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
+          <a class="nav-link  category-filter" href="{% url 'auctions' %}?category=home_appliances"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-couch fa-2x"></i> Furniture</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=furniture"><i class="fas fa-couch fa-2x"></i> Furniture</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=electronics"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-magic fa-2x"></i> Decoration</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=decoration"><i class="fas fa-magic fa-2x"></i> Decoration</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=clothes"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-book fa-2x"></i> Books</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=books"><i class="fas fa-book fa-2x"></i> Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="#"><i class="fas fa-palette fa-2x"></i> Art</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=art"><i class="fas fa-palette fa-2x"></i> Art</a>
         </li>
       </ul>
     </div>
