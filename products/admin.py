@@ -4,12 +4,14 @@ from .models import Category, Condition, Product, Image
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'friendly_name',
     )
 
 
 class ConditionAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'friendly_description',
     )
 
