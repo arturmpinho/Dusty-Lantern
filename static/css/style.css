@@ -31,3 +31,16 @@ h1 {
     height: 50%w;
     object-fit: cover;
 }
+
+.category-filter{
+    width: min-content;
+    text-align: center;
+}
+
+.nav-link{
+    color: #9A031E;
+}
+
+.nav-link:focus, .nav-link:hover{
+    color: #dc3545;
+}

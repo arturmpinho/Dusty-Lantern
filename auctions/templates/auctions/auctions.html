@@ -12,6 +12,41 @@
         </div>
     </div>
 
+    <!-- Category filter nav -->
+    <div class="container">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-music fa-2x"></i> Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  category-filter" href="#"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-couch fa-2x"></i> Furniture</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-magic fa-2x"></i> Decoration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-book fa-2x"></i> Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link category-filter" href="#"><i class="fas fa-palette fa-2x"></i> Art</a>
+        </li>
+      </ul>
+    </div>
     <!-- Auction Cards -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for auction in auctions %}
@@ -25,7 +60,7 @@
                         {% endfor %}
                         <hr>
                         <p class="text-end">
-                            <a href="#"><i class="far fa-star fa-2x"></i></a>
+                            <a href="#"><i class="far fa-star fa-2x nav-link"></i></a>
                         </p>
                         <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                         <p class="card-text">{{ auction.product.description}}</p>
