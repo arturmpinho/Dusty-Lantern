@@ -13,38 +13,51 @@
     </div>
 
     <!-- Category filter nav -->
-    <div class="container">
+    <div class="container mb-5">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=accessories"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=accessories"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=vehicles"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=vehicles"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=music"><i class="fas fa-music fa-2x"></i> Music</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=music"><i class="fas fa-music fa-2x"></i> Music</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  category-filter" href="{% url 'auctions' %}?category=home_appliances"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
+          <a class="nav-link  category-filter" href="{% url 'auctions' %}?product__category__name=home_appliances"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=furniture"><i class="fas fa-couch fa-2x"></i> Furniture</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=furniture"><i class="fas fa-couch fa-2x"></i> Furniture</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=electronics"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=electronics"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=decoration"><i class="fas fa-magic fa-2x"></i> Decoration</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=decoration"><i class="fas fa-magic fa-2x"></i> Decoration</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=clothes"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=clothes"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=books"><i class="fas fa-book fa-2x"></i> Books</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=books"><i class="fas fa-book fa-2x"></i> Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?category=art"><i class="fas fa-palette fa-2x"></i> Art</a>
+          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category=art"><i class="fas fa-palette fa-2x"></i> Art</a>
         </li>
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort by:
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=base_amount&direction=asc">Price: Low to High</a></li>
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=base_amount&direction=desc">Price: High to Low</a></li>
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=product__category__name&direction=asc">Category</a></li>
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=product__condition&direction=asc">Condition</a></li>
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=end_date_time&direction=asc">First closing</a></li>
+              <li><a class="dropdown-item" href="{% url 'auctions' %}?sort=end_date_time&direction=desc">Last Closing</a></li>
+            </ul>
+          </div>
       </ul>
     </div>
     <!-- Auction Cards -->

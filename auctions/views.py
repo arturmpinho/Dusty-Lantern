@@ -12,8 +12,24 @@ def all_auctions(request):
     auctions = Auction.objects.all()
     query = None
     category = None
+    sort = None
+    direction = None
 
     if request.GET:
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                auctions = auctions.annotate(lower_name=Lower('name'))
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+
+            auctions = auctions.order_by(sortkey)
+
         if 'category' in request.GET:
             category = request.GET['category']
             auctions = auctions.filter(product__category__name__in=category)
@@ -32,10 +48,13 @@ def all_auctions(request):
             )
             auctions = auctions.filter(queries)
 
+    sorting = f'{sort}_{direction}'
+
     context = {
         'auctions': auctions,
         'search_term': query,
         'category': category,
+        'sorting': sorting,
     }
 
     return render(request, 'auctions/auctions.html', context)
