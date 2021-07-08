@@ -44,3 +44,21 @@ h1 {
 .nav-link:focus, .nav-link:hover{
     color: #dc3545;
 }
+
+.btntop{
+    position: fixed;
+    display: none;
+    bottom: 5vh;
+    right: 5vw;
+    z-index: 9999;
+    color: #9A031E;
+    border-color: #9A031E;
+    cursor: pointer;
+    font-size: 1.7rem;
+}
+
+.btntop:hover{
+    background-color: #9A031E;
+    padding: 1.9rem;
+    transition: ease-in-out;
+}
