@@ -2,6 +2,7 @@ from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404)
 from django.contrib import messages
 from django.db.models import Q
+from django.db.models.functions import Lower
 from .models import Auction
 from products.models import Category
 
@@ -9,6 +10,7 @@ from products.models import Category
 def all_auctions(request):
     """View to return the auctions page w/ sorting and search queries"""
 
+    categories = Category.objects.all()
     auctions = Auction.objects.all()
     query = None
     category = None
@@ -32,7 +34,7 @@ def all_auctions(request):
 
         if 'category' in request.GET:
             category = request.GET['category']
-            auctions = auctions.filter(product__category__name__in=category)
+            auctions = auctions.filter(product__category__name=category)
             category = Category.objects.filter(name__in=category)
 
         if 'q' in request.GET:
@@ -51,6 +53,7 @@ def all_auctions(request):
     sorting = f'{sort}_{direction}'
 
     context = {
+        'categories': categories,
         'auctions': auctions,
         'search_term': query,
         'category': category,

@@ -11,52 +11,44 @@
             <hr>
         </div>
     </div>
-
+    
     <!-- Category filter nav -->
     <div class="container text-center mb-5">
       <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=accessories"><i class="fas fa-hat-cowboy fa-2x"></i> Accessories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=vehicles"><i class="fas fa-car-side fa-2x"></i> Vehicles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=music"><i class="fas fa-music fa-2x"></i> Music</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=home_appliances"><i class="fas fa-blender fa-2x"></i> Home Appliances</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=furniture"><i class="fas fa-couch fa-2x"></i> Furniture</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=electronics"><i class="fas fa-laptop fa-2x"></i> Electronics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=decoration"><i class="fas fa-magic fa-2x"></i> Decoration</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=clothes"><i class="fas fa-tshirt fa-2x"></i> Clothes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category__name=books"><i class="fas fa-book fa-2x"></i> Books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link category-filter" href="{% url 'auctions' %}?product__category=art"><i class="fas fa-palette fa-2x"></i> Art</a>
-        </li>
+        {% for category in categories %}
+          <li class="nav-item">
+            <a class="nav-link category-filter" href="{% url 'auctions' %}?category={{category}}"><i class="fa-2x"></i>{{category.friendly_name}}</a>
+          </li>
+        {% endfor %}
+        <!-- 
+        <i class="fas fa-hat-cowboy fa-2x"></i> Accessories
+        <i class="fas fa-car-side fa-2x"></i> Vehicles
+        <i class="fas fa-music fa-2x"></i> Music</a>
+        <i class="fas fa-blender fa-2x"></i> Home Appliances
+        <i class="fas fa-couch fa-2x"></i> Furniture
+        <i class="fas fa-laptop fa-2x"></i> Electronics
+        <i class="fas fa-magic fa-2x"></i> Decoration
+        <i class="fas fa-tshirt fa-2x"></i> Clothes
+        <i class="fas fa-book fa-2x"></i> Books
+        <i class="fas fa-palette fa-2x"></i> Art
+        -->
       </ul>
       <select id="sort-selector">
         <option value="reset" {% if sorting == 'None_None' %}selected{% endif %}>Sorty by...</option>
         <option value="base_amount,asc" {% if sorting == 'base_amount_asc' %}selected{% endif %}>Base Amount: Low to High</option>
         <option value="base_amount,desc" {% if sorting == 'base_amount_desc' %}selected{% endif %}>Base Amount: High to Low</option>
-        <option value="product__category__name,asc" {% if sorting == 'product__category__name_asc' %}selected{% endif %}>Category (A-Z)</option>
-        <option value="product__category__name,desc" {% if sorting == 'product__category__name_desc' %}selected{% endif %}>Category (Z-A)</option>
+        <option value="product__category,asc" {% if sorting == 'product__category_asc' %}selected{% endif %}>Category (A-Z)</option>
+        <option value="product__category,desc" {% if sorting == 'product__category_desc' %}selected{% endif %}>Category (Z-A)</option>
         <option value="product__condition,desc" {% if sorting == 'product__condition_desc' %}selected{% endif %}>Condition (New-To Be Fixed)</option>
         <option value="product__condition,asc" {% if sorting == 'product__condition_asc' %}selected{% endif %}>Condition (To Be Fixed-New) </option>
         <option value="end_date_time,asc" {% if sorting == 'end_date_time_asc' %}selected{% endif %}>First closing</option>
         <option value="end_date_time,desc" {% if sorting == 'end_date_time_desc' %}selected{% endif %}>Last Closing</option>
       </select>
+    </div>
+    <div class="container text-center">
+      <p>
+        <a class="btn btn-outline-danger" href="{% url 'auctions' %}"></i>Clear filters</a>
+      </p>
     </div>
     <div class="container text-center">
       <p>
