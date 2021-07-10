@@ -6,6 +6,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'friendly_name',
+        'fa_icon_class'
     )
 
 

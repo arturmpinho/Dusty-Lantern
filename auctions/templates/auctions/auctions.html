@@ -17,21 +17,9 @@
       <ul class="nav justify-content-center">
         {% for category in categories %}
           <li class="nav-item">
-            <a class="nav-link category-filter" href="{% url 'auctions' %}?category={{category}}"><i class="fa-2x"></i>{{category.friendly_name}}</a>
+            <a class="nav-link category-filter" href="{% url 'auctions' %}?category={{category}}"><i class="{{ category.fa_icon_class}}"></i> {{category.friendly_name}}</a>
           </li>
         {% endfor %}
-        <!-- 
-        <i class="fas fa-hat-cowboy fa-2x"></i> Accessories
-        <i class="fas fa-car-side fa-2x"></i> Vehicles
-        <i class="fas fa-music fa-2x"></i> Music</a>
-        <i class="fas fa-blender fa-2x"></i> Home Appliances
-        <i class="fas fa-couch fa-2x"></i> Furniture
-        <i class="fas fa-laptop fa-2x"></i> Electronics
-        <i class="fas fa-magic fa-2x"></i> Decoration
-        <i class="fas fa-tshirt fa-2x"></i> Clothes
-        <i class="fas fa-book fa-2x"></i> Books
-        <i class="fas fa-palette fa-2x"></i> Art
-        -->
       </ul>
       <select id="sort-selector">
         <option value="reset" {% if sorting == 'None_None' %}selected{% endif %}>Sorty by...</option>
