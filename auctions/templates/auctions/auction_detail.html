@@ -14,7 +14,7 @@
 
     <!-- Auction Cards -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col-lg-4">
+        <div class="col-lg-4 card">
             <div class="h-100 p-5 rounded-3 text-center">
                 {% for image in auction.product.images.all %}
                     {% if image.main_image %}
@@ -27,11 +27,29 @@
             <p class="card-text">{{ auction.product.description}}</p>
             <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>
             <p><i class="fas fa-gavel fa-2x"></i> Here comes the current bid</p>
-            <!-- If starting_date is after current date, show countdown until the start of the auction -->
-            <p><i class="far fa-clock fa-2x"></i> Here comes the countdown timer</p>
-            <!-- Else, countdown until ending_date -->
+            {% now "Y-m-d H:m:s" as current_date_time %}
+            <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
+            <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
+            {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:m:s" %}
+                <p><i class="far fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
+            {% elif auction.start_date_time|date:"Y-m-d H:m:s" > current_date_time %}
+                <p>
+                    <i class="far fa-clock fa-2x"></i> 
+                    <span class="countdowntimer"></span>
+                </p>
+            {% else %}
+                <p>
+                    <i class="far fa-clock fa-2x"></i> 
+                    <span class="countdowntimer"></span> 
+                </p>
+            {% endif %}
             <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
         </div>
     </div>
 
 {% endblock%}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'js/auctions.js' %}"></script>
+{% endblock %}
