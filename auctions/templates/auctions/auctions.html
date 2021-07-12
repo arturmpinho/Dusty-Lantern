@@ -51,37 +51,35 @@
           <div class="card">
             <div class="card-body">
               {% for image in auction.product.images.all %}
-                  {% if image.main_image %}
-                      <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
-                  {% endif %}
+              {% if image.main_image %}
+              <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
+              {% endif %}
               {% endfor %}
               <hr>
               <p class="text-end">
                 <span class="badge bg-secondary">{{ auction.product.category }}</span>
+                <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
                 <a href="#"><i class="far fa-star fa-2x nav-link"></i></a>
               </p>
               <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
               <p class="card-text">{{ auction.product.description}}</p>
-              <p class="card-text">Condition: <span class="badge rounded-pill bg-secondary">{{ auction.product.condition.friendly_description}}</span></p>
               <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>
               <p><i class="fas fa-gavel fa-2x"></i> Here comes the current bid</p>
-
+              
               {% now "Y-m-d H:m:s" as current_date_time %}
-              <div id="start_date_time">{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
-              <div id="end_date_time">{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
-              <div id="current_date_time">{{ current_date_time }} </div>
-
+              <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
+              <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
               {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:m:s" %}
-              <p><i class="far fa-clock fa-2x"></i> Auction closed</p>
+              <p><i class="far fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
               {% elif auction.start_date_time|date:"Y-m-d H:m:s" > current_date_time %}
                 <p>
                   <i class="far fa-clock fa-2x"></i> 
-                  Starting in: <span id="countdowntimer"></span> 
+                  <span class="countdowntimer"></span>
                 </p>
               {% else %}
                 <p>
                   <i class="far fa-clock fa-2x"></i> 
-                  Ending in: <span id="countdown2end"></span> 
+                  <span class="countdowntimer"></span> 
                 </p>
               {% endif %}
             </div>
