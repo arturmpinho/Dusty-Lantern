@@ -3,12 +3,13 @@ from django.shortcuts import (render, redirect,
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Auction
 from products.models import Category
+from .models import Auction, Bid
 
 
 def all_auctions(request):
-    """View to return the auctions page w/ sorting and search queries"""
+    """View to return the auctions page w/ sorting and search queries
+       and determine the each auction highest bid"""
 
     categories = Category.objects.all()
     auctions = Auction.objects.all()
@@ -16,6 +17,16 @@ def all_auctions(request):
     category = None
     sort = None
     direction = None
+
+    highest_bids = []
+    no_bids = []
+    for auction in auctions:
+        filtered_bids = Bid.objects.filter(auction=auction.id)
+        if filtered_bids:
+            highest_bid = filtered_bids.order_by('bidding_time')[0]
+            highest_bids.append(highest_bid)
+        else:
+            no_bids.append(auction)
 
     if request.GET:
         if 'sort' in request.GET:
@@ -58,7 +69,9 @@ def all_auctions(request):
         'search_term': query,
         'category': category,
         'sorting': sorting,
-    }
+        'highest_bids': highest_bids,
+        'no_bids': no_bids,
+        }
 
     return render(request, 'auctions/auctions.html', context)
 

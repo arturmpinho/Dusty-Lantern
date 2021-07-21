@@ -17,6 +17,7 @@ class Auction(models.Model):
 
 
 class Bid(models.Model):
+
     bidder = models.ForeignKey(User,
                                null=True, blank=False,
                                on_delete=models.SET_NULL)

@@ -20,8 +20,7 @@
                         <p class="col-md-8 fs-4">Because (re)New is always better!</p>
                         <div>
                             {% if request.user.is_authenticated %}
-                            
-                                <button class="btn btn-danger btn-lg mt-3" type="button">See all auctions</button>
+                                <a href="{% url 'auctions' %}" class="btn btn-danger btn-lg mt-3" type="button">See all auctions</a>                     
                             {% else %}
                                 <a href="{% url 'account_signup' %}" class="btn btn-danger btn-lg" type="button">Register</a>
                                 <a href="{% url 'account_login' %}" class="btn btn-danger btn-lg" type="button">Login</a>
