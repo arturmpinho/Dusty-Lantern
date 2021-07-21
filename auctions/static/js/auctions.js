@@ -54,3 +54,17 @@ for (let i = 0; i < cards.length; i++) {
     }
   }, 1000);
 }
+
+$(window).on('load', function(){
+
+  let ongoingAuctions =  $('.card').length
+  console.log(ongoingAuctions)
+  
+  if (ongoingAuctions > 1){
+    $('#cards-counter').append(`There are ${ongoingAuctions} auctions matching your search criteria`)
+  } else if (ongoingAuctions == 0) {
+    $('#cards-counter').append(`There are no auctions matching your search criteria`)
+  } else {
+    $('#cards-counter').append(`There is ${ongoingAuctions} auction matching your search criteria`)
+  }
+})

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404)
 from django.contrib import messages
@@ -17,9 +18,9 @@ def all_auctions(request):
     category = None
     sort = None
     direction = None
-
     highest_bids = []
     no_bids = []
+
     for auction in auctions:
         filtered_bids = Bid.objects.filter(auction=auction.id)
         if filtered_bids:

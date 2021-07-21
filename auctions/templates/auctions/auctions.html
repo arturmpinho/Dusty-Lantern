@@ -42,13 +42,15 @@
     </div>
     <div class="container text-center">
       <p>
-        There are <strong>{{ auctions|length }}</strong> auctions matching your search criteria
+        <span id="cards-counter"></span>
       </p>
     </div>
 
     <!-- Auction Cards -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
       {% for auction in auctions %}
+      {% now "Y-m-d H:m:s" as current_date_time %}
+        {% if current_date_time < auction.end_date_time|date:"Y-m-d H:m:s" %}
       <div class="col col-md-4 col-lg-3">
         <div class="card">
           <div class="card-body">
@@ -68,24 +70,7 @@
             <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
             <p class="card-text">{{ auction.product.description}}</p>
             <p><i class="far fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-            {% now "Y-m-d H:m:s" as current_date_time %}
-            
-            {% if current_date_time > auction.end_date_time|date:"Y-m-d H:m:s" %}
-            
-            {% for bid in no_bids %}
-              {% if bid == auction %}
-                <p>No bids were placed in this auction </p>
-              {% endif %}
-            {% endfor %}
-
-            {% for bid in highest_bids %}
-                {% if bid.auction == auction %}
-                    <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
-                    <p><i class="fas fa-user fa-2x"></i> Winner: {{ bid.bidder }}</p>                      
-                {% endif %}
-            {% endfor %}
-              
-            {% else %}
+                   
               {% for bid in no_bids %}
                 {% if bid == auction %}
                   <p>No bids yet</p>
@@ -94,10 +79,11 @@
 
               {% for bid in highest_bids %}
                   {% if bid.auction == auction %}
+                  
+                     <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
                     <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
                   {% endif %}
               {% endfor %}
-            {% endif %}  
 
             <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
             <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
@@ -123,6 +109,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
       {% endfor %}
     </div>
 
