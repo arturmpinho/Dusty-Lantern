@@ -62,3 +62,30 @@ h1 {
     padding: 1.9rem;
     transition: ease-in-out;
 }
+
+
+/* ensures the increment/decrement arrows always display on input field type number */
+/* Credits to https://davidwalsh.name/always-show-arrows-for-number-input */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+
+/* ------------------------------- bootstrap toasts */
+
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+    color: red;
+}
+
+.custom-toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
