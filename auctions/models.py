@@ -26,5 +26,5 @@ class Bid(models.Model):
     bidding_time = models.DateTimeField()
     bid = models.DecimalField(max_digits=7, decimal_places=2)
 
-    def __str__(self):
+    def __int__(self):
         return self.bid

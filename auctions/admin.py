@@ -2,9 +2,7 @@ from django.contrib import admin
 from .models import Auction, Bid
 
 
-class BidAdmin(admin.TabularInline):
-
-    model = Bid
+class BidAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
@@ -15,7 +13,6 @@ class BidAdmin(admin.TabularInline):
 
 
 class AuctionAdmin(admin.ModelAdmin):
-    inlines = [BidAdmin]
 
     list_display = (
         'id',
@@ -30,3 +27,5 @@ class AuctionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Auction, AuctionAdmin)
+admin.site.register(Bid, BidAdmin)
+

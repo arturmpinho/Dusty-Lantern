@@ -24,7 +24,7 @@ def all_auctions(request):
     for auction in auctions:
         filtered_bids = Bid.objects.filter(auction=auction.id)
         if filtered_bids:
-            highest_bid = filtered_bids.order_by('bidding_time')[0]
+            highest_bid = filtered_bids.order_by('-bidding_time')[0]
             highest_bids.append(highest_bid)
         else:
             no_bids.append(auction)
@@ -81,9 +81,44 @@ def auction_detail(request, auction_id):
     """View to return the specific details of an auction"""
 
     auction = get_object_or_404(Auction, pk=auction_id)
+    bids = Bid.objects.filter(auction=auction.id)
+    if bids:
+        current_highest_bid = bids.order_by('-bidding_time')[0]
+        current_value = current_highest_bid.bid + auction.bidding_increment
 
     context = {
         'auction': auction,
+        'current_value': current_value
     }
 
     return render(request, 'auctions/auction_detail.html', context)
+
+
+def place_bid(request, auction_id):
+    """View to place a bid for specific auction"""
+    if request.method == 'POST':
+        bidding_value = request.POST['bidding_amount']
+        auction = get_object_or_404(Auction, pk=auction_id)
+        
+        bids = Bid.objects.filter(auction=auction.id)
+        if bids:
+            current_highest_bid = bids.order_by('-bidding_time')[0]
+        
+        print(type(float(bidding_value)))
+        print(type(current_highest_bid.bid))
+        if float(bidding_value) > current_highest_bid.bid:
+            bid = Bid()
+            bid.bidder = request.user
+            bid.auction = auction
+            bid.bidding_time = datetime.now()
+            bid.bid = bidding_value
+            bid.save()
+            messages.info(request,
+                               "Your bid has been placed successfully!")
+        else:
+            messages.error(request,
+                               "Looks like someone was faster. Please adjust \
+                                   your bid and try again!")
+            return redirect(reverse('auction_detail', args=[auction.id]))
+
+    return redirect(reverse('auction_detail', args=[auction.id]))

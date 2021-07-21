@@ -23,26 +23,9 @@
                 {% endfor %}
             </div>
         </div>
-        <div>
+        <div class="col-lg-8">
             <p class="card-text">{{ auction.product.description}}</p>
-            <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>
-            {% for auction in auctions %}
-
-                {% for bid in no_bids %}
-                    {% if bid == auction %}
-                        <p>No bids yet</p>
-                    {% endif %}
-                {% endfor %}
-
-                {% for bid in highest_bids %}
-                    {% if bid.auction == auction %}   
-                        <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
-                        <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
-                    {% endif %}
-                {% endfor %}
-            
-            {% endfor %}
-            
+            <p><i class="far fa-money-bill-alt fa-2x"></i> {{ auction.base_amount }}</p>       
 
             {% now "Y-m-d H:m:s" as current_date_time %}
             <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
@@ -61,6 +44,16 @@
                 </p>
             {% endif %}
             <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
+
+            <div class="col-12">
+                <p class="mt-3"><strong>Add bid:</strong></p>
+                <form method="POST" action="{% url 'place_bid' auction.id  %}">
+                    {% csrf_token %}
+                    <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}">
+                    <button type="submit">Place your bid</button>
+                </form>
+            </div>
+
         </div>
     </div>
 

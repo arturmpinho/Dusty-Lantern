@@ -131,24 +131,25 @@
                   <p class="card-text">{{ auction.product.description}}</p>
                   <p><i class="far fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
                         
-                    {% for bid in no_bids %}
-                      {% if bid == auction %}
-                        <p>No bids yet</p>
-                      {% endif %}
-                    {% endfor %}
-
-                    {% for bid in highest_bids %}
-                        {% if bid.auction == auction %}
-                        
-                          <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
-                          <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
-                        {% endif %}
-                    {% endfor %}
+                 
 
                   <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
                   <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
 
                   {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:m:s" %}
+                  {% for bid in no_bids %}
+                    {% if bid == auction %}
+                      <p>No bids yet</p>
+                    {% endif %}
+                  {% endfor %}
+
+                {% for bid in highest_bids %}
+                    {% if bid.auction == auction %}
+                      <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
+                      <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
+                    {% endif %}
+                {% endfor %}
+
                   <p><i class="far fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
                   {% elif auction.start_date_time|date:"Y-m-d H:m:s" > current_date_time %}
                     <p>
