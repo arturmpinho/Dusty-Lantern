@@ -79,7 +79,6 @@ input[type=number]::-webkit-outer-spin-button {
     top: 72px;
     right: 15px;
     z-index: 99999999999;
-    color: red;
 }
 
 .custom-toast {
