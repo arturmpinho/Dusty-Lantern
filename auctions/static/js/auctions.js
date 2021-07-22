@@ -58,7 +58,6 @@ for (let i = 0; i < cards.length; i++) {
 $(window).on('load', function(){
 
   let ongoingAuctions =  $('.card').length
-  console.log(ongoingAuctions)
   
   if (ongoingAuctions > 1){
     $('#cards-counter').append(`There are ${ongoingAuctions} auctions matching your search criteria`)
@@ -68,7 +67,6 @@ $(window).on('load', function(){
     $('#cards-counter').append(`There is ${ongoingAuctions} auction matching your search criteria`)
   }
 })
-
 
 
 // Disable manual input for input field type number on bidding form

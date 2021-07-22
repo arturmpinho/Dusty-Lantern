@@ -2,12 +2,13 @@ from datetime import datetime
 from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404)
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from products.models import Category
 from .models import Auction, Bid
 
-
+@login_required
 def all_auctions(request):
     """View to return the auctions page w/ sorting and search queries
        and determine the each auction highest bid"""
@@ -76,7 +77,7 @@ def all_auctions(request):
 
     return render(request, 'auctions/auctions.html', context)
 
-
+@login_required
 def auction_detail(request, auction_id):
     """View to return the specific details of an auction"""
 
@@ -85,15 +86,19 @@ def auction_detail(request, auction_id):
     if bids:
         current_highest_bid = bids.order_by('-bidding_time')[0]
         current_value = current_highest_bid.bid + auction.bidding_increment
+    else:
+        current_value = auction.base_amount
+        current_highest_bid = None
 
     context = {
         'auction': auction,
-        'current_value': current_value
+        'current_value': current_value,
+        'current_highest_bid': current_highest_bid,
     }
 
     return render(request, 'auctions/auction_detail.html', context)
 
-
+@login_required
 def place_bid(request, auction_id):
     """View to place a bid for specific auction"""
     if request.method == 'POST':

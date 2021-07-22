@@ -87,19 +87,10 @@
                 <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
                 <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
 
-                {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:m:s" %}
-                <p><i class="far fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
-                {% elif auction.start_date_time|date:"Y-m-d H:m:s" > current_date_time %}
-                  <p>
-                    <i class="far fa-clock fa-2x"></i> 
-                    <span class="countdowntimer"></span>
-                  </p>
-                {% else %}
-                  <p>
-                    <i class="far fa-clock fa-2x"></i> 
-                    <span class="countdowntimer"></span> 
-                  </p>
-                {% endif %}
+                <p>
+                  <i class="far fa-clock fa-2x"></i> 
+                  <span class="countdowntimer"></span>
+                </p>
 
                 <!-- Card footer -->
                 </div>
@@ -130,9 +121,7 @@
                   <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                   <p class="card-text">{{ auction.product.description}}</p>
                   <p><i class="far fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-                        
-                 
-
+                  
                   <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
                   <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
 
