@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'products',
     'auctions',
     'profiles',
+    'checkout',
     # 'allauth.socialaccount.providers.facebook', # check in the end if it has been used
 ]
 
