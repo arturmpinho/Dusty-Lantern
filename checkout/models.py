@@ -16,22 +16,23 @@ class Order(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
                                      null=True, blank=True,
                                      related_name='orders')
-    fname = models.CharField(max_length=50, null=False, blank=False)
-    lname = models.CharField(max_length=50, null=False, blank=False)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
-    default_phone_number = models.CharField(max_length=20,
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False,
+                              default="")
+    phone_number = models.CharField(max_length=20,
                                             null=True, blank=True)
-    default_country = CountryField(blank_label='Country *',
+    country = CountryField(blank_label='Country *',
                                    null=True, blank=True)
-    default_postcode = models.CharField(max_length=20,
+    postcode = models.CharField(max_length=20,
                                         null=True, blank=True)
-    default_town_or_city = models.CharField(max_length=40,
+    town_or_city = models.CharField(max_length=40,
                                             null=True, blank=True)
-    default_street_address1 = models.CharField(max_length=80,
+    street_address1 = models.CharField(max_length=80,
                                                null=True, blank=True)
-    default_street_address2 = models.CharField(max_length=80,
+    street_address2 = models.CharField(max_length=80,
                                                null=True, blank=True)
-    default_county = models.CharField(max_length=80, null=True, blank=True)
+    county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     auction_fee = models.DecimalField(max_digits=6, decimal_places=2,
                                       null=False, default=0)
