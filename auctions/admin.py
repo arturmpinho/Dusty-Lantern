@@ -28,4 +28,3 @@ class AuctionAdmin(admin.ModelAdmin):
 
 admin.site.register(Auction, AuctionAdmin)
 admin.site.register(Bid, BidAdmin)
-

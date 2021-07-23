@@ -8,10 +8,13 @@ from django.db.models.functions import Lower
 from products.models import Category
 from .models import Auction, Bid
 
+
 @login_required
 def all_auctions(request):
-    """View to return the auctions page w/ sorting and search queries
-       and determine the each auction highest bid"""
+    """
+    View to return the auctions page w/ sorting and search queries
+    and determine the each auction highest bid
+    """
 
     categories = Category.objects.all()
     auctions = Auction.objects.all()
@@ -77,9 +80,12 @@ def all_auctions(request):
 
     return render(request, 'auctions/auctions.html', context)
 
+
 @login_required
 def auction_detail(request, auction_id):
-    """View to return the specific details of an auction"""
+    """
+    View to return the specific details of an auction
+    """
 
     auction = get_object_or_404(Auction, pk=auction_id)
     bids = Bid.objects.filter(auction=auction.id)
@@ -98,17 +104,21 @@ def auction_detail(request, auction_id):
 
     return render(request, 'auctions/auction_detail.html', context)
 
+
 @login_required
 def place_bid(request, auction_id):
-    """View to place a bid for specific auction"""
+    """
+    View to place a bid for a specific auction
+    """
+
     if request.method == 'POST':
         bidding_value = request.POST['bidding_amount']
         auction = get_object_or_404(Auction, pk=auction_id)
-        
+
         bids = Bid.objects.filter(auction=auction.id)
         if bids:
             current_highest_bid = bids.order_by('-bidding_time')[0]
-        
+
         print(type(float(bidding_value)))
         print(type(current_highest_bid.bid))
         if float(bidding_value) > current_highest_bid.bid:
