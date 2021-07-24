@@ -1,15 +1,15 @@
 from datetime import datetime
 from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404)
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from products.models import Category
-from .models import Auction, Bid
+from .models import Auction, Bid, Bag
 
 
-@login_required
 def all_auctions(request):
     """
     View to return the auctions page w/ sorting and search queries
@@ -81,7 +81,6 @@ def all_auctions(request):
     return render(request, 'auctions/auctions.html', context)
 
 
-@login_required
 def auction_detail(request, auction_id):
     """
     View to return the specific details of an auction
@@ -119,8 +118,6 @@ def place_bid(request, auction_id):
         if bids:
             current_highest_bid = bids.order_by('-bidding_time')[0]
 
-        print(type(float(bidding_value)))
-        print(type(current_highest_bid.bid))
         if float(bidding_value) > current_highest_bid.bid:
             bid = Bid()
             bid.bidder = request.user
@@ -137,3 +134,23 @@ def place_bid(request, auction_id):
             return redirect(reverse('auction_detail', args=[auction.id]))
 
     return redirect(reverse('auction_detail', args=[auction.id]))
+
+
+def add_to_cart(request, auction_id):
+    """ Add auction to cart"""
+    if request.method == 'POST':
+        auction = get_object_or_404(Auction, pk=auction_id)
+        bids = Bid.objects.filter(auction=auction.id)
+        if bids:
+            current_highest_bid = bids.order_by('-bidding_time')[0]
+            bidder = current_highest_bid.bidder
+
+        bag = Bag(
+            auction=auction,
+            bid=current_highest_bid,
+            bidder=bidder
+        )
+        bag.save()
+        return redirect('home')
+
+    return redirect(reverse('home'))

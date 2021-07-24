@@ -24,22 +24,26 @@
                         <p class="mb-1 mt-0">Subtotal</p>
                     </div>
                 </div>
-                {% for auction in auction %}
+                {% for auction in auctions %}
                     <div class="row">
                         <div class="col-2 mb-1">
-                            <a href="{% url 'auction' auction.id %}">
-                                {% if auction.image %}
-                                    <img class="w-100" src="#" alt="#">
-                                {% else %}
-                                    <img class="w-100" src="#" alt="#">
-                                {% endif %}
+                            <a href="#">
+                                {% for image in auction.product.images.all %}
+                                    {% if image.main_image %}
+                                        <img src="{{ image.image.url }}">
+                                    {% endif %}
+                                {% endfor %}
                             </a>
                         </div>
                         <div class="col-7">
                             <p class="my-0"><strong>{{ auction.product }}</strong></p>
                         </div>
                         <div class="col-3 text-right">
-                            <p class="my-0">${{ auction.closing_bid }}</p>
+                            {% for bid in bids %}
+                                {% if bid.auction == auction %}
+                            <p class="my-0">${{ bid.bid }}</p>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 {% endfor %}

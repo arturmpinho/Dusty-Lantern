@@ -43,7 +43,7 @@
             <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
                 <p>
                     <i class="far fa-clock fa-2x"></i>
-                    <span class="countdowntimer"></span>
+                    <span class="countdowntimer auto-refresh"></span>
                 </p>
 
             {% if current_date_time > auction.start_date_time|date:"Y-m-d H:m:s" %}
@@ -51,6 +51,7 @@
                 <p class="mt-3"><strong>Add bid:</strong></p>
                 <form method="POST" action="{% url 'place_bid' auction.id  %}">
                     {% csrf_token %}
+                    <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
                     <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}">
                     <button type="submit" class="btn btn-outline-danger">Place your bid</button>
                 </form>
@@ -58,6 +59,10 @@
             {% endif %}
 
             <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
+            <form action="">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger" onclick="addToCart()">Trigger add to cart</button>
+            </form>
 
         </div>
     </div>
@@ -68,3 +73,5 @@
     {{ block.super }}
     <script src="{% static 'js/auctions.js' %}"></script>
 {% endblock %}
+
+

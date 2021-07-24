@@ -28,3 +28,16 @@ class Bid(models.Model):
 
     def __int__(self):
         return self.bid
+
+
+class Bag(models.Model):
+    bidder = models.ForeignKey(User,
+                               null=True, blank=False,
+                               on_delete=models.SET_NULL)
+    auction = models.ForeignKey(Auction, null=True,
+                                on_delete=models.CASCADE)
+    bid = models.ForeignKey(Bid, null=True,
+                            on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.auction.product.title

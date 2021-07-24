@@ -30,30 +30,41 @@ for (let i = 0; i < cards.length; i++) {
     
     let end_date_time = new Date(document.getElementsByClassName('end_date_time').item(i).textContent);
   
-    let now = new Date().getTime();
-    
+    let now = new Date();
+
     let timeleft = ''
       
     if (start_date_time >= now) {
-      timeleft = start_date_time - now; 
+      timeleft = start_date_time - now;       
     } else {
-      timeleft = end_date_time - now;
+        timeleft = end_date_time - now;
     }
-    
+
     let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
     let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
       
-    if (start_date_time >= now) {
+    if (start_date_time > now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Starting in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s "; 
     } else if (end_date_time < now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Auction Closed";
+    
+      // Auto refresh auction detail page when countdowntimer reaches 0
+    } else if (timeleft == 0) {
+        setTimeout(function(){
+          $('.auto-refresh').location.reload();
+      }); 
+          
     } else {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
     }
   }, 1000);
 }
+
+
+
+// Number of ongoing auction counter
 
 $(window).on('load', function(){
 
@@ -68,8 +79,33 @@ $(window).on('load', function(){
   }
 })
 
-
 // Disable manual input for input field type number on bidding form
 $("[type='number']").keypress(function (evt) {
   evt.preventDefault();
 });
+
+
+
+function addToCart() {
+  var auctionId = document.getElementById('auction_id').value;
+  var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+  var postData = {
+    "auction_id": auctionId,
+    'csrfmiddlewaretoken': csrfToken,
+  }
+
+  var url = `${auctionId}/add_to_cart`
+  // var url = "4/add_to_cart"
+  $.post(url, postData).done(function () {
+    console.log("Hello")
+      
+    .then(function(result) {
+          console.log("then")
+      });
+  }).fail(function (e) {
+      // just reload the page, the error will be in django messages
+      console.log(e)
+  })
+
+  
+};

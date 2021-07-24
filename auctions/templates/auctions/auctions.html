@@ -46,6 +46,8 @@
       </p>
     </div>
 
+    {% now "Y-m-d H:m:s" as current_date_time %}
+    <div class="current_date_time" hidden>{{ current_date_time }}</div>
     <!-- Auction Cards -->
     <div class="container row row-cols-1 row-cols-md-2 g-4 offset-1">
       {% for auction in auctions %}
@@ -87,6 +89,7 @@
                 <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
                 <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
 
+
                 <p>
                   <i class="far fa-clock fa-2x"></i> 
                   <span class="countdowntimer"></span>
@@ -101,6 +104,7 @@
           </div>
         {% else %}
           {% now "Y-m-d H:m:s" as current_date_time %}
+          <div class="current_date_time">{{ current_date_time }}</div>
           {% if current_date_time < auction.end_date_time|date:"Y-m-d H:m:s" %}
             <div class="col col-md-4 col-lg-3">
               <div class="card">

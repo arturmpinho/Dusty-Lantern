@@ -6,6 +6,8 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 
+from auctions.models import Bag, Auction, Bid
+
 from products.models import Product
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
@@ -92,12 +94,28 @@ def checkout(request):
                 })
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
-        else:
+        else:            
             order_form = OrderForm()
+    bag = Bag.objects.filter(bidder=request.user)
+    auctions = []
+    bids = []
+    for item in bag:
+        auction = get_object_or_404(Auction, pk=item.auction.id)
+        bid = get_object_or_404(Bid, pk=item.bid.id)
+        auctions.append(auction)
+        bids.append(bid)
 
+    
     template = 'checkout/checkout.html'
+    context = {
+            'auctions': auctions,
+            'bids': bids
+        }
 
-    return render(request, template)
+    return render(request, template, context)
+    # template = 'checkout/checkout.html'
+
+    # return render(request, template)
 
 
 def checkout_success(request, order_number):
