@@ -227,6 +227,10 @@ As a buyer, the page will display the watchlist and the participating auctions, 
 
 As a seller, this page will display the items created for auction and the corresponding receivables status.
 
+#### **Checkout**
+
+The checkout page works differently than what we have been taught in the Boutique Ado project. Instead of targeting a session bag, the checkout uses the database to obtain the highest bidder of the auction, and add it to its cart. Whne the user is ready to payh for the items, he can proceed.
+
 #### **Payment**
 
 The payment page will be powered by the multiparty payment system provided by [Stripe](https://stripe.com/ "Stripe"): **Stripe Connect**.
@@ -235,7 +239,7 @@ This systems will allow the auction payment directly from the buyer to the selle
 
 Nontheless, if you interact with the platform as a seller, you will have to proceed with the verification of your [Stripe](https://stripe.com/ "Stripe") Connect Account in order to comply with [Stripe](https://stripe.com/ "Stripe") safety procedures. This step can be seen as tedious, especially if your intention is to list an auction of a small amount.
 
- On the other hand, it provides the buyer and the site owner with an extra security feature, generating extra confidence in the auction platform usage.
+On the other hand, it provides the buyer and the site owner with an extra security feature, generating extra confidence in the auction platform usage.
 
 
 [[Back to top]](#table-of-contents)
@@ -288,6 +292,9 @@ Nontheless, if you interact with the platform as a seller, you will have to proc
 * Courier's APIs in order to automatically generate a shipping label to the seller and  the tracking number to the auction winner
 * Share a specific auction on social networks
 * Auction suggestion based on previous search results / watchlist
+* It can be considered to add a confirmation modal for when a user places a bid as a defensive mechanism to avoid the user to place a binding bid by mistake.
+* When auction is about to close (< 1 min) and an user places a bet, the counter sall reset the count to 1 min again, in order to motivate last minute bids.
+* In case the ongoing auctions list becomes to big, I will include a pagination system ordered by end date time first, in order to improve the UX.
 
 
 [[Back to top]](#table-of-contents)
