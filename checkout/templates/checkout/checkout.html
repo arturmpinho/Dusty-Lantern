@@ -1,20 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="#">
-{% endblock %}
-
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
-{% endblock %}
-
 {% block content %}
-    <div class="container">
+
+    {% include 'components/navigation/navbar.html' %}
+
+    <div class="container" id="checkout">
         <div class="row">
             <div class="col">
                 <h2 class="mb-4">Checkout</h2>
@@ -22,7 +13,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-12 col-lg-6 order-lg-last mb-5">
                 <p>Order Summary ({{ auction_count }})</p>
                 <div class="row">
@@ -33,7 +24,7 @@
                         <p class="mb-1 mt-0">Subtotal</p>
                     </div>
                 </div>
-                {% for auction in auction%}
+                {% for auction in auction %}
                     <div class="row">
                         <div class="col-2 mb-1">
                             <a href="{% url 'auction' auction.id %}">
@@ -48,7 +39,7 @@
                             <p class="my-0"><strong>{{ auction.product }}</strong></p>
                         </div>
                         <div class="col-3 text-right">
-                            <p class="my-0 small text-muted">${{ auction.closing_bid }}</p>
+                            <p class="my-0">${{ auction.closing_bid }}</p>
                         </div>
                     </div>
                 {% endfor %}
@@ -60,31 +51,31 @@
                         <p class="my-0">Grand Total:</p>
                     </div>
                     <div class="col-3">
-                        <p class="my-0">${{ total | floatformat:2 }}</p>
-                        <p class="my-0">${{ auction_fee | floatformat:2 }}</p>
-                        <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+                        <p class="my-0">€ {{ total | floatformat:2 }}</p>
+                        <p class="my-0">€ {{ auction_fee | floatformat:2 }}</p>
+                        <p class="my-0"><strong>€ {{ grand_total | floatformat:2 }}</strong></p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6">
-                <p class="text-muted">Please fill out the form below to complete your order</p>
+                <p>Please fill out the form below to complete your order</p>
                 <form action="{% url 'checkout' %}" method="POST">
                     {% csrf_token %}
                     <fieldset class="px-3 mb-5">
-                        <legend class="small px-2 w-auto">Details</legend>
-                        {{ order_form.first_name | as_crispy_field }}
-                        {{ order_form.last_name | as_crispy_field }}
-                        {{ order_form.email | as_crispy_field }}
+                        <legend class="px-2 w-auto">Details</legend>
+                        {{ order_form.first_name }}
+                        {{ order_form.last_name }}
+                        {{ order_form.email }}
                     </fieldset>
                     <fieldset class="px-3 mb-5">
-                        <legend class="small px-2 w-auto">Delivery</legend>
-                        {{ order_form.phone_number | as_crispy_field }}
-                        {{ order_form.street_address1 | as_crispy_field }}
-                        {{ order_form.street_address2 | as_crispy_field }}
-                        {{ order_form.town_or_city | as_crispy_field }}
-                        {{ order_form.county | as_crispy_field }}
-                        {{ order_form.postcode | as_crispy_field }}
-                        {{ order_form.country | as_crispy_field }}
+                        <legend class="px-2 w-auto">Delivery</legend>
+                        {{ order_form.phone_number }}
+                        {{ order_form.street_address1 }}
+                        {{ order_form.street_address2 }}
+                        {{ order_form.town_or_city }}
+                        {{ order_form.county }}
+                        {{ order_form.postcode }}
+                        {{ order_form.country }}
                         <div class="form-check form-check-inline float-right mr-0">
 							{% if user.is_authenticated %}
 								<label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
@@ -98,7 +89,7 @@
 						</div>
                     </fieldset>
                     <fieldset class="px-3">
-                        <legend class="small px-2 w-auto">Payment</legend>
+                        <legend class="px-2 w-auto">Payment</legend>
                         <!-- A Stripe card element will go here -->
                         <div class="mb-3"></div>
                         <!-- Used to display form errors -->
@@ -114,29 +105,15 @@
 								<i class="fas fa-lock"></i>
 							</span>
 						</button>
-						<p class="small text-danger my-0">
+						<p class="text-danger my-0">
 							<span class="icon">
 								<i class="fas fa-exclamation-circle"></i>
 							</span>
-							<span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+							<span>Your card will be charged <strong>€ {{ grand_total|floatformat:2 }}</strong></span>
 						</p>
 					</div>
                 </form>
             </div>
         </div>
     </div>
-    <div id="loading-overlay">
-        <h1 class="text-light logo-font loading-spinner">
-            <span class="icon">
-                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-            </span>
-        </h1>
-    </div>
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

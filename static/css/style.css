@@ -88,3 +88,9 @@ input[type=number]::-webkit-outer-spin-button {
 .toast-capper {
     height: 2px;
 }
+
+/* Checkout */
+
+#checkout {
+    margin-top: 12rem;
+}
