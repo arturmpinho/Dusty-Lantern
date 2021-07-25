@@ -30,7 +30,26 @@
                 <div class="col-12">
                     <h3>Your orders</h3>
                     {% for order in orders %}
-                        {{ order }}
+                    <h4><a href="{% url 'order_history' order %}">Order number {{ order }}</a></h4>
+
+                    {% for item in order.lineitems.all %}
+                        <div class="row">
+                            <div class="col-2 mb-1">
+                                <a href="#">
+                                    {% for image in item.auction.product.images.all %}
+                                        {% if image.main_image %}
+                                            <img src="{{ image.image.url }}" class="auction_main_image">
+                                        {% endif %}
+                                    {% endfor %}
+                                </a>
+                            </div>
+                            <div class="col-7">
+                                <p class="my-0"><strong>{{ item.auction.product }}</strong></p>
+                                <p class="my-0"><strong>{{ item.lineitem_total }}</strong></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
                     {% endfor %}
                 </div>
             </div>

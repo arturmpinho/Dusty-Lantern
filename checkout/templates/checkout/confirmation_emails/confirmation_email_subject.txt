@@ -1,0 +1,1 @@
+Dusty Lantern Confirmation for your order: {{ order.order_number }}
