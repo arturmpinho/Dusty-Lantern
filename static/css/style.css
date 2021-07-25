@@ -41,9 +41,23 @@ footer {
     color: #EEEEEE;
 }
 
+/* Auction cards */
+
 .card-img-top {
     width: 100%;
     object-fit: cover;
+}
+
+.card-img-preview {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
+.card-footer {
+    background-color: transparent
+    ;
+
 }
 
 /* Navbar */
@@ -56,7 +70,7 @@ footer {
 .nav-link:focus, .nav-link:hover,
 .nav-item:focus, .nav-item:hover,
 a:focus, a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #EEEEEE;
 }
 
