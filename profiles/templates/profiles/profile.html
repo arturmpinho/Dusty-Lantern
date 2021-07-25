@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'components/navigation/navbar.html' %}
+    
+    
+    <div class="p-5 m-4 rounded-3">
+        <div class="container-fluid py-5">
+            <div class="row align-items-md-stretch">
+                <div class="col-lg-8">
+                    <div class="h-100 p-5 rounded-3">
+                        <h2 class="display-4 fw-bold">Your profile</h2>
+
+                        {{ user_profile }}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3>Default Delivery Information</h3>
+                    <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <button>Update information</button>
+                    </form>
+                </div>
+                <div class="col-12">
+                    <h3>Your orders</h3>
+                    {% for order in orders %}
+                        {{ order }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock%}
