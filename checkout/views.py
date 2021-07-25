@@ -16,19 +16,33 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 
 
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, ('Sorry, your payment cannot be '
+                                 'processed right now. Please try '
+                                 'again later.'))
+        return HttpResponse(content=e, status=400)
+
+
+
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
         bag = Bag.objects.filter(bidder=request.user)
-        checkout_bag = {}
-       
-        for item in bag:
-            auction = get_object_or_404(Auction, pk=item.auction.id)
-            bid = get_object_or_404(Bid, pk=item.bid.id)
-            checkout_bag[item.auction.id] = item.bid.id
-            
+        checkout_bag = request.session.get('bag', {})
+
         form_data = {
             'first_name': request.POST['first_name'],
             'last_name': request.POST['last_name'],
@@ -97,7 +111,7 @@ def checkout(request):
         #     order_form = OrderForm()
     
     bag = Bag.objects.filter(bidder=request.user)
-    checkout_bag = {}
+    checkout_bag = request.session.get('bag', {})
     auctions = []
     bids = []
     order_total = 0
@@ -109,6 +123,8 @@ def checkout(request):
         order_total += bid.bid
         auctions.append(auction)
         bids.append(bid)
+    request.session['bag'] = checkout_bag
+    print(request.session['bag'])
     
     if order_total < 500:
         auction_fee = float(order_total) * 0.05
@@ -182,7 +198,10 @@ def checkout_success(request, order_number):
     bag = Bag.objects.filter(bidder=request.user)
     for item in bag:
         item.delete()
-
+    
+    if 'bag' in request.session:
+        del request.session['bag']
+    
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
