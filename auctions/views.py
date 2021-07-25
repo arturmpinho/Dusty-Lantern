@@ -118,20 +118,29 @@ def place_bid(request, auction_id):
         if bids:
             current_highest_bid = bids.order_by('-bidding_time')[0]
 
-        if float(bidding_value) > current_highest_bid.bid:
+            if float(bidding_value) > current_highest_bid.bid:
+                bid = Bid()
+                bid.bidder = request.user
+                bid.auction = auction
+                bid.bidding_time = datetime.now()
+                bid.bid = bidding_value
+                bid.save()
+                messages.info(request,
+                                "Your bid has been placed successfully!")
+            else:
+                messages.error(request,
+                                "Looks like someone was faster. Please adjust \
+                                    your bid and try again!")
+                return redirect(reverse('auction_detail', args=[auction.id]))
+        else:
             bid = Bid()
             bid.bidder = request.user
             bid.auction = auction
             bid.bidding_time = datetime.now()
             bid.bid = bidding_value
             bid.save()
-            messages.info(request,
-                               "Your bid has been placed successfully!")
-        else:
-            messages.error(request,
-                               "Looks like someone was faster. Please adjust \
-                                   your bid and try again!")
-            return redirect(reverse('auction_detail', args=[auction.id]))
+                
+            messages.info(request, "Congratulations, you have placed the first bid for this auction!")
 
     return redirect(reverse('auction_detail', args=[auction.id]))
 
@@ -145,12 +154,12 @@ def add_to_cart(request, auction_id):
             current_highest_bid = bids.order_by('-bidding_time')[0]
             bidder = current_highest_bid.bidder
 
-        bag = Bag(
-            auction=auction,
-            bid=current_highest_bid,
-            bidder=bidder
-        )
-        bag.save()
-        return redirect('home')
+            bag = Bag(
+                auction=auction,
+                bid=current_highest_bid,
+                bidder=bidder
+            )
+            bag.save()
+            return redirect('home')
 
     return redirect(reverse('home'))
