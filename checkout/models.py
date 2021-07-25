@@ -54,12 +54,15 @@ class Order(models.Model):
         Update grand total each time an auction is added
         to the bag, including the auction fee.
         """
-        self.order_total = (self.lineitems.aggregate(Sum('lineitem_total'))[
-                                                        'lineitem_total__sum']
-                            or 0)
-        self.auction_fee = (self.order_total *
-                            settings.AUCTION_FEE_PERCENTAGE / 100)
-        self.grand_total = self.order_total + self.auction_fee
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
+                                                        'lineitem_total__sum'] or 0
+        if self.order_total < 500:
+            self.auction_fee = float(self.order_total) * 0.05
+        elif self.order_total < 1000:
+            self.auction_fee = float(self.order_total) * 0.025
+        else:
+            self.auction_fee = float(self.order_total) * 0.01
+        self.grand_total = float(self.order_total) + self.auction_fee
         self.save()
 
     def save(self, *args, **kwargs):

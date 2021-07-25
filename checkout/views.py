@@ -21,6 +21,14 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
+        bag = Bag.objects.filter(bidder=request.user)
+        checkout_bag = {}
+       
+        for item in bag:
+            auction = get_object_or_404(Auction, pk=item.auction.id)
+            bid = get_object_or_404(Bid, pk=item.bid.id)
+            checkout_bag[item.auction.id] = item.bid.id
+            
         form_data = {
             'first_name': request.POST['first_name'],
             'last_name': request.POST['last_name'],
@@ -35,45 +43,36 @@ def checkout(request):
         }
 
         order_form = OrderForm(form_data)
-        print(order_form)
-        # if order_form.is_valid():
-        #     order = order_form.save(commit=False)
-        #     pid = request.POST.get('client_secret').split('_secret')[0]
-        #     order.stripe_pid = pid
-        #     order.save()
-        #     for item_id, item_data in auction.items():
-        #         try:
-        #             product = Product.objects.get(id=item_id)
-        #             if isinstance(item_data, int):
-        #                 order_line_item = OrderLineItem(
-        #                     order=order,
-        #                     product=product,
-        #                     quantity=item_data,
-        #                 )
-        #                 order_line_item.save()
-        #             else:
-        #                 for size, quantity in item_data['items_by_size'].items():
-        #                     order_line_item = OrderLineItem(
-        #                         order=order,
-        #                         product=product,
-        #                         quantity=quantity,
-        #                         product_size=size,
-        #                     )
-        #                     order_line_item.save()
-        #         except Product.DoesNotExist:
-        #             messages.error(request, (
-        #                 "Error"
-        #                 "Please call us for assistance!")
-        #             )
-        #             order.delete()
-        #             return redirect(reverse('view_profile'))
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.save()
+            for auction_id, bid_id in checkout_bag.items():
+                try:
+                    auction = Auction.objects.get(id=auction_id)
+                    bid = Bid.objects.get(id=bid_id)
+                    if isinstance(bid_id, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            auction=auction,
+                            lineitem_total=bid.bid,
+                        )
+                        order_line_item.save()
+                except Auction.DoesNotExist:
+                    messages.error(request, (
+                        "Error"
+                        "Please call us for assistance!")
+                    )
+                    order.delete()
+                    return redirect(reverse('view_profile'))
 
-        #     # Save the info to the user's profile if all is well
-        #     request.session['save_info'] = 'save-info' in request.POST
-        #     return redirect(reverse('checkout_success', args=[order.order_number]))
-        # else:
-        #     messages.error(request, 'There was an error with your form. \
-        #         Please double check your information.')
+            # Save the info to the user's profile if all is well
+            request.session['save_info'] = 'save-info' in request.POST
+            return redirect(reverse('checkout_success', args=[order.order_number]))
+        else:
+            messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
 
 
         # Attempt to prefill the form with any info the user maintains in their profile
@@ -113,13 +112,10 @@ def checkout(request):
     
     if order_total < 500:
         auction_fee = float(order_total) * 0.05
-        print(auction_fee)
     elif order_total < 1000:
         auction_fee = float(order_total) * 0.025
-        print(auction_fee)
     else:
         auction_fee = float(order_total) * 0.01
-        print(auction_fee)
 
     grand_total = float(order_total) + auction_fee
 
@@ -158,31 +154,34 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
-        order.user_profile = profile
-        order.save()
+    # if request.user.is_authenticated:
+    #     profile = UserProfile.objects.get(user=request.user)
+    #     # Attach the user's profile to the order
+    #     order.user_profile = profile
+    #     order.save()
 
-        # Save the user's info
-        if save_info:
-            profile_data = {
-                'default_phone_number': order.phone_number,
-                'default_country': order.country,
-                'default_postcode': order.postcode,
-                'default_town_or_city': order.town_or_city,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
-            }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+    #     # Save the user's info
+    #     if save_info:
+    #         profile_data = {
+    #             'default_phone_number': order.phone_number,
+    #             'default_country': order.country,
+    #             'default_postcode': order.postcode,
+    #             'default_town_or_city': order.town_or_city,
+    #             'default_street_address1': order.street_address1,
+    #             'default_street_address2': order.street_address2,
+    #             'default_county': order.county,
+    #         }
+    #         user_profile_form = UserProfileForm(profile_data, instance=profile)
+    #         if user_profile_form.is_valid():
+    #             user_profile_form.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
 
+    bag = Bag.objects.filter(bidder=request.user)
+    for item in bag:
+        item.delete()
 
     template = 'checkout/checkout_success.html'
     context = {
