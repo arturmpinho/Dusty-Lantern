@@ -6,14 +6,28 @@ html {
 
 body {
     font-size: 1.6rem;
-    font-family: "Montserrat", Impact, Haettenschweiler, sans-serif;
+    font-family: "Montserrat", monospace, Haettenschweiler, sans-serif;
     color: #393E46;
 }
 
 h1 {
-    font-family: 'Vast Shadow', Impact, Haettenschweiler, sans-serif;
+    font-family: 'Vast Shadow', monospace, Haettenschweiler, sans-serif;
     color: #EEEEEE;
-    font-size: 6rem;
+    font-size: 3rem;
+}
+
+a {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+
+footer {
+    position: static;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #393E46;
+    color: #EEEEEE;
 }
 
 .btn-danger,
@@ -32,20 +46,47 @@ h1 {
     object-fit: cover;
 }
 
-.category-filter{
+/* Navbar */
+
+.nav-link, .nav-item,
+.navbar-dark {
+    color: #EEEEEE !important;
+}
+
+.nav-link:focus, .nav-link:hover,
+.nav-item:focus, .nav-item:hover,
+a:focus, a:hover {
+    text-decoration: underline;
+    color: #EEEEEE;
+}
+
+#dlbrand{
+    font-size: min(max(2rem, 7vw), 5rem);
+}
+
+#dlbrand-nav:focus, #dlbrand-nav:hover {
+    text-decoration: none;
+}
+
+.mt-55 {
+    margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+.category-filter,
+.add-fav {
     width: min-content;
     text-align: center;
-}
-
-.nav-link{
     color: #9A031E;
+    display: block;
+    padding: 0.5rem;
 }
 
-.nav-link:focus, .nav-link:hover{
-    color: #dc3545;
+.category-filter:focus, .category-filter:hover,
+.add-fav:focus, .add-fav:hover {
+color: #dc3545;
 }
 
-.btntop{
+.btntop {
     position: fixed;
     display: none;
     bottom: 5vh;
@@ -57,18 +98,23 @@ h1 {
     font-size: 1.7rem;
 }
 
-.btntop:hover{
+.btntop:hover {
     background-color: #9A031E;
     padding: 1.9rem;
     transition: ease-in-out;
 }
 
+/* Jumbotron */
+.container-fluid {
+    background: #393E46;
+    color: #EEEEEE;
+}
 
 /* ensures the increment/decrement arrows always display on input field type number */
 /* Credits to https://davidwalsh.name/always-show-arrows-for-number-input */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {
-  opacity: 1;
+    opacity: 1;
 }
 
 
@@ -99,3 +145,4 @@ input[type=number]::-webkit-outer-spin-button {
     width: 10rem;
     height: 10rem;
 }
+

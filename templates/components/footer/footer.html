@@ -1,0 +1,78 @@
+<div class="container-fluid pb-0 mb-0 justify-content-center">
+    <footer>
+        <div class="row mt-5 justify-content-center py-5">
+            <div class="col-12">
+                <div class="row ">
+                    <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
+                        <h2 class="mb-5">Dusty Lantern</h2>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                        <h4 class="mb-3 mb-lg-4 "><b>MENU</b></h4>
+                        <ul class="list-unstyled">
+                            {% if request.user.is_authenticated %}                          
+                            <li>
+                                <a href="{% url 'home' %}">
+                                    <div>
+                                        <p class="my-0">Home</p>
+                                    </div>
+                                </a>
+                            </li>
+                            {% if request.user.is_superuser %}
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p class="my-0">Auction Management</p>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a href="{% url 'auctions' %}">
+                                    <div>
+                                        <p class="my-0">Auctions</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'profile' %}">
+                                    <div>
+                                        <p class="my-0">My Dashboard</p>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-12">
+                        <h4 class="mb-3 mb-lg-4 mt-sm-0 mt-5"><b>ADDRESS</b></h4>
+                        <p class="mb-1">PARKWEG 123</p>
+                        <p>2271 AE - VOORBURG</p>
+                        <p>ZUID-HOLLAND</p>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+                        <p class="mb-0 pb-0">
+                            <span class="mx-2">
+                                <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+                            </span>
+                            <span class="mx-2">
+                                <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                            </span>
+                            <span class="mx-2">
+                                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+                            </span>
+                            <span class="mx-2">
+                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                            </span>
+                        </p>
+                        <small class="rights"><span>&#174;</span> All Rights Reserved</small>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
+                        <h4 class="mt-2"><b>ARTUR M. PINHO</b></h4><small> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> dustylantern@example.com</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
