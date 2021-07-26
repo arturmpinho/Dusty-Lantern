@@ -6,64 +6,77 @@
     {% include 'components/navigation/navbar.html' %}
     
     <div class="pt-5 mt-5 rounded-3">
-        <div class="container py-5 m-5">
+        <div class="container py-5 mt-5">
             <h2>{{ auction.product.title }} | {{ auction.product.brand }}</h2>
             <hr>
         </div>
     </div>
 
     <!-- Auction Cards -->
-    <div class="container row row-cols-1 row-cols-md-2 g-4">
-        <div class="col-lg-4 card">
-            <div class="h-100 p-5 rounded-3 text-center">
-                {% for image in auction.product.images.all %}
-                    {% if image.main_image %}
-                        <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
-                    {% endif %}
-                {% endfor %}
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <div class="h-100 p-5 rounded-3">
+                            {% for image in auction.product.images.all %}
+                                {% if image.main_image %}
+                                    <img class = "card-img-top" src="{{image.image.url}}" alt="{{ product.title }}">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-8 align-self-center">
+                        <div class="container p-5">
+                        <p class="card-text">{{ auction.product.description}}</p>
+                        <p class="card-text">
+                            <i class="far fa-money-bill-alt fa-2x"></i> 
+                            {{ auction.base_amount }}
+                        </p>            
+                        <p class="card-text">
+                            <i class="fas fa-gavel fa-2x"></i>
+                            € {{ current_highest_bid.bid }}
+                        </p>
+                        <p class="card-text">
+                            <i class="fas fa-user fa-2x"></i> 
+                            Last bid from: {{ current_highest_bid.bidder }}
+                        </p>
+
+                        {% now "Y-m-d H:m:s" as current_date_time %}
+                        <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
+                        <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
+                            <p>
+                                <i class="far fa-clock fa-2x"></i>
+                                <span class="countdowntimer auto-refresh"></span>
+                            </p>
+
+                        {% if current_date_time > auction.start_date_time|date:"Y-m-d H:m:s" %}
+                        <div class="col-12 mb-5">
+                            <p class="mt-3"><strong>Add bid:</strong></p>
+                            <form method="POST" action="{% url 'place_bid' auction.id  %}">
+                                {% csrf_token %}
+                                <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
+                                <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}">
+                                <button type="submit" class="btn btn-outline-danger">Place your bid</button>
+                            </form>
+                        </div>
+                        {% endif %}
+
+                        <form action="">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger" onclick="addToCart()">Trigger add to cart</button>
+                        </form>
+                        </div>
+
+                        <!-- Card footer -->
+                        </div>
+                            <div class="card-footer text-center">
+                                <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-8">
-            <p class="card-text">{{ auction.product.description}}</p>
-            <p>
-                <i class="far fa-money-bill-alt fa-2x"></i> 
-                {{ auction.base_amount }}
-            </p>            
-            <p>
-                <i class="fas fa-gavel fa-2x"></i>
-                € {{ current_highest_bid.bid }}
-            </p>
-            <p>
-                <i class="fas fa-user fa-2x"></i> 
-                Last bid from: {{ current_highest_bid.bidder }}
-            </p>
-
-            {% now "Y-m-d H:m:s" as current_date_time %}
-            <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:m:s" }} </div>
-            <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:m:s" }} </div>
-                <p>
-                    <i class="far fa-clock fa-2x"></i>
-                    <span class="countdowntimer auto-refresh"></span>
-                </p>
-
-            {% if current_date_time > auction.start_date_time|date:"Y-m-d H:m:s" %}
-            <div class="col-12 mb-5">
-                <p class="mt-3"><strong>Add bid:</strong></p>
-                <form method="POST" action="{% url 'place_bid' auction.id  %}">
-                    {% csrf_token %}
-                    <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
-                    <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}">
-                    <button type="submit" class="btn btn-outline-danger">Place your bid</button>
-                </form>
-            </div>
-            {% endif %}
-
-            <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
-            <form action="">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline-danger" onclick="addToCart()">Trigger add to cart</button>
-            </form>
-
         </div>
     </div>
 

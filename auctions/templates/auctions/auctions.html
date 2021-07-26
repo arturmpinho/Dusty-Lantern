@@ -97,10 +97,10 @@
 
                   <!-- Card footer -->
                   </div>
-                  <div class="card-footer text-center">
-                      <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
+                    </div>
                   </div>
-                </div>
             
           {% else %}
             {% now "Y-m-d H:m:s" as current_date_time %}
