@@ -26,6 +26,8 @@
                     <th>Bidding Increment</th>
                     <th>Start Date Time</th>
                     <th>End Date Time</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +38,8 @@
                         <td>{{ auction.bidding_increment }}</td>
                         <td>{{ auction.start_date_time }}</td>
                         <td>{{ auction.end_date_time }}</td>
+                        <td><a href="{% url 'edit_auction' auction.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
+                        <td><a href="{% url 'delete_auction' auction.id %}"><i class="fas fa-trash-alt fa-lg"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

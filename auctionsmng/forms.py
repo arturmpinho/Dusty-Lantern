@@ -7,6 +7,11 @@ from .widgets import CustomClearableFileInput
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'datetime-local'
+
+
 class ProductForm(forms.ModelForm):
 
     class Meta:
@@ -33,6 +38,10 @@ class AuctionForm(forms.ModelForm):
     class Meta:
         model = Auction
         fields = '__all__'
+        widgets = {
+            'start_date_time': DateTimeInput(),
+            'end_date_time': DateTimeInput(),
+        }  
 
 
     def __init__(self, *args, **kwargs):

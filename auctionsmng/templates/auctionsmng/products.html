@@ -26,6 +26,8 @@
                     <th>Measurements</th>
                     <th>Brand</th>
                     <th>Condition</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +39,8 @@
                         <td>{{ product.measurements }}</td>
                         <td>{{ product.brand }}</td>
                         <td>{{ product.condition }}</td>
+                        <td><a href="{% url 'edit_product' product.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
+                        <td><a href="{% url 'delete_product' product.id %}"><i class="fas fa-trash-alt fa-lg"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

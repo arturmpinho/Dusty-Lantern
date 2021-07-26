@@ -7,7 +7,7 @@
     
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>Add auction</h2>
+            <h2>Add product</h2>
             <hr>
         </div>
     </div>
@@ -17,8 +17,14 @@
             <div class="col-12">
                 <form action="{% url 'add_product' %}" method="POST">
                     {% csrf_token %}
-                    {{ product_form | crispy }}
-                    <button type="submit">Next</button>
+                    {% for field in product_form %}
+                        {% if field.name != 'image' %}
+                            {{ field | as_crispy_field }}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit">Add product</button>
                 </form>
             </div>
         </div>

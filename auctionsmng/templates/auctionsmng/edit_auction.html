@@ -7,7 +7,7 @@
     
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>Add auction</h2>
+            <h2>Edit auction</h2>
             <hr>
         </div>
     </div>
@@ -15,10 +15,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="{% url 'add_auction' %}" method="POST">
+                <form action="{% url 'edit_auction' auction.id %}" method="POST">
                     {% csrf_token %}
                     {{ auction_form | crispy }}
-                    <button type="submit">Add auction</button>
+                    <button type="submit">Update auction</button>
                 </form>
             </div>
         </div>
