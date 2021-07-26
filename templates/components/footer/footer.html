@@ -18,13 +18,13 @@
                                 </a>
                             </li>
                             {% if request.user.is_superuser %}
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p class="my-0">Auction Management</p>
-                                    </div>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <p class="my-0">Auction Management</p>
+                                        </div>
+                                    </a>
+                                </li>
                             {% endif %}
                             <li>
                                 <a href="{% url 'auctions' %}">
@@ -40,6 +40,21 @@
                                     </div>
                                 </a>
                             </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% url 'account_login' %}">
+                                        <div>
+                                            <p class="my-0">Login</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'account_signup' %}">
+                                        <div>
+                                            <p class="my-0">Register</p>
+                                        </div>
+                                    </a>
+                                </li>
                             {% endif %}
                         </ul>
                     </div>
