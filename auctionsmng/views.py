@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .forms import AuctionForm, ProductForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from products.models import Product
+from products.models import Product, Image
 from auctions.models import Auction
 
 
@@ -53,8 +53,16 @@ def add_product(request):
     
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES)
+        images = request.FILES.getlist('images')
         if product_form.is_valid():
             product = product_form.save()
+            for image in images:
+                Image.objects.create(product=product, image=image)
+            images = Image.objects.filter(product=product)
+            first_product_image = images[0]
+            first_product_image.main_image = True
+            first_product_image.save()
+            
             messages.info(request, f'Product {product} has been successfully added!')
             return redirect('products')
 

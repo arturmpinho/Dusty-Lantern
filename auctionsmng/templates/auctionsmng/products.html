@@ -40,7 +40,8 @@
                         <td>{{ product.brand }}</td>
                         <td>{{ product.condition }}</td>
                         <td><a href="{% url 'edit_product' product.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td><a href="{% url 'delete_product' product.id %}"><i class="fas fa-trash-alt fa-lg"></i></a></td>
+                        <td><a href="#a{{product}}" data-bs-toggle="modal" data-bs-target="#a{{product}}" aria-label="Open delete product modal"><i class="fas fa-trash-alt"></i></a></td>
+                        {% include 'auctionsmng/delete_product_modal.html' %}
                     </tr>
                 {% endfor %}
             </tbody>

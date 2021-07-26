@@ -21,8 +21,8 @@ class ProductForm(forms.ModelForm):
             'creation_date': DateInput()
         }  
         
-    image = forms.ImageField(label="Image", required=False,
-                             widget=CustomClearableFileInput)
+    images = forms.ImageField(label="Image", required=True,
+                             widget=CustomClearableFileInput(attrs={'multiple': True}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,3 +51,4 @@ class AuctionForm(forms.ModelForm):
         # self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
+

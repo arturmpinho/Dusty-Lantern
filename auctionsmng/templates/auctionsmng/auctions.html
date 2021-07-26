@@ -39,7 +39,8 @@
                         <td>{{ auction.start_date_time }}</td>
                         <td>{{ auction.end_date_time }}</td>
                         <td><a href="{% url 'edit_auction' auction.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td><a href="{% url 'delete_auction' auction.id %}"><i class="fas fa-trash-alt fa-lg"></i></a></td>
+                        <td><a href="#a{{auction}}" data-bs-toggle="modal" data-bs-target="#a{{auction}}" aria-label="Open delete auction modal"><i class="fas fa-trash-alt"></i></a></td>
+                        {% include 'auctionsmng/delete_auction_modal.html' %}
                     </tr>
                 {% endfor %}
             </tbody>
