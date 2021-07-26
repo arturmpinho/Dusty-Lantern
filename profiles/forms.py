@@ -1,5 +1,7 @@
 from django import forms
 from .models import UserProfile
+from auctions.models import Auction
+from products.models import Product, Image, Category, Condition
 
 
 class UserProfileForm(forms.ModelForm):
@@ -32,3 +34,4 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = ('mt-3 fs-4 rounded-3')
             self.fields[field].label = False
+

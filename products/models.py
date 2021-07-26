@@ -31,9 +31,6 @@ class Condition(models.Model):
 
 
 class Product(models.Model):
-    username = models.ForeignKey(User,
-                                 null=True, blank=False,
-                                 on_delete=models.SET_NULL)
     title = models.CharField(max_length=50)
     description = models.TextField()
     category = models.ForeignKey(Category,

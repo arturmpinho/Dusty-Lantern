@@ -35,7 +35,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'title',
-        'username',
         'category',
         'condition',
     )
