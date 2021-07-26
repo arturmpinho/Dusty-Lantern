@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block content %}
 
     {% include 'components/navigation/navbar.html' %}
@@ -11,9 +15,45 @@
             <hr>
         </div>
     </div>
-    
-    
+
+    <div class="container">
+        <table id="products-table" class="display">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Measurements</th>
+                    <th>Brand</th>
+                    <th>Condition</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.measurements }}</td>
+                        <td>{{ product.brand }}</td>
+                        <td>{{ product.condition }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     {% include 'components/footer/footer.html' %}
 
 {% endblock%}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#products-table').DataTable();
+        });
+    </script>
+
+{% endblock %}

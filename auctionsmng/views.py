@@ -1,27 +1,46 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-# from .models import UserProfile
 from .forms import AuctionForm, ProductForm
-# from checkout.models import Order
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# from products.models import Product
-
+from products.models import Product
+from auctions.models import Auction
 
 
 # Create your views here.
-
+@login_required
 def auctions(request):
+    """ Function to display all the auctions for the superuser """
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+    
+    auctions = Auction.objects.all()
     template = "auctionsmng/auctions.html"
+    
+    context = {
+        'auctions': auctions
+    }
 
-    return render(request, template)
+    return render(request, template, context)
 
 
+@login_required
 def products(request):
+    """ Function to display all the products for the superuser """
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+    
+    products = Product.objects.all()
     template = "auctionsmng/products.html"
+    
+    context = {
+        'products': products
+    }
 
-    return render(request, template)
+    return render(request, template, context)
 
 
 @login_required

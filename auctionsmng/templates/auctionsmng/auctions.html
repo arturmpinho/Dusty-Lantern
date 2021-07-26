@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block content %}
 
     {% include 'components/navigation/navbar.html' %}
@@ -11,9 +16,45 @@
             <hr>
         </div>
     </div>
-    
+
+    <div class="container">
+        <table id="auctions" class="display">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Base Amount</th>
+                    <th>Bidding Increment</th>
+                    <th>Start Date Time</th>
+                    <th>End Date Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for auction in auctions %}
+                    <tr>
+                        <td>{{ auction.product }}</td>
+                        <td>{{ auction.base_amount }}</td>
+                        <td>{{ auction.bidding_increment }}</td>
+                        <td>{{ auction.start_date_time }}</td>
+                        <td>{{ auction.end_date_time }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     
 
     {% include 'components/footer/footer.html' %}
 
 {% endblock%}
+
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#auctions').DataTable();
+        } );
+    </script>
+
+{% endblock %}
