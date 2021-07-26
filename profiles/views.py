@@ -22,7 +22,6 @@ def profile(request):
 
     form = UserProfileForm(instance=user_profile)
     orders = user_profile.orders.all()
-    print(orders)
 
     template = "profiles/profile.html"
     context = {
