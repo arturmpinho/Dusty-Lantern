@@ -15,6 +15,7 @@
 
     <div class="row">
         <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            
         <!-- User's personal information -->
             <div class="container">
                 <div class="row">
@@ -23,34 +24,43 @@
                         <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
                             {% csrf_token %}
                             {{ form | crispy }}
-                            <button class="btn btn-danger mt-5">Update my info</button>
+                            <button class="btn btn-danger my-5">Update my info</button>
                         </form>
                     </div>
+
             <!-- User's orders history -->
                     <div class="col-lg-7">
-                <h3>Your orders</h3>
-                    {% for order in orders %}
-                    <h4><a href="{% url 'order_history' order %}">Order number {{ order }}</a></h4>
-
-                        {% for item in order.lineitems.all %}
-                            <div class="row">
-                                <div class="col-2 mb-1">
-                                    <a href="#">
-                                        {% for image in item.auction.product.images.all %}
-                                            {% if image.main_image %}
-                                                <img src="{{ image.image.url }}" class="auction_main_image">
-                                            {% endif %}
-                                        {% endfor %}
-                                    </a>
-                                </div>
-                                <div class="col-7">
-                                    <p class="my-0"><strong>{{ item.auction.product }}</strong></p>
-                                    <p class="my-0"><strong>{{ item.lineitem_total }}</strong></p>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                        {% endfor %}
+                        <h3>Your Orders</h3>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Article Image</th>
+                                        <th scope="col">Order Number</th>
+                                        <th scope="col">Article</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        {% for item in order.lineitems.all %}
+                                            {% for image in item.auction.product.images.all %}
+                                                {% if image.main_image %}
+                                                    <td><img src="{{ image.image.url }}" class="auction_main_image"></td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        <td scope="row">
+                                            <a href="{% url 'order_history' order %}" id="order_num">{{ order | truncatechars:10 }}</a>
+                                        </td>
+                                        <td scope="row">{{ item.auction.product }}</td>
+                                        <td scope="row">€ {{ item.lineitem_total }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

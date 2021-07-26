@@ -149,6 +149,15 @@ input[type=number]::-webkit-outer-spin-button {
     height: 2px;
 }
 
+/* Profiles: Order history */
+#order_num {
+    color: black;
+}
+
+#order_num:focus, #order_num:hover {
+    text-decoration: underline;
+}
+
 /* Checkout */
 
 #checkout {
