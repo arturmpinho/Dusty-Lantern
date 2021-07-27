@@ -33,36 +33,42 @@ for (let i = 0; i < cards.length; i++) {
     let now = new Date();
 
     let timeleft = ''
+    
+    let timer = ""
       
     if (start_date_time >= now) {
       timeleft = start_date_time - now;       
     } else {
-        timeleft = end_date_time - now;
+      timeleft = end_date_time - now;
     }
 
     let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
     let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-      
+
+    if (timeleft < 500 && timeleft > -500) {
+      timer = 0
+    } 
+
+    console.log(timer)
+
     if (start_date_time > now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Starting in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s "; 
+
     } else if (end_date_time < now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Auction Closed";
     
       // Auto refresh auction detail page when countdowntimer reaches 0
-    } else if (timeleft == 0) {
-        setTimeout(function(){
-          $('.auto-refresh').location.reload();
-      }); 
-          
-    } else {
-      document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-    }
+    } else if (timer === 0) {
+      setTimeout("location.reload(true);");
+    } 
+     
+      else {
+        document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      }
   }, 1000);
 }
-
-
 
 // Number of ongoing auction counter
 
@@ -85,6 +91,7 @@ $("[type='number']").keypress(function (evt) {
 });
 
 
+// Add to cart functionality when auction closes
 
 function addToCart() {
   var auctionId = document.getElementById('auction_id').value;
@@ -95,7 +102,6 @@ function addToCart() {
   }
 
   var url = `${auctionId}/add_to_cart`
-  // var url = "4/add_to_cart"
   $.post(url, postData).done(function () {
     console.log("Hello")
       

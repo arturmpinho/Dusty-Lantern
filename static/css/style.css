@@ -106,6 +106,10 @@ a > .nav-link,
 color: #dc3545;
 }
 
+.card {
+    box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+
 
 /* Buttons */
 
