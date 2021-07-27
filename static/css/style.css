@@ -80,13 +80,13 @@ a > .nav-link,
     text-decoration: none;
 }
 
-footer {
-    position: static;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #393E46;
+#footer-container {
+    background-color: #393E46 ;
     color: #EEEEEE;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-bottom: 0;
 }
 
 
