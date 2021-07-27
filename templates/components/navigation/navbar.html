@@ -18,7 +18,7 @@
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{% url 'auctionsmng' %}">
                                 <div class="text-center">
                                     <div><i class="fas fa-edit fa-lg"></i></div>
                                     <p class="my-0">Auction Management</p>

@@ -17,17 +17,8 @@ h1 {
 }
 
 a {
-    color: #EEEEEE;
+    color: #9A031E;
     text-decoration: none;
-}
-
-footer {
-    position: static;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #393E46;
-    color: #EEEEEE;
 }
 
 .btn-danger,
@@ -39,18 +30,6 @@ footer {
 
 .btn-outline-danger{
     color: #EEEEEE;
-}
-
-/* Allauth */
-
-.allauth-a-tags {
-    color: #9A031E;
-}
-
-.allauth-a-tags:focus,
-.allauth-a-tags:hover {
-    color: #9A031E;
-    text-decoration: underline;
 }
 
 /* Auction cards */
@@ -72,7 +51,7 @@ footer {
 
 }
 
-/* Navbar */
+/* Navbar & footer */
 
 .nav-link, .nav-item,
 .navbar-dark {
@@ -81,7 +60,7 @@ footer {
 
 .nav-link:focus, .nav-link:hover,
 .nav-item:focus, .nav-item:hover,
-a:focus, a:hover {
+.menu-links:focus, .menu-links:hover{
     text-decoration: none;
     color: #EEEEEE;
 }
@@ -94,9 +73,24 @@ a:focus, a:hover {
     text-decoration: none;
 }
 
-.mt-55 {
-    margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
+a > .nav-link,
+.fab, .far,
+.menu-links {
+    color: #EEEEEE;
+    text-decoration: none;
 }
+
+footer {
+    position: static;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+
+/*Auctions: Category filters */
 
 .category-filter,
 .add-fav {
@@ -111,6 +105,9 @@ a:focus, a:hover {
 .add-fav:focus, .add-fav:hover {
 color: #dc3545;
 }
+
+
+/* Buttons */
 
 .btntop {
     position: fixed;
@@ -130,11 +127,17 @@ color: #dc3545;
     transition: ease-in-out;
 }
 
+
 /* Jumbotron */
 .container-fluid {
     background: #393E46;
     color: #EEEEEE;
 }
+
+.mt-55 {
+    margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
 
 /* ensures the increment/decrement arrows always display on input field type number */
 /* Credits to https://davidwalsh.name/always-show-arrows-for-number-input */
@@ -144,7 +147,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-/* ------------------------------- bootstrap toasts */
+/* Toasts */
 
 .message-container {
     position: fixed;
@@ -162,6 +165,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* Profiles: Order history */
+
 #order_num {
     color: black;
 }
@@ -169,6 +173,7 @@ input[type=number]::-webkit-outer-spin-button {
 #order_num:focus, #order_num:hover {
     text-decoration: underline;
 }
+
 
 /* Checkout */
 
@@ -180,4 +185,3 @@ input[type=number]::-webkit-outer-spin-button {
     width: 10rem;
     height: 10rem;
 }
-

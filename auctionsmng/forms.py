@@ -19,10 +19,10 @@ class ProductForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'creation_date': DateInput()
-        }  
-        
+        }
+
     images = forms.ImageField(label="Image", required=True,
-                             widget=CustomClearableFileInput(attrs={'multiple': True}))
+                              widget=CustomClearableFileInput(attrs={'multiple': True}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,7 +41,7 @@ class AuctionForm(forms.ModelForm):
         widgets = {
             'start_date_time': DateTimeInput(),
             'end_date_time': DateTimeInput(),
-        }  
+        }
 
 
     def __init__(self, *args, **kwargs):
@@ -51,4 +51,3 @@ class AuctionForm(forms.ModelForm):
         # self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
-

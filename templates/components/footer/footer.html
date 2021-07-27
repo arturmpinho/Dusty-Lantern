@@ -11,7 +11,7 @@
                         <ul class="list-unstyled">
                             {% if request.user.is_authenticated %}                          
                             <li>
-                                <a href="{% url 'home' %}">
+                                <a href="{% url 'home' %}" class="menu-links">
                                     <div>
                                         <p class="my-0">Home</p>
                                     </div>
@@ -19,7 +19,7 @@
                             </li>
                             {% if request.user.is_superuser %}
                                 <li>
-                                    <a href="#">
+                                    <a href="{% url 'auctionsmng' %}" class="menu-links">
                                         <div>
                                             <p class="my-0">Auction Management</p>
                                         </div>
@@ -27,14 +27,14 @@
                                 </li>
                             {% endif %}
                             <li>
-                                <a href="{% url 'auctions' %}">
+                                <a href="{% url 'auctions' %}" class="menu-links">
                                     <div>
                                         <p class="my-0">Auctions</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'profile' %}">
+                                <a href="{% url 'profile' %}" class="menu-links">
                                     <div>
                                         <p class="my-0">My Dashboard</p>
                                     </div>
@@ -42,14 +42,14 @@
                             </li>
                             {% else %}
                                 <li>
-                                    <a href="{% url 'account_login' %}">
+                                    <a href="{% url 'account_login' %}" class="menu-links">
                                         <div>
                                             <p class="my-0">Login</p>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'account_signup' %}">
+                                    <a href="{% url 'account_signup' %}" class="menu-links">
                                         <div>
                                             <p class="my-0">Register</p>
                                         </div>
