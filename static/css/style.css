@@ -41,6 +41,18 @@ footer {
     color: #EEEEEE;
 }
 
+/* Allauth */
+
+.allauth-a-tags {
+    color: #9A031E;
+}
+
+.allauth-a-tags:focus,
+.allauth-a-tags:hover {
+    color: #9A031E;
+    text-decoration: underline;
+}
+
 /* Auction cards */
 
 .card-img-top {
