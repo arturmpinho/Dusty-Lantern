@@ -7,7 +7,7 @@
     
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>Add product</h2>
+            <h2>Add Product</h2>
             <hr>
         </div>
     </div>
@@ -24,7 +24,10 @@
                             {{ field }}
                         {% endif %}
                     {% endfor %}
-                    <button type="submit">Add product</button>
+                    <div class="container m-5">
+                        <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Go Back</a>
+                        <button type="submit" class="btn btn-danger">Add Product</button>
+                    </div>
                 </form>
             </div>
         </div>

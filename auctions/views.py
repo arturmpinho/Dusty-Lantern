@@ -5,15 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
-from products.models import Category
-from .models import Auction, Bid
-
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from products.models import Category
+from .models import Auction, Bid
 
 
-
+@login_required
 def all_auctions(request):
     """
     View to return the auctions page w/ sorting and search queries
@@ -85,6 +84,7 @@ def all_auctions(request):
     return render(request, 'auctions/auctions.html', context)
 
 
+@login_required
 def auction_detail(request, auction_id):
     """
     View to return the specific details of an auction
@@ -159,7 +159,7 @@ def send_place_bid_confirmation_email(bid):
     a user has place a bid
     """
     client_email = bid.bidder.email
-    
+
     subject = render_to_string(
         'auctions/confirmation_emails/confirmation_email_subject.txt',
         {'bid': bid})

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Auction, Bid, Bag
 
+
 class BidAdmin(admin.ModelAdmin):
 
     list_display = (
@@ -33,6 +34,7 @@ class BagAdmin(admin.ModelAdmin):
         'bid',
         'bidder',
     )
+
 
 admin.site.register(Auction, AuctionAdmin)
 admin.site.register(Bid, BidAdmin)

@@ -1,17 +1,14 @@
+import json
+import time
+
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Order, OrderLineItem
 from profiles.models import UserProfile
 from auctions.models import Auction, Bid, Bag
-from django.contrib.auth.models import User
-
-from profiles.models import UserProfile
-
-import json
-import time
+from .models import Order, OrderLineItem
 
 
 class StripeWH_Handler:
@@ -67,17 +64,20 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             user_profile = UserProfile.objects.get(user__username=username)
-            if save_info != false:
-                print(save_info)
+            if save_info != "false":
                 user_profile.default_phone_number = shipping_details.phone
                 user_profile.default_country = shipping_details.address.country
-                user_profile.default_postcode = shipping_details.address.postal_code
-                user_profile.default_town_or_city = shipping_details.address.city
-                user_profile.default_street_address1 = shipping_details.address.line1
-                user_profile.default_street_address2 = shipping_details.address.line2
+                user_profile.default_postcode = (shipping_details.
+                                                 address.postal_code)
+                user_profile.default_town_or_city = (shipping_details.
+                                                     address.city)
+                user_profile.default_street_address1 = (shipping_details.
+                                                        address.line1)
+                user_profile.default_street_address2 = (shipping_details.
+                                                        address.line2)
                 user_profile.default_county = shipping_details.address.state
                 user_profile.save()
-    
+
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -143,7 +143,7 @@ class StripeWH_Handler:
         bag = Bag.objects.filter(bidder=user_profile.user)
         for item in bag:
             item.delete()
-        
+
         for item in order.lineitems.all():
             auction = Auction.objects.get(pk=item.auction.id)
             auction.is_sold = True

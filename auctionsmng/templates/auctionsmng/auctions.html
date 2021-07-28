@@ -12,10 +12,17 @@
     
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>Auctions</h2>
+            <h2>Auctions Management</h2>
             <hr>
         </div>
     </div>
+
+        <div class="container mb-5 text-center">
+            <div class="col">
+                <a href="{% url 'add_product' %}" class="btn btn-outline-danger">Add Product</a>
+                <a href="{% url 'add_auction' %}" class="btn btn-outline-danger">Add Auction</a>
+            </div>
+        </div>
 
     <div class="container">
         <table id="auctions" class="display">

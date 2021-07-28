@@ -51,9 +51,6 @@ for (let i = 0; i < cards.length; i++) {
       timer = 0
     } 
 
-    console.log(timeleft)
-    console.log(timer)
-
     if (start_date_time > now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Starting in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s "; 
 
