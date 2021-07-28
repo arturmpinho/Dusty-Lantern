@@ -1,0 +1,1 @@
+web: gunicorn dusty_lantern.wsgi:application
