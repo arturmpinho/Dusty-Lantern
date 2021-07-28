@@ -54,7 +54,7 @@
                         {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
                             {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
                                 <div class="col-12 mb-5" id="place-bid">
-                                    <p class="mt-3"><strong>Add bid (€):</strong></p>
+                                    <p class="mt-3"><strong>Next bid (€):</strong></p>
                                     <form method="POST" action="{% url 'place_bid' auction.id  %}">
                                         {% csrf_token %}
                                         <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
@@ -64,11 +64,6 @@
                                 </div>                            
                             {% endif %}
                         {% endif %}
-
-                        <form action="">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger" onclick="addToCart()">Trigger add to cart</button>
-                        </form>
                         </div>
 
                         <!-- Card footer -->

@@ -5,6 +5,7 @@ class BidAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
+        'auction',
         'bidder',
         'bidding_time',
         'bid',

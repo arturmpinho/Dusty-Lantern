@@ -5,7 +5,6 @@
 
     {% include 'components/navigation/navbar.html' %}
     
-    
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
             <h2>{{ user_profile }}'s dashboard</h2>
@@ -14,8 +13,66 @@
     </div>
 
     <div class="row">
+            <!-- User's orders history -->
+                    <div class="col-md-6 offset-md-3 ">
+                        <h3 class="mb-5">Pending payments</h3>
+                        <div class="table-responsive table-sm text-center ">
+                            <table class="table table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Article Image</th>
+                                        <th scope="col">Article</th>
+                                        <th scope="col">Bid</th>
+                                        <th scope="col">Checkout</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for bid in winning_bids %}
+                                        <tr>
+                                            <td scope="row">                                        
+                                                {% for image in bid.auction.product.images.all %}
+                                                    {% if image.main_image %}
+                                                        <img class = "card-img-top auction_main_image" src="{{image.image.url}}" alt="{{ product.title }}">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td scope="row">{{ bid.auction }}</td>
+                                            <td scope="row">
+                                                <span>€ {{ bid.bid }} </span>
+                                            <td scope="row">
+                                                <a href="{% url 'add_to_cart' bid.auction.id %}" class="btn btn-outline-danger">
+                                                    <i class="fas fa-shopping-cart fa-2x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td scope="row">
+                                                <span><i class="fas fa-glass-cheers fa-2x"></i> Congratulations, you do not have any pending payments!</span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
         <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            
+            <hr>        
         <!-- User's personal information -->
             <div class="container">
                 <div class="row">
@@ -43,19 +100,19 @@
                                 </thead>
                                 <tbody>
                                     {% for order in orders %}
-                                    <tr>
-                                        {% for item in order.lineitems.all %}
-                                            {% for image in item.auction.product.images.all %}
-                                                {% if image.main_image %}
-                                                    <td><img src="{{ image.image.url }}" class="auction_main_image"></td>
-                                                {% endif %}
-                                            {% endfor %}
-                                        <td scope="row">
-                                            <a href="{% url 'order_history' order %}" id="order_num">{{ order | truncatechars:10 }}</a>
-                                        </td>
-                                        <td scope="row">{{ item.auction.product }}</td>
-                                        <td scope="row">€ {{ item.lineitem_total }}</td>
-                                    </tr>
+                                        <tr>
+                                            {% for item in order.lineitems.all %}
+                                                {% for image in item.auction.product.images.all %}
+                                                    {% if image.main_image %}
+                                                        <td><img src="{{ image.image.url }}" class="auction_main_image"></td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            <td scope="row">
+                                                <a href="{% url 'order_history' order %}" id="order_num">{{ order | truncatechars:10 }}</a>
+                                            </td>
+                                            <td scope="row">{{ item.auction.product }}</td>
+                                            <td scope="row">€ {{ item.lineitem_total }}</td>
+                                        </tr>
                                     {% endfor %}
                                 </tbody>
                                 {% endfor %}

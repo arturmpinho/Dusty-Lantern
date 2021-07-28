@@ -1,14 +1,12 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import UserProfile
-from .forms import UserProfileForm
-from checkout.models import Order
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from products.models import Product
+from auctions.models import Auction, Bid, Bag
+from checkout.models import Order
+from .models import UserProfile
+from .forms import UserProfileForm
 
-
-
-# Create your views here.
 
 @login_required
 def profile(request):
@@ -25,14 +23,38 @@ def profile(request):
 
     form = UserProfileForm(instance=user_profile)
     orders = user_profile.orders.all()
+    now = datetime.datetime.now()
+
+    unique_auctions = []
+    winning_bids = []
+
+    bids = Bid.objects.filter(bidder=user)
+
+    for bid in bids:
+        auctions = Auction.objects.filter(pk=bid.auction.id)
+        for auction in auctions:
+            if auction.end_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4]:
+                if auction not in unique_auctions:
+                    unique_auctions.append(auction)
+
+    for auction in unique_auctions:
+        all_bids = Bid.objects.filter(auction=auction.id)
+        if all_bids:
+            highest_bid = all_bids.order_by('-bidding_time')[0]
+            if highest_bid in bids:
+                winning_auction = Auction.objects.get(
+                    pk=highest_bid.auction.id)
+                if winning_auction.is_sold is not True:
+                    winning_bids.append(highest_bid)
 
     template = "profiles/profile.html"
     context = {
         "user_profile": user_profile,
         'form': form,
-        'orders': orders
+        'orders': orders,
+        'winning_bids': winning_bids
     }
-    
+
     return render(request, template, context)
 
 @login_required
@@ -49,3 +71,25 @@ def order_history(request, order_number):
         'from_profile': True
     }
     return render(request, template, context)
+
+@login_required
+def add_to_cart(request, auction_id):
+    """ Add auction to cart"""
+
+    auction = get_object_or_404(Auction, pk=auction_id)
+    bids = Bid.objects.filter(auction=auction.id)
+    if bids:
+        current_highest_bid = bids.order_by('-bidding_time')[0]
+        bidder = current_highest_bid.bidder
+        try:
+            bag = Bag.objects.get(auction=current_highest_bid.auction)
+            return redirect(reverse('checkout'))
+        except Bag.DoesNotExist:
+            bag = Bag(
+                auction=auction,
+                bid=current_highest_bid,
+                bidder=bidder
+            )
+            bag.save()
+
+        return redirect(reverse('checkout'))

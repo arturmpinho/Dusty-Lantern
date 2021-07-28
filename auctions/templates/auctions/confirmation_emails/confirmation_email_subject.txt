@@ -1,0 +1,1 @@
+Dusty Lantern Confirmation of your bid for auction : {{ bid.auction }}

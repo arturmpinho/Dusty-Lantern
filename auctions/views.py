@@ -1,13 +1,17 @@
-from datetime import datetime
+import datetime
 from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404)
-from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from products.models import Category
-from .models import Auction, Bid, Bag
+from .models import Auction, Bid
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
+
 
 
 def all_auctions(request):
@@ -122,44 +126,51 @@ def place_bid(request, auction_id):
                 bid = Bid()
                 bid.bidder = request.user
                 bid.auction = auction
-                bid.bidding_time = datetime.now()
+                bid.bidding_time = datetime.datetime.now()
                 bid.bid = bidding_value
                 bid.save()
                 messages.info(request,
-                                "Your bid has been placed successfully!")
+                              "Your bid has been placed successfully!")
+                send_place_bid_confirmation_email(bid)
             else:
                 messages.error(request,
-                                "Looks like someone was faster. Please adjust \
+                               "Looks like someone was faster. Please adjust \
                                     your bid and try again!")
                 return redirect(reverse('auction_detail', args=[auction.id]))
         else:
             bid = Bid()
             bid.bidder = request.user
             bid.auction = auction
-            bid.bidding_time = datetime.now()
+            bid.bidding_time = datetime.datetime.now()
             bid.bid = bidding_value
             bid.save()
-                
-            messages.info(request, "Congratulations, you have placed the first bid for this auction!")
+
+            messages.info(request,
+                          "Congratulations, you have placed the first bid for \
+                          this auction!")
+            send_place_bid_confirmation_email(bid)
 
     return redirect(reverse('auction_detail', args=[auction.id]))
 
 
-def add_to_cart(request, auction_id):
-    """ Add auction to cart"""
-    if request.method == 'POST':
-        auction = get_object_or_404(Auction, pk=auction_id)
-        bids = Bid.objects.filter(auction=auction.id)
-        if bids:
-            current_highest_bid = bids.order_by('-bidding_time')[0]
-            bidder = current_highest_bid.bidder
+def send_place_bid_confirmation_email(bid):
+    """
+    Send email confirmation function for when
+    a user has place a bid
+    """
+    client_email = bid.bidder.email
+    
+    subject = render_to_string(
+        'auctions/confirmation_emails/confirmation_email_subject.txt',
+        {'bid': bid})
+    body = render_to_string(
+        'auctions/confirmation_emails/confirmation_email_body.txt',
+        {'bid': bid,
+            'contact_email': settings.DEFAULT_FROM_EMAIL})
 
-            bag = Bag(
-                auction=auction,
-                bid=current_highest_bid,
-                bidder=bidder
-            )
-            bag.save()
-            return redirect('home')
-
-    return redirect(reverse('home'))
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [client_email]
+    )

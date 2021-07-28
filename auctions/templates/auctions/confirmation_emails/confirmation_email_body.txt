@@ -1,0 +1,21 @@
+Hello {{ bid.bidder }}!
+
+This is a confirmation of your bid on auction {{ bid.auction }} at Dusty Lantern. 
+Below you can find more details about your bid.
+
+Auction: {{ bid.auction }}
+Time when you placed the bid: {{ bid.bidding_time }}
+Your bid: €{{ bid.bid }}
+
+The auction will end on {{ bid.auction.end_date_time }}.
+
+When the auction ends, don't forget to go your profile page to see if you have won the auction!
+There you can proceed with the checkout and the auction item will be delivered as soon as possible.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your bid!
+
+Sincerely,
+
+Dusty Lantern

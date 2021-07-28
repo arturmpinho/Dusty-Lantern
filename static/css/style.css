@@ -21,6 +21,10 @@ a {
     text-decoration: none;
 }
 
+td {
+    vertical-align: middle;
+}
+
 .btn-danger,
 .btn-outline-danger{
     background-color:#9A031E;

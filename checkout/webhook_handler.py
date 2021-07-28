@@ -143,6 +143,12 @@ class StripeWH_Handler:
         bag = Bag.objects.filter(bidder=user_profile.user)
         for item in bag:
             item.delete()
+        
+        for item in order.lineitems.all():
+            auction = Auction.objects.get(pk=item.auction.id)
+            auction.is_sold = True
+            auction.save()
+
         self._send_confirmation_email(order)
 
         return HttpResponse(

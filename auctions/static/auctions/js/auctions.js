@@ -64,7 +64,6 @@ for (let i = 0; i < cards.length; i++) {
       // Auto refresh auction detail page when countdowntimer reaches 0
     } else if (timer === 0) {
       location.reload();
-      addToCart();
     } 
      
       else {
@@ -96,27 +95,3 @@ $(window).on('load', function(){
 $("[type='number']").keypress(function (evt) {
   evt.preventDefault();
 });
-
-
-// Add to cart functionality when auction closes
-
-function addToCart() {
-  var auctionId = document.getElementById('auction_id').value;
-  var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-  var postData = {
-    "auction_id": auctionId,
-    'csrfmiddlewaretoken': csrfToken,
-  }
-
-  var url = `${auctionId}/add_to_cart`
-  $.post(url, postData).done(function () {
-    console.log("Hello")
-      
-    .then(function(result) {
-          console.log("then")
-      });
-  }).fail(function (e) {
-      // just reload the page, the error will be in django messages
-      console.log(e)
-  })
-};

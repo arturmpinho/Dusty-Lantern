@@ -197,6 +197,12 @@ def checkout_success(request, order_number):
     if 'bag' in request.session:
         del request.session['bag']
     
+    for item in order.lineitems.all():
+        auction = Auction.objects.get(pk=item.auction.id)
+        auction.is_sold = True
+        auction.save()
+
+
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
