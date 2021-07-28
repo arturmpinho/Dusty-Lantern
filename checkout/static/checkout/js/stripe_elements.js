@@ -54,8 +54,8 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-    // $('#checkout-form').fadeToggle(100);
-    // $('#loading-overlay').fadeToggle(100);
+    $('#checkout-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
 
     var saveInfo = Boolean($('#id-save-info:checked').val());
     console.log(saveInfo)
@@ -107,8 +107,8 @@ form.addEventListener('submit', function(ev) {
                 <span>${result.error.message}</span>
                 `;
                 $(errorDiv).html(html);
-                // $('#checkout-form').fadeToggle(100);
-                // $('#loading-overlay').fadeToggle(100);
+                $('#checkout-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);
                 card.update({ 'disabled': false});
                 $('#submit-button').attr('disabled', false);
 
