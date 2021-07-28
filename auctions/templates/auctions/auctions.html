@@ -48,18 +48,77 @@
 
     {% now "Y-m-d H:i:s" as current_date_time %}
     <div class="current_date_time" hidden>{{ current_date_time }}</div>
+    
     <!-- Auction Cards -->
     <div class="col-12 col-md-10 offset-md-1">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">
         {% for auction in auctions %}
           {% if request.user.is_superuser %}
+
+            <!-- Ongoing Auctions (decide to leave or not auctions closed to superuser) -->
+            <!-- {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %} -->
+
+              <div class="card">
+                <div class="card-body">
+
+                {% for image in auction.product.images.all %}
+                  {% if image.main_image %}
+                  <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                  {% endif %}
+                {% endfor %}
+
+                <hr>
+                <p class="text-end">
+                  <span class="badge bg-secondary">{{ auction.product.category }}</span>
+                  <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
+                  <a href="#"><i class="far fa-star fa-2x add-fav"></i></a>
+                </p>
+                <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+                <p class="card-text">{{ auction.product.description}}</p>
+                <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
+                      
+                {% for bid in no_bids %}
+                  {% if bid == auction %}
+                  <p><i class="fas fa-gavel fa-2x"></i> There are no bid yet</p>
+                  <p><i class="fas fa-user fa-2x"></i> Be the first one placing a bid! </p>
+                  {% endif %}
+                {% endfor %}
+
+                {% for bid in highest_bids %}
+                    {% if bid.auction == auction %}
+                      <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
+                      <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
+                <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
+
+                <p>
+                  <i class="fas fa-clock fa-2x"></i> 
+                  <span class="countdowntimer"></span>
+                </p>
+
+                <!-- Card footer -->
+                </div>
+                  <div class="card-footer text-center">
+                      <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
+                  </div>
+                </div>
+            <!-- {% endif %} -->
+
+          <!-- Ongoing Auctions if not superuser   -->
+          {% else %}
+            {% now "Y-m-d H:i:s" as current_date_time %}
+            <div class="current_date_time" hidden>{{ current_date_time }}</div>
+            {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
               <div class="card">
                 <div class="card-body">
 
                   {% for image in auction.product.images.all %}
-                  {% if image.main_image %}
-                  <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
-                  {% endif %}
+                    {% if image.main_image %}
+                    <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                    {% endif %}
                   {% endfor %}
 
                   <hr>
@@ -71,95 +130,44 @@
                   <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                   <p class="card-text">{{ auction.product.description}}</p>
                   <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-                        
+                  
+                  <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
+                  <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
+
+                  {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
                     {% for bid in no_bids %}
                       {% if bid == auction %}
-                        <p>No bids yet</p>
+                      <p><i class="fas fa-gavel fa-2x"></i> There are no bid yet</p>
+                      <p><i class="fas fa-user fa-2x"></i> Be the first one placing a bid! </p>
                       {% endif %}
                     {% endfor %}
 
                     {% for bid in highest_bids %}
                         {% if bid.auction == auction %}
-                        
                           <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
                           <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
                         {% endif %}
                     {% endfor %}
 
-                  <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
-                  <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
+                    <p><i class="fas fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
 
-
-                  <p>
-                    <i class="fas fa-clock fa-2x"></i> 
-                    <span class="countdowntimer"></span>
-                  </p>
+                  {% elif auction.start_date_time|date:"Y-m-d H:i:s" > current_date_time %}
+                    <p>
+                      <i class="fas fa-clock fa-2x"></i> 
+                      <span class="countdowntimer"></span>
+                    </p>
+                  {% else %}
+                    <p>
+                      <i class="fas fa-clock fa-2x"></i> 
+                      <span class="countdowntimer"></span> 
+                    </p>
+                  {% endif %}
 
                   <!-- Card footer -->
                   </div>
-                    <div class="card-footer text-center">
-                        <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
-                    </div>
+                  <div class="card-footer text-center">
+                      <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
                   </div>
-            
-          {% else %}
-            {% now "Y-m-d H:i:s" as current_date_time %}
-            <div class="current_date_time" hidden>{{ current_date_time }}</div>
-            {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
-                <div class="card">
-                  <div class="card-body">
-
-                    {% for image in auction.product.images.all %}
-                    {% if image.main_image %}
-                    <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
-                    {% endif %}
-                    {% endfor %}
-
-                    <hr>
-                    <p class="text-end">
-                      <span class="badge bg-secondary">{{ auction.product.category }}</span>
-                      <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
-                      <a href="#"><i class="far fa-star fa-2x add-fav"></i></a>
-                    </p>
-                    <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
-                    <p class="card-text">{{ auction.product.description}}</p>
-                    <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-                    
-                    <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
-                    <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
-
-                    {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
-                    {% for bid in no_bids %}
-                      {% if bid == auction %}
-                        <p>No bids yet</p>
-                      {% endif %}
-                    {% endfor %}
-
-                  {% for bid in highest_bids %}
-                      {% if bid.auction == auction %}
-                        <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
-                        <p><i class="fas fa-user fa-2x"></i> Last bid from: {{ bid.bidder }} </p>
-                      {% endif %}
-                  {% endfor %}
-
-                    <p><i class="fas fa-clock fa-2x"></i> <span class="countdowntimer"></span></p>
-                    {% elif auction.start_date_time|date:"Y-m-d H:i:s" > current_date_time %}
-                      <p>
-                        <i class="fas fa-clock fa-2x"></i> 
-                        <span class="countdowntimer"></span>
-                      </p>
-                    {% else %}
-                      <p>
-                        <i class="fas fa-clock fa-2x"></i> 
-                        <span class="countdowntimer"></span> 
-                      </p>
-                    {% endif %}
-
-                    <!-- Card footer -->
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
-                    </div>
                 </div>
             {% endif %}
           {% endif %}
@@ -167,7 +175,7 @@
       </div>
   </div>
 
-    {% include 'components/footer/footer.html' %}
+  {% include 'components/footer/footer.html' %}
 
 {% endblock%}
 

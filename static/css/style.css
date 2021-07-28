@@ -26,6 +26,7 @@ a {
     background-color:#9A031E;
     border-color: #9A031E;
     font-size: 1.3rem;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 30%);
 }
 
 .btn-outline-danger{
@@ -108,6 +109,10 @@ color: #dc3545;
 
 .card {
     box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+
+#place-bid {
+    display: block;
 }
 
 

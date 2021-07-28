@@ -47,10 +47,11 @@ for (let i = 0; i < cards.length; i++) {
     let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-    if (timeleft < 500 && timeleft > -500) {
+    if (timeleft < 1500 && timeleft > -5000) {
       timer = 0
     } 
 
+    console.log(timeleft)
     console.log(timer)
 
     if (start_date_time > now) {
@@ -58,16 +59,22 @@ for (let i = 0; i < cards.length; i++) {
 
     } else if (end_date_time < now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Auction Closed";
+      display_to_none();
     
       // Auto refresh auction detail page when countdowntimer reaches 0
     } else if (timer === 0) {
-      setTimeout("location.reload(true);");
+      location.reload();
+      addToCart();
     } 
      
       else {
         document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       }
   }, 1000);
+}
+
+function display_to_none(){
+  $("#place-bid").hide();
 }
 
 // Number of ongoing auction counter
@@ -112,6 +119,4 @@ function addToCart() {
       // just reload the page, the error will be in django messages
       console.log(e)
   })
-
-  
 };
