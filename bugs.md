@@ -40,4 +40,6 @@ When comparing to datetime fields, the result of the difference between these al
 NaNd NaNh NaNm NaNs
 
 
+## Footer is not fixed to the bottom
+
 

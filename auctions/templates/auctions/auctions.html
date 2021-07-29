@@ -71,7 +71,6 @@
                 <p class="text-end">
                   <span class="badge bg-secondary">{{ auction.product.category.friendly_name }}</span>
                   <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
-                  <a href="#"><i class="far fa-star fa-2x add-fav"></i></a>
                 </p>
                 <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                 <p class="card-text">{{ auction.product.description}}</p>
@@ -79,7 +78,7 @@
                       
                 {% for bid in no_bids %}
                   {% if bid == auction %}
-                  <p><i class="fas fa-gavel fa-2x"></i> There are no bid yet</p>
+                  <p><i class="fas fa-gavel fa-2x"></i> There are no bids yet</p>
                   <p><i class="fas fa-user fa-2x"></i> Be the first one placing a bid! </p>
                   {% endif %}
                 {% endfor %}
@@ -124,7 +123,6 @@
                   <p class="text-end">
                     <span class="badge bg-secondary">{{ auction.product.category }}</span>
                     <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
-                    <a href="#"><i class="far fa-star fa-2x add-fav"></i></a>
                   </p>
                   <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                   <p class="card-text">{{ auction.product.description}}</p>

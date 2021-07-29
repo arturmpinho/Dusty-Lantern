@@ -32,7 +32,6 @@ def cache_checkout_data(request):
         return HttpResponse(content=e, status=400)
 
 
-
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -85,7 +84,7 @@ def checkout(request):
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
-    
+
     bag = Bag.objects.filter(bidder=request.user)
     checkout_bag = request.session.get('bag', {})
     auctions = []
@@ -100,7 +99,7 @@ def checkout(request):
         auctions.append(auction)
         bids.append(bid)
     request.session['bag'] = checkout_bag
-    
+
     if order_total < 500:
         auction_fee = float(order_total) * 0.05
     elif order_total < 1000:
@@ -135,13 +134,13 @@ def checkout(request):
             })
         except UserProfile.DoesNotExist:
             order_form = OrderForm()
-    else:            
+    else:
         order_form = OrderForm()
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe Public Key is missing.  \
             Did you forget to set it in your environment?')
-    
+
     template = 'checkout/checkout.html'
     context = {
             'auctions': auctions,
@@ -193,10 +192,10 @@ def checkout_success(request, order_number):
     bag = Bag.objects.filter(bidder=request.user)
     for item in bag:
         item.delete()
-    
+
     if 'bag' in request.session:
         del request.session['bag']
-    
+
     for item in order.lineitems.all():
         auction = Auction.objects.get(pk=item.auction.id)
         auction.is_sold = True

@@ -27,14 +27,14 @@ for (let i = 0; i < cards.length; i++) {
   let x = setInterval(function() {
 
     let start_date_time = new Date(document.getElementsByClassName('start_date_time').item(i).textContent);
-    
+
     let end_date_time = new Date(document.getElementsByClassName('end_date_time').item(i).textContent);
   
     let now = new Date();
 
     let timeleft = ''
     
-    let timer = ""
+    let timer = ''
       
     if (start_date_time >= now) {
       timeleft = start_date_time - now;       
