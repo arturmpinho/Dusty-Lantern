@@ -33,8 +33,3 @@ $(window).on('load', function(){
     $('#cards-counter').append(`There is ${ongoingAuctions} auction matching your search criteria`)
   }
 })
-
-// Disable manual input for input field type number on bidding form
-$("[type='number']").keypress(function (evt) {
-  evt.preventDefault();
-});

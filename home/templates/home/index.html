@@ -52,22 +52,15 @@
                                     <span class="badge bg-secondary">{{ auction.product.category.friendly_name }}</span>
                                     <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
                                 </p>
-                                <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
-                                <p class="card-text">{{ auction.product.description}}</p>
-                                <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-                                
-                                {% for bid in no_bids %}
-                                {% if bid == auction %}
-                                    <p><i class="fas fa-gavel fa-2x"></i> There are no bids yet</p>
-                                    <p><i class="fas fa-user fa-2x"></i> Be the first one placing a bid! </p>
+                                {% if auction.product.brand %}
+                                    <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+                                {% else %}
+                                    <h2 class="card-title">{{ auction.product.title }}</h2>
                                 {% endif %}
-                                {% endfor %}
-
-                                {% for bid in highest_bids %}
-                                    {% if bid.auction == auction %}
-                                    <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
-                                    {% endif %}
-                                {% endfor %}
+                                <p class="card-text">{{ auction.product.description}}</p>
+                                <p><i class="fas fa-money-bill-alt fa-2x"></i> Base amount: € {{ auction.base_amount }}</p>
+                                
+                                
 
                                 <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
                                 <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>

@@ -7,7 +7,11 @@
     
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+            {% if auction.product.brand %}
+                <h2>{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+            {% else %}
+                <h2>{{ auction.product.title }}</h2>
+            {% endif %}
             <hr>
         </div>
     </div>
@@ -47,6 +51,7 @@
                     <div class="col-md-8 align-self-center">
                         <div class="container p-5">
                         <p class="card-text">{{ auction.product.description}}</p>
+                        <p class="card-text">{{ auction.product.measurements}}</p>
                         <p class="card-text">
                             <i class="fas fa-money-bill-alt fa-2x"></i> 
                             € {{ auction.base_amount }}
@@ -69,6 +74,9 @@
                                 <span class="countdowntimer"></span>
                             </p>
 
+                        {% if request.user.is_superuser %}
+
+                        {% else %}
                         {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
                             {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
                                 <div class="col-12 mb-5" id="place-bid">
@@ -83,6 +91,7 @@
                             {% endif %}
                         {% endif %}
                         </div>
+                        {% endif %}
 
                         <!-- Card footer -->
                         </div>

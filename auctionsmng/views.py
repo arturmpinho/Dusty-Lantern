@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .forms import AuctionForm, ProductForm
+from .forms import AddAuctionForm, ProductForm, EditAuctionForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from products.models import Product, Image
@@ -144,7 +144,7 @@ def add_auction(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        auction_form = AuctionForm(request.POST)
+        auction_form = AddAuctionForm(request.POST)
         
         if auction_form["start_date_time"].value() > now.strftime(
             '%Y-%m-%dT%H:%M'):
@@ -167,7 +167,7 @@ def add_auction(request):
                 Please adjust the start date time.")
             return redirect(reverse('add_auction'))
     else:
-        auction_form = AuctionForm()
+        auction_form = AddAuctionForm()
         template = 'auctionsmng/add_auction.html'
 
         context = {
@@ -188,7 +188,7 @@ def edit_auction(request, auction_id):
     auction = get_object_or_404(Auction, pk=auction_id)
 
     if request.method == "POST":
-        auction_form = AuctionForm(request.POST,
+        auction_form = EditAuctionForm(request.POST,
                                    instance=auction)
         if auction_form.is_valid:
             auction = auction_form.save()
@@ -199,7 +199,7 @@ def edit_auction(request, auction_id):
             messages.error(request, 'Failed to update auction. \
             Please ensure the form is valid.')
 
-    auction_form = AuctionForm(instance=auction)
+    auction_form = EditAuctionForm(instance=auction)
     messages.info(request, f'You are editing auction concerning product: \
          {auction}')
 

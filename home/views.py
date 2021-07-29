@@ -13,7 +13,7 @@ def index(request):
         if auction.start_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] and auction.end_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] > now.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4]:
             ongoing_auctions.append(auction)
 
-    top_5 = ongoing_auctions[:5]
+    top_5 = ongoing_auctions[:4]
 
     context = {
         'auctions': top_5

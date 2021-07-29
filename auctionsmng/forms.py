@@ -2,9 +2,10 @@ from django import forms
 from auctions.models import Auction
 from products.models import Product, Image, Category, Condition
 from .widgets import CustomClearableFileInput
+from django.forms.widgets import DateTimeInput
 
 
-class DateTimeInput(forms.DateTimeInput):
+class CustomDateTimeInput(forms.DateTimeInput):
     input_type = 'datetime-local'
 
 
@@ -31,17 +32,34 @@ class ProductForm(forms.ModelForm):
                 field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
 
 
-
-class AuctionForm(forms.ModelForm):
+class AddAuctionForm(forms.ModelForm):
 
     class Meta:
         model = Auction
         exclude = ('is_sold',)
         widgets = {
-            'start_date_time': DateTimeInput(),
-            'end_date_time': DateTimeInput(),
+            'start_date_time': CustomDateTimeInput(),
+            'end_date_time': CustomDateTimeInput(),
         }
 
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        product = Product.objects.all()
+
+        for field_name, field in self.fields.items():           
+            field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
+
+
+class EditAuctionForm(forms.ModelForm):
+
+    class Meta:
+        model = Auction
+        exclude = ('is_sold',)
+        widgets = {
+            'start_date_time': DateTimeInput(attrs={'type': 'text'}, ),
+            'end_date_time': DateTimeInput(attrs={'type': 'text'}, ),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

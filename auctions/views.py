@@ -13,7 +13,7 @@ from .models import Auction, Bid
 
 
 @login_required
-def all_auctions(request):
+def auctions(request):
     """
     View to return the auctions page w/ sorting and search queries
     and determine the each auction highest bid
