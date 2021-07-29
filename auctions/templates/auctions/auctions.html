@@ -27,8 +27,8 @@
         <option value="reset" {% if sorting == 'None_None' %}selected{% endif %}>Sorty by...</option>
         <option value="base_amount,asc" {% if sorting == 'base_amount_asc' %}selected{% endif %}>Base Amount: Low to High</option>
         <option value="base_amount,desc" {% if sorting == 'base_amount_desc' %}selected{% endif %}>Base Amount: High to Low</option>
-        <option value="product__category,asc" {% if sorting == 'product__category_asc' %}selected{% endif %}>Category (A-Z)</option>
-        <option value="product__category,desc" {% if sorting == 'product__category_desc' %}selected{% endif %}>Category (Z-A)</option>
+        <option value="product__category,desc" {% if sorting == 'product__category_desc' %}selected{% endif %}>Category (A-Z)</option>
+        <option value="product__category,asc" {% if sorting == 'product__category_asc' %}selected{% endif %}>Category (Z-A)</option>
         <option value="product__condition,asc" {% if sorting == 'product__condition_asc' %}selected{% endif %}>Condition (New-To Be Fixed)</option>
         <option value="product__condition,desc" {% if sorting == 'product__condition_desc' %}selected{% endif %}>Condition (To Be Fixed-New) </option>
         <option value="end_date_time,asc" {% if sorting == 'end_date_time_asc' %}selected{% endif %}>First closing</option>

@@ -35,6 +35,9 @@ When comparing to datetime fields, the result of the difference between these al
 3rd approach: Boolean field in auctions models (is_sold)
 
 
+## Countdown timer is not being displayed properly in iphone
+
+NaNd NaNh NaNm NaNs
 
 
 
