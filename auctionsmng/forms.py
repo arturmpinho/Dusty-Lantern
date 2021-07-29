@@ -30,7 +30,11 @@ class ProductForm(forms.ModelForm):
         category = Category.objects.all()
 
         for field_name, field in self.fields.items():
+            print(field)
+            if field_name == "category":
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
             field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
+
 
 
 class AuctionForm(forms.ModelForm):

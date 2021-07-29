@@ -27,7 +27,8 @@
     <div class="container">
         <table id="auctions" class="display">
             <thead>
-                <tr>
+                <tr class="text-center">
+                    <th>Is sold</th>
                     <th>Product</th>
                     <th>Base Amount</th>
                     <th>Bidding Increment</th>
@@ -39,7 +40,12 @@
             </thead>
             <tbody>
                 {% for auction in auctions %}
-                    <tr>
+                    <tr class="text-center">
+                        {% if auction.is_sold %}
+                            <td><i class="fas fa-check"></i></td>
+                        {% else %}
+                            <td><i class="fas fa-times"></i></td>
+                        {% endif %}
                         <td>{{ auction.product }}</td>
                         <td>{{ auction.base_amount }}</td>
                         <td>{{ auction.bidding_increment }}</td>

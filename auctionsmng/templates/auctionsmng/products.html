@@ -19,7 +19,7 @@
     <div class="container">
         <table id="products-table" class="display">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Product</th>
                     <th>Description</th>
                     <th>Category</th>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 {% for product in products %}
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ product }}</td>
                         <td>{{ product.description }}</td>
                         <td>{{ product.category }}</td>
