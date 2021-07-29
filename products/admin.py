@@ -37,6 +37,7 @@ class ProductAdmin(admin.ModelAdmin):
         'title',
         'category',
         'condition',
+        'creation_date'
     )
 
 

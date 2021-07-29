@@ -40,7 +40,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=50, null=True, blank=True)
     condition = models.ForeignKey(Condition, null=True,
                                   on_delete=models.SET_NULL)
-    creation_date = models.DateField(auto_now_add=False)
+    creation_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
