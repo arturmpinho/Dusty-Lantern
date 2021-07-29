@@ -85,6 +85,10 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
+    # Ensure bag in session is cleared out before creating new session bag
+    if 'bag' in request.session:
+        del request.session['bag']
+
     bag = Bag.objects.filter(bidder=request.user)
     checkout_bag = request.session.get('bag', {})
     auctions = []

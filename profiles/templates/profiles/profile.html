@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-            <!-- User's orders history -->
+            <!-- User's pending payments -->
                     <div class="col-md-6 offset-md-3 ">
                         <h3 class="mb-5">Pending payments</h3>
                         <div class="table-responsive table-sm text-center ">
@@ -108,13 +108,29 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             <td scope="row">
-                                                <a href="{% url 'order_history' order %}" id="order_num">{{ order | truncatechars:10 }}</a>
+                                                <a href="{% url 'order_history' order %}" id="order_num" title="{{order }}">{{ order | truncatechars:10 }}</a>
                                             </td>
                                             <td scope="row">{{ item.auction.product }}</td>
                                             <td scope="row">€ {{ item.lineitem_total }}</td>
                                         </tr>
+                                    
                                     {% endfor %}
                                 </tbody>
+                                {% empty %}
+                                    <tr>
+                                        <td scope="row">
+                                            <span>You don't have any orders yet!</span>
+                                        </td>
+                                        <td>
+                                            <span>-</span>
+                                        </td>
+                                        <td>
+                                            <span>-</span>
+                                        </td>
+                                        <td>
+                                            <span>-</span>
+                                        </td>
+                                    </tr>
                                 {% endfor %}
                             </table>
                         </div>

@@ -26,14 +26,15 @@
         </div>
     </div>
 
-        <div class="container mb-5 text-center">
-            <div class="col">
-                <a href="{% url 'add_product' %}" class="btn btn-outline-danger">Add Product</a>
-            </div>
+    <div class="container mb-5 text-center">
+        <div class="col">
+            <a href="{% url 'add_product' %}" class="btn btn-outline-danger">Add Product</a>
         </div>
+    </div>
 
-        <div class="container">
-            <table id="products" class="display">
+    <div class="container">
+        <div class="table-responsive">
+            <table id="products" class="display table">
                 <thead>
                     <tr class="text-center">
                         <th>Title</th>
@@ -63,6 +64,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     
 
     {% include 'components/footer/footer.html' %}

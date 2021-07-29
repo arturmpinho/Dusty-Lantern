@@ -81,15 +81,19 @@ def add_to_cart(request, auction_id):
     if bids:
         current_highest_bid = bids.order_by('-bidding_time')[0]
         bidder = current_highest_bid.bidder
-        try:
-            bag = Bag.objects.get(auction=current_highest_bid.auction)
-            return redirect(reverse('checkout'))
-        except Bag.DoesNotExist:
-            bag = Bag(
-                auction=auction,
-                bid=current_highest_bid,
-                bidder=bidder
-            )
-            bag.save()
+
+        # Ensure there is no other bag for this user to ensure proceeding
+        # checkout with 1 auction only
+        expired_bag = Bag.objects.filter(bidder=current_highest_bid.bidder)
+        if expired_bag:
+            for item in expired_bag:
+                item.delete()
+        
+        bag = Bag(
+            auction=auction,
+            bid=current_highest_bid,
+            bidder=bidder
+        )
+        bag.save()
 
         return redirect(reverse('checkout'))
