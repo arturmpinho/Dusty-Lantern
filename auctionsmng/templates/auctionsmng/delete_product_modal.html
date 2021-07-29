@@ -1,12 +1,12 @@
-<div class="modal fade" id="a{{ product }}" tabindex="-1" aria-labelledby="{{product}}" aria-hidden="true">
+<div class="modal fade" id="a{{ product.id }}" tabindex="-1" aria-labelledby="{{product.id}}" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content fs-1">
         <div class="modal-body">
             <p class="mb-4">Are you sure you want to delete product {{ product }}?</p> 
         </div>
         <div class="modal-footer">
-            <a class="button" href="{% url 'delete_product' product.id %}" aria-label="Delete">Yes</a>
-            <button type="button" class="button" data-bs-dismiss="modal">No</button>
+            <a class="button btn btn-danger" href="{% url 'delete_product' product.id %}" aria-label="Delete">Yes</a>
+            <button type="button" class="button btn btn-danger" data-bs-dismiss="modal">No</button>
         </div>
         </div>
     </div>

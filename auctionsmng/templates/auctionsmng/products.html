@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 {% endblock %}
@@ -8,57 +9,75 @@
 {% block content %}
 
     {% include 'components/navigation/navbar.html' %}
-    
+
     <div class="pt-5 mt-5 rounded-3">
         <div class="container py-5 mt-5">
-            <h2>Products</h2>
+            <h2>Products Management</h2>
             <hr>
         </div>
     </div>
 
     <div class="container">
-        <table id="products-table" class="display">
-            <thead>
-                <tr class="text-center">
-                    <th>Product</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Measurements</th>
-                    <th>Brand</th>
-                    <th>Condition</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in products %}
-                    <tr class="text-center">
-                        <td>{{ product }}</td>
-                        <td>{{ product.description }}</td>
-                        <td>{{ product.category }}</td>
-                        <td>{{ product.measurements }}</td>
-                        <td>{{ product.brand }}</td>
-                        <td>{{ product.condition }}</td>
-                        <td><a href="{% url 'edit_product' product.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td><a href="#a{{product}}" data-bs-toggle="modal" data-bs-target="#a{{product}}" aria-label="Open delete product modal"><i class="fas fa-trash-alt"></i></a></td>
-                        {% include 'auctionsmng/delete_product_modal.html' %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="col">
+            <p>
+                <span>Want to go back to <strong>Auctions Manager</strong>? </span> 
+                <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Click here</a>
+            </p>
+        </div>
     </div>
+
+        <div class="container mb-5 text-center">
+            <div class="col">
+                <a href="{% url 'add_product' %}" class="btn btn-outline-danger">Add Product</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <table id="products" class="display">
+                <thead>
+                    <tr class="text-center">
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Measurements</th>
+                        <th>Condition</th>
+                        <th>Created on:</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr class="text-center">
+                            <td>{{ product }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.measurements }}</td>
+                            <td>{{ product.condition }}</td>
+                            <td>{{ product.creation_date }}</td>
+                            <td><a href="{% url 'edit_product' product.id %}"><i class="fas fa-edit fa-lg"></i></a></td>
+                            <td><a href="#a{{product.id}}" data-bs-toggle="modal" data-bs-target="#a{{product.id}}" aria-label="Open delete product modal"><i class="fas fa-trash-alt"></i></a></td>
+                            {% include 'auctionsmng/delete_product_modal.html' %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
 
     {% include 'components/footer/footer.html' %}
 
 {% endblock%}
 
+
 {% block postloadjs %}
     {{ block.super }}
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function () {
-            $('#products-table').DataTable();
-        });
+            $('#auctions').DataTable();
+            $('#products').DataTable();
+        } );
     </script>
 
 {% endblock %}

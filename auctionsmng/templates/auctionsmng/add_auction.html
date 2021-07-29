@@ -19,8 +19,8 @@
                     {% csrf_token %}
                     {{ auction_form | crispy }}
                     <div class="container m-5">
-                        <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Go Back</a>
                         <button type="submit" class="btn btn-danger">Add Auction</button>
+                        <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Go Back</a>
                     </div>
                 </form>
             </div>

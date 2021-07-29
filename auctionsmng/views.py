@@ -4,20 +4,21 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from products.models import Product, Image
 from auctions.models import Auction
+import datetime
 
 
 # Create your views here.
 @login_required
-def auctions(request):
+def auctionsmng(request):
     """ Function to display all the auctions for the superuser """
 
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     auctions = Auction.objects.all()
     template = "auctionsmng/auctions.html"
-    
+
     context = {
         'auctions': auctions
     }
@@ -32,10 +33,10 @@ def products(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     products = Product.objects.all()
     template = "auctionsmng/products.html"
-    
+
     context = {
         'products': products
     }
@@ -50,9 +51,10 @@ def add_product(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES)
+
         images = request.FILES.getlist('images')
         if product_form.is_valid():
             product = product_form.save()
@@ -62,8 +64,9 @@ def add_product(request):
             first_product_image = images[0]
             first_product_image.main_image = True
             first_product_image.save()
-            
-            messages.info(request, f'Product {product} has been successfully added!')
+
+            messages.info(request, f'Product {product} has been \
+                successfully added!')
             return redirect('products')
 
         else:
@@ -82,10 +85,10 @@ def add_product(request):
 @login_required
 def delete_product(request, product_id):
     """
-    Function to delete the product
+    Function to delete the product for the superuser
     """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only site owners can do that.')
+        messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
@@ -97,12 +100,12 @@ def delete_product(request, product_id):
 @login_required
 def edit_product(request, product_id):
     """
-    Function to edit the product for superuser
+    Function to edit the product for the superuser
     """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only site owners can do that.')
+        messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     product = get_object_or_404(Product, pk=product_id)
 
     if request.method == "POST":
@@ -116,7 +119,7 @@ def edit_product(request, product_id):
         else:
             messages.error(request, 'Failed to update product. \
             Please ensure the form is valid.')
-            
+
     product_form = ProductForm(instance=product)
     messages.info(request, f'You are editing product: \
          {product}')
@@ -132,22 +135,37 @@ def edit_product(request, product_id):
 
 @login_required
 def add_auction(request):
-    """ Function for superuser to add auction"""
+    """ Function for the superuser to add auction"""
+
+    now = datetime.datetime.now()
 
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     if request.method == 'POST':
         auction_form = AuctionForm(request.POST)
-        if auction_form.is_valid():
-            auction = auction_form.save()
-            messages.info(request, f'Auction {auction} has been successfully added!')
-            return redirect('auctions')
-
+        
+        if auction_form["start_date_time"].value() > now.strftime(
+            '%Y-%m-%dT%H:%M'):
+            if auction_form["end_date_time"].value() > auction_form[
+                "start_date_time"].value():
+                if auction_form.is_valid():
+                    auction = auction_form.save()
+                    messages.info(request, f'Auction {auction} has been \
+                        successfully added!')
+                    return redirect('auctionsmng')
+                else:
+                    messages.error(request, "Failed to add auction. \
+                    Please ensure the form is valid.")
+            else:
+                messages.error(request, "End date time of your action can not be before the start date time. \
+                Please adjust the end date time.")
+                return redirect(reverse('add_auction'))
         else:
-            messages.error(request, "Failed to add auction. \
-            Please ensure the form is valid.")
+            messages.error(request, "Start time of your action can not be in the past. \
+                Please adjust the start date time.")
+            return redirect(reverse('add_auction'))
     else:
         auction_form = AuctionForm()
         template = 'auctionsmng/add_auction.html'
@@ -161,12 +179,12 @@ def add_auction(request):
 @login_required
 def edit_auction(request, auction_id):
     """
-    Function to edit the auction for superuser
+    Function to edit the auction for the superuser
     """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only site owners can do that.')
+        messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     auction = get_object_or_404(Auction, pk=auction_id)
 
     if request.method == "POST":
@@ -176,11 +194,11 @@ def edit_auction(request, auction_id):
             auction = auction_form.save()
             messages.info(request, f'You have successfully updated \
                 auction concerning product {auction}.')
-            return redirect('auctions')
+            return redirect('auctionsmng')
         else:
             messages.error(request, 'Failed to update auction. \
             Please ensure the form is valid.')
-            
+
     auction_form = AuctionForm(instance=auction)
     messages.info(request, f'You are editing auction concerning product: \
          {auction}')
@@ -197,13 +215,13 @@ def edit_auction(request, auction_id):
 @login_required
 def delete_auction(request, auction_id):
     """
-    Function to delete the auction
+    Function to delete the auction for the superuser
     """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only site owners can do that.')
+        messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     auction = get_object_or_404(Auction, pk=auction_id)
     auction.delete()
     messages.success(request, 'Auction successfully deleted')
-    return redirect(reverse('auctions'))
+    return redirect(reverse('auctionsmng'))

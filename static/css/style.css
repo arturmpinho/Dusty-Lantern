@@ -29,6 +29,7 @@ td {
     vertical-align: middle;
 }
 
+
 .btn-danger,
 .btn-outline-danger{
     background-color:#9A031E;
@@ -154,6 +155,7 @@ color: #dc3545;
 .mt-55 {
     margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
 }
+
 
 
 /* ensures the increment/decrement arrows always display on input field type number */

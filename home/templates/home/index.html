@@ -32,6 +32,62 @@
         </div>
     </div>
 
+    <div class="cont">
+        <div class="row">
+            <div class="col-12 col-md-10 offset-md-1">
+                <h2>Ongoing auctions!</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">
+                    {% for auction in auctions %}
+                        <div class="card">
+                            <div class="card-body">
+
+                            {% for image in auction.product.images.all %}
+                            {% if image.main_image %}
+                                <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                            {% endif %}
+                            {% endfor %}
+
+                                <hr>
+                                <p class="text-end">
+                                    <span class="badge bg-secondary">{{ auction.product.category.friendly_name }}</span>
+                                    <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
+                                </p>
+                                <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
+                                <p class="card-text">{{ auction.product.description}}</p>
+                                <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
+                                
+                                {% for bid in no_bids %}
+                                {% if bid == auction %}
+                                    <p><i class="fas fa-gavel fa-2x"></i> There are no bids yet</p>
+                                    <p><i class="fas fa-user fa-2x"></i> Be the first one placing a bid! </p>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% for bid in highest_bids %}
+                                    {% if bid.auction == auction %}
+                                    <p><i class="fas fa-gavel fa-2x"></i>€ {{ bid.bid }}</p>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
+                                <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
+
+                                <p>
+                                    <i class="fas fa-clock fa-2x"></i> 
+                                    <span class="countdowntimer"></span>
+                                </p>
+                            </div>
+                        <!-- Card footer -->
+                            <div class="card-footer text-center">
+                                <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>  
+            </div>
+        </div>
+    </div>
+
     {% include 'components/footer/footer.html' %}
 
 {% endblock%}

@@ -18,7 +18,7 @@
                 <form action="{% url 'edit_auction' auction.id %}" method="POST">
                     {% csrf_token %}
                     {{ auction_form | crispy }}
-                    <button type="submit">Update auction</button>
+                    <button type="submit" class="btn btn-danger">Update auction</button>
                 </form>
             </div>
         </div>

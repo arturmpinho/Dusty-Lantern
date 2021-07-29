@@ -24,7 +24,8 @@
                             {{ field }}
                         {% endif %}
                     {% endfor %}
-                    <button type="submit">Update product</button>
+                    <button type="submit" class="btn btn-danger">Update product</button>
+                    <a href="{% url 'products' %}" class="btn btn-outline-danger">Go Back</a>
                 </form>
             </div>
         </div>
