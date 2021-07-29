@@ -6,13 +6,13 @@
 ---
 
 ## **Project Goal** 
-***Dusty Lantern*** aims to be the marketplace of reference in the auction of second-hand products.
+***Dusty Lantern*** aims to be a market reference in the auction of second-hand products.
 
-It intends to provide buyers and sellers with an intuitive and appealing platform to trade their used belongings.
+It intends to provide buyers and site owners with an intuitive and appealing platform to trade used belongings.
 
-With sustainability being the key-driver of innovation and the second-hand market increasing substantially during the past years, combining both contexts generates a great opportunity that must be addressed.
+With sustainability being the key-driver of innovation and the second-hand market increasing substantially during the past years, combining these contexts generates a great opportunity that must be addressed.
 
-With this in mind the ***Dusty Lantern*** will provide like-minded people the best platform so they can give second-hand products/belongings a new life and start contributing to a more sustainable society, monetizing their own old and unused items.
+With this in mind the ***Dusty Lantern*** will provide like-minded people the best platform so they can give second-hand articles a new life and start contributing to a more sustainable society, monetizing old and unused items.
 
 ---
 <a></a>
@@ -70,39 +70,33 @@ With this in mind the ***Dusty Lantern*** will provide like-minded people the be
 ### **User Goals and Stories**
 #### **Goals**
 
-* The homepage must be clear, intuitive and self-explanatory about the purpose of the marketplace
-* The marketplace must be attractive and entice user to participate in the auctions
+* The homepage must be clear, intuitive and self-explanatory about the purpose of the website
+* The platform must be attractive and entice users to participate in the auctions
 * The entire website must be fully responsive on every device
-* The website must give the user the ability to bid/sell second-hand articles
-* The marketplace must display auctions categorised
+* The website must give the user the ability to bid on second-hand articles
+* The platform must display auctions categorised
 
 
 #### **Stories**
-User stories are divided into buyer/seller as the user will have the option to choose which status he wants to interact with the platform with.
 
-Therefore,
-
-As a **buyer**:
+As a user:
 
 1. I want to see second-hand articles of my interest
 1. I want to place bids on auctions of my interest
-1. I want to have a a good overview of the most popular auctions
-1. I want to add to a watchlist the auctions I want to follow/participate
-1. I want to have a full overview of how much I will pay for the won auction
-1. I want to see my outstanding open balance
+1. I want to have a a good overview of the ongoing auctions
+1. I want to have a full overview of how much I will pay for the won auction in the checkout
+1. I want to see my outstanding auctions
 1. I want to see when the auctions will start
 1. I want to see how long until the auction closes
 1. I want to see my history of won auctions
 
 
-As a **seller**:
+As a site owner:
 
-1. I want to add items to auctions
-1. I want to delete auctions created if these did not start or up to 24hrs before auction starting date & time
-1. I want to edit auctions created if these did not start or up to 24hrs before auction starting date & time
-1. I want to see my outstanding receivables
+1. I want to add products to auctions
+1. I want to delete/edit auctions created 
 1. I want to follow my auctions bids live
-1. I want to have an overview of my items sold
+1. I want to have an overview of the items sold
 1. I want to receive my payments via a secure platform
 
 [[Back to top]](#table-of-contents)
@@ -113,10 +107,8 @@ As a **seller**:
 #### **Requirements**
 
 * Easy and intuitive navigation system across pages through a navbar
-* Efficient way of finding auctions of interest as a buyer
-* Possibility of adding items for sale according to my own requirements (date, base amount, level of bid increments, etc.)
+* Efficient way of finding auctions of interest
 * Check my auctions history
-* Easy switch between my seller/buyer profiles
 * Contact information easy to find
 
 #### **Expectations**
@@ -124,10 +116,10 @@ As a **seller**:
 * Strong connections with the platform with via a welcoming landing page
 * Links to external pages must open in a new browser tab
 * Navigation system must be working properly
-* When auction is finished, as a buyer, I want to receive a confirmation email if I won the auction
-* For the auctions won as a buyer, I want to have the immeadiate option of proceeding with the payment of the item
-* As a buyer I want to have a clear overview of the total cost of the purchase item, including any additional fees
-* As a seller, a transparent transaction between the buyer and me with the platform as an intermediate for a safer transaction
+* When user places a bid and when auction is finished the user must receive a confirmation email if it won the auction
+* For the auctions won, I want to have the immeadiate option of proceeding with the payment of the item
+* As a buyer I want to have a clear overview of the total cost of the item to purchase, including any additional fees
+* A transparent transaction between the buyer and site owners with a payment platform as an intermediate for a safer transaction
 
 [[Back to top]](#table-of-contents)
 
@@ -135,9 +127,11 @@ As a **seller**:
 
 ### **Site Owners Goals**
 
-1. Monetize the auction marketplace by collecting a percentage fee from the seller/buyer via [Stripe](https://stripe.com/ "Stripe")
+1. Monetize the auction website by collecting a percentage fee from all the auctions [Stripe](https://stripe.com/ "Stripe")
 1. Promote the auction platform to captivate new users
 1. Full overview of all the ongoing and finished auctions
+1. Possibility of adding items for sale according to my own requirements (date, base amount, level of bid increments, etc.)
+
 
 [[Back to top]](#table-of-contents)
 
@@ -156,12 +150,6 @@ The icons used are self-explanatory and aid the navigation of the user, bringing
 #### Colors
 ![Colors](wireframes/dusty_lantern_color_palette.png)
 
-#393E46: 
-
-#EEEEEE: 
-
-#9A031E: 
-
 While creating this color scheme, I have used the [Contrast-Checker](https://coolors.co/contrast-checker "Contrast Checker") tool to assure a good readability across the website and decide between different color-pairings to be used in the apps.
 
 |Text color  	|Background color  	|Result   	|
@@ -177,7 +165,7 @@ While creating this color scheme, I have used the [Contrast-Checker](https://coo
 
 #### **Structure**
 
-The structure of the Dusty Lantern auction marketplace will devided into 6 pages:
+The structure of the Dusty Lantern auction website will devided into 7 main sections:
 
 ##### **Landing Page**
 
@@ -193,47 +181,59 @@ This page will be powered by a search bar and filter system in order to aid the 
 
 Moreover, the auctions page will have the watchlist functionality in order for the user to follow closely on the auctions of interest. 
 
-#### **Bidding**
+#### **Auction Details / Bidding**
 
 The bidding page will maintain the basic structure of the auctions page but will enable the user to place bids on the selected auctions. 
 
 The auctions cards will have an intuitive 'place bid' system where the buyer can place the bid, incrementing the previous highest bid by the amount selected by the seller as the increment for the auction.
 
-#### **Create auctions page (exclusively for sellers)**
+#### **Create/Edit auctions/products pages (exclusively for the site owners)**
 
-As a seller, the user will have a dedicated page, powered by 2 forms, in order to create through a single page an auction and the corresponding article in the database.
+As the seller, the site owners will have, through dedicated pages powered by corresponding forms, the option to create/edit an auction and the corresponding article in the database.
 
-The form will give the user the following options in order to promote the item:
+The form will give the site owners the following options in order to promote the item:
 
-**Form 1: Item**
+**Form 1: Product**
 1. Title
-1. Description (short/full)
+1. Description
 1. Category
 1. Measurements
 1. Brand
-1. Image
 1. Condition
+1. Image
+1. Creation date
 
 **Form 2: Auction**
-1. Starting date & time
+1. Product
 1. Base amount
 1. Increment level
+1. Start date & time
+1. End date & time
+1. "Is sold" checkbox
 
-#### **User's Dashboard**
+#### **User's Dashboard / Checkout**
 
 The user's dashboard will be the page resuming the actions taken by the user across the other pages.
 
-As a buyer, the page will display the watchlist and the participating auctions, as well as the corresponding payment status of the won auctions.
+As a buyer, the page will display the won auctions, the corresponding payment status and the default delivery info.
 
-As a seller, this page will display the items created for auction and the corresponding receivables status.
+For the checkout, instead of targeting a session bag like in the BoutiqueAdo project, the checkout uses the database to obtain the highest bidder for a given auction. When the auction closes, it will be automatically added to the user's pending payment orders. Therefore, when the user is ready to pay for the won auctions, he can proceed to the payment via the personal dashboard.
 
-#### **Checkout**
+#### **Auction Management**
 
-The checkout page works differently than what we have been taught in the Boutique Ado project. Instead of targeting a session bag, the checkout uses the database to obtain the highest bidder of the auction, and add it to its cart. Whne the user is ready to payh for the items, he can proceed.
+As a site owner, this page will display at first glance the auctions created, together with other CTA buttons.
+
+The auctions will be displayed in a table giving the user a friendly way to display all the auction fields.
+
+The same goes for the products management page, that will be "embeeded" as part of the Auction Management page.
+
+Depending on if the site owner is visualizing auctions or products, it will have the correspnding buttons/links to the add/edit/delete functionalities, allowing the site owner to manage the auctions products in a more appealing wauy rather than the Django Admin. 
 
 #### **Payment**
 
-The payment page will be powered by the multiparty payment system provided by [Stripe](https://stripe.com/ "Stripe"): **Stripe Connect**.
+The payment page will be powered by [Stripe](https://stripe.com/ "Stripe"): **Stripe Connect**.
+
+At this stage, the user will be displayed an short overview of the auction to be paid (Highest Bid + Auction Fee). The auction fee will be a variable percentage, depending on the base amount of the order total.
 
 This systems will allow the auction payment directly from the buyer to the seller, discounting the acution fee, transfering it straight to the site owner's account.
 
@@ -276,12 +276,11 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 
 ### **Existing Features**
 
-* Sign In and Registration functionalities by Django allauth package (including social accounts)
-* Search engine and filtering so user can refine its search for a specific auction
-* Bidding system that allow the buyer to increment the current highest bid for any given auction
-* Possibility for seller to create items in the database without being the admin
-* Add auctions to a watchlist functionality so user can follow-up on the auctions of interest straight from its dashboard.
-* Follow-up on payables/receivables according to payment status.
+* Sign In and Registration functionalities by Django allauth package
+* Search engine and filtering so user can refine the search for a specific product/auction
+* Bidding system that allows the buyer to increment the current highest bid for any given auction
+* Possibility for the site owner to create auctions/products in the database without being the admin
+* Follow-up on payables according to payment status
 
 [[Back to top]](#table-of-contents)
 
@@ -289,12 +288,13 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 
 ### **Future Features**
 
-* Courier's APIs in order to automatically generate a shipping label to the seller and  the tracking number to the auction winner
+* Courier's APIs in order to automatically generate a shipping label to the seller and send the tracking number to the auction winner
+* Auction watchlist so user can follow-up closely auctions of interest
 * Share a specific auction on social networks
 * Auction suggestion based on previous search results / watchlist
-* It can be considered to add a confirmation modal for when a user places a bid as a defensive mechanism to avoid the user to place a binding bid by mistake.
-* When auction is about to close (< 1 min) and an user places a bet, the counter sall reset the count to 1 min again, in order to motivate last minute bids.
+* When auction is about to close (< 1 min) and an user places a bid, the counter shall reset the countdown to 1 min again, in order to motivate last minute bids.
 * In case the ongoing auctions list becomes to big, I will include a pagination system ordered by end date time first, in order to improve the UX.
+* Error handling 
 
 
 [[Back to top]](#table-of-contents)
