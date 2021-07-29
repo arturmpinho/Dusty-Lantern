@@ -22,11 +22,9 @@ let cards = $('.card')
 for (let i = 0; i < cards.length; i++) {
   let x = setInterval(function() {
 
-    let start_date_time = new Date(document.getElementsByClassName('start_date_time').item(i).textContent);
-    let end_date_time = new Date(document.getElementsByClassName('end_date_time').item(i).textContent);
-    let now = new Date(document.getElementsByClassName('current_date_time')[0].textContent);
-
-    
+    let start_date_time = Date.parse(`${document.getElementsByClassName('start_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
+    let end_date_time = Date.parse(`${document.getElementsByClassName('end_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
+    let now = Date.now()
 
     let timeleft = ''
     
