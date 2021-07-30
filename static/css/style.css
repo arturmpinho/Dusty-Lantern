@@ -8,6 +8,7 @@ body {
     font-size: 1.6rem;
     font-family: "Montserrat", monospace, Haettenschweiler, sans-serif;
     color: #393E46;
+    overflow-x: hidden;
 }
 
 h1 {
