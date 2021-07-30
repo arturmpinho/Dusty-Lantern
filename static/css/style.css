@@ -68,10 +68,16 @@ td {
     color: #EEEEEE !important;
 }
 
+.navbar-dark .navbar-toggler {
+    padding: 1.5rem;
+    float: right;
+    margin: 0.5rem;
+}
+
 .nav-link:focus, .nav-link:hover,
 .nav-item:focus, .nav-item:hover,
 .menu-links:focus, .menu-links:hover{
-    text-decoration: none;
+    text-decoration: underline;
     color: #EEEEEE;
 }
 
@@ -99,6 +105,13 @@ a > .nav-link,
     margin-bottom: 0;
 }
 
+#email {
+    color: #EEEEEE;
+}
+
+#email:hover {
+    text-decoration: underline;
+}
 
 /*Auctions: Category filters */
 
