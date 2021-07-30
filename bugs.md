@@ -10,8 +10,15 @@ TBF
 TBF
 
 ### Increment and decrement input field arrows not being displayed in mobiles
-TBF
+During the testing phase, I have been alerted to the fact that the input field where you define the bid amount that you want to place was not displaying the increment/decrement arrows.
 
+![Bug_Input_Field](README-images/bug_input_field_arrows.png "Input Field Arrows")
+
+This bug is caused due to browser compatibility, which differ widely in between them. As a fix, I have opted out to remove the non-editable restriction, allowing the user to type the amount of the next bid and by doing the form validation defining the min, max and step attributes levels with the corresponding values from the DB.
+
+Nonetheless, in the future, I want to tackle this form of form validation as per warning of the [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number "Mozilla Developer Network"), doing it so on the server-side due to security reasons.
+
+![Bug_Input_Field](README-images/bug_input_field_warning.png "Input Field Warning")
 
 ## Functionality
 
@@ -149,7 +156,10 @@ Therefore, I removed the First and Last Names as a comparison between the 2.
 Being all the rest exactly the same, the order is not being created in a duplicate manner.
 
 
-### Start/End date times and images are not being populated on editing the auctions and editing products respectively
+### Start/End date times are not being populated on editing the auctions
+TBF
+
+### Uploaded Images are not being recognized by the editing product form 
 TBF
 
 ### Unselect checkbox to save user's info during checkout is not preventing overwriting the user data in the DB.
