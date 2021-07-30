@@ -16,7 +16,8 @@ class AddProductForm(forms.ModelForm):
         fields = '__all__'
 
     images = forms.ImageField(label="Image", required=True,
-                              widget=CustomClearableFileInput(attrs={'multiple': True}))
+                              widget=(CustomClearableFileInput(
+                                      attrs={'multiple': True})))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,11 +26,14 @@ class AddProductForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             if field_name == "category":
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4 form-select'
             elif field_name == "condition":
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4 form-select'
             else:
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4'
 
 
 class EditProductForm(forms.ModelForm):
@@ -47,11 +51,14 @@ class EditProductForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             if field_name == "category":
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4 form-select'
             elif field_name == "condition":
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4 form-select'
             else:
-                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
+                field.widget.attrs['class'] = 'border-black rounded-0 \
+                    mt-2 fs-4'
 
 
 class AddAuctionForm(forms.ModelForm):
@@ -64,12 +71,11 @@ class AddAuctionForm(forms.ModelForm):
             'end_date_time': CustomDateTimeInput(),
         }
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         product = Product.objects.all()
 
-        for field_name, field in self.fields.items():           
+        for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
 
 
@@ -87,5 +93,5 @@ class EditAuctionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         product = Product.objects.all()
 
-        for field_name, field in self.fields.items():           
+        for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'

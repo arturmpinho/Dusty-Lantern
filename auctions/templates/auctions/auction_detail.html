@@ -26,28 +26,28 @@
                             {% if auction.product.images.all %}
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
-                                  {% for image in auction.product.images.all %}
-                                    {% if image.main_image %}
-                                        <div class="carousel-item active">
-                                            <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
-                                        </div>
-                                    {% else %}
-                                        <div class="carousel-item ">
-                                            <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
-                                        </div>
-                                      {% endif %}
-                                    {% endfor %}
+                                        {% for image in auction.product.images.all %}
+                                            {% if image.main_image %}
+                                                <div class="carousel-item active">
+                                                    <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                                                </div>
+                                            {% else %}
+                                                <div class="carousel-item ">
+                                                    <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
                                 
-                                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                      <span class="visually-hidden">Previous</span>
-                                  </button>
-                                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                      <span class="visually-hidden">Next</span>
-                                </button>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
                             {% else %}
                                 <img class = "card-img-top card-img-preview" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo">
                                 <p class="text-danger my-0 mt-3">
@@ -61,69 +61,67 @@
                     </div>
                     <div class="col-md-8 align-self-center">
                         <div class="container p-5">
-                        <p class="card-text">{{ auction.product.description}}</p>
-                        <p class="card-text">{{ auction.product.measurements}}</p>
-                        <p class="card-text">
-                            <i class="fas fa-money-bill-alt fa-2x"></i> 
-                            Bidding starts from: € {{ auction.base_amount }}
-                        </p>        
-                        {% if current_highest_bid %}    
-                        <p class="card-text">
-                            <i class="fas fa-gavel fa-2x"></i>
-                            Current highest bid: € {{ current_highest_bid.bid }}
-                        </p>
-                        {% endif %}
-                        <p class="card-text">
-                            <i class="fas fa-user fa-2x"></i> 
-                            {% if current_highest_bid %}
-                                Last bid from: {{ current_highest_bid.bidder }}
+                            <p class="card-text">{{ auction.product.description}}</p>
+                            <p class="card-text">{{ auction.product.measurements}}</p>
+                            <p class="card-text">
+                                <i class="fas fa-money-bill-alt fa-2x"></i> 
+                                Bidding starts from: € {{ auction.base_amount }}
+                            </p>        
+                            {% if current_highest_bid %}    
+                                <p class="card-text">
+                                    <i class="fas fa-gavel fa-2x"></i>
+                                    Current highest bid: € {{ current_highest_bid.bid }}
+                                </p>
+                            {% endif %}
+                            <p class="card-text">
+                                <i class="fas fa-user fa-2x"></i> 
+                                    {% if current_highest_bid %}
+                                        Last bid from: {{ current_highest_bid.bidder }}
+                                    {% else %}
+                                        There are no bids yet!
+                                    {% endif %}
+                            </p>
+                            <p class="card-text">
+                                <i class="fas fa-plus-circle fa-2x"></i>
+                                Minimum increment: € {{ auction.bidding_increment }}
+                            </p>
+
+                            {% now "Y-m-d H:i:s" as current_date_time %}
+                            <div class="current_date_time" hidden>{{ current_date_time }} </div>
+                            <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
+                            <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
+                            <p class="countdowntimer"></p>
+
+                            {% if request.user.is_superuser %}
+
                             {% else %}
-                                There are no bids yet!
+                            {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
+                                {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
+                                    <div class="col-12 mb-5" id="place-bid">
+                                        <p class="mt-3"><strong>Next bid (€):</strong></p>
+                                        <p class="text-danger my-0">
+                                            <span class="icon">
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </span>
+                                            <small>Please ensure you include decimals in you bid (e.g 20<strong>.00</strong>)!
+                                            </small>
+                                        </p>            
+                                        <form method="POST" action="{% url 'place_bid' auction.id  %}">
+                                            {% csrf_token %}
+                                            <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
+                                            <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}" required>
+                                            <button type="submit" class="btn btn-outline-danger">Place your bid</button>
+                                        </form>
+                                    </div>                            
+                                {% endif %}
                             {% endif %}
-                        </p>
-                        <p class="card-text">
-                            <i class="fas fa-plus-circle fa-2x"></i>
-                            Minimum increment: € {{ auction.bidding_increment }}
-                        </p>
-
-                        {% now "Y-m-d H:i:s" as current_date_time %}
-                        <div class="current_date_time" hidden>{{ current_date_time }} </div>
-                        <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
-                        <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
-                        <p class="countdowntimer"></p>
-
-                        {% if request.user.is_superuser %}
-
-                        {% else %}
-                        {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
-                            {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
-                                <div class="col-12 mb-5" id="place-bid">
-                                    <p class="mt-3"><strong>Next bid (€):</strong></p>
-                                    <p class="text-danger my-0">
-                                        <span class="icon">
-                                            <i class="fas fa-exclamation-circle"></i>
-                                        </span>
-                                        <small>Please ensure you include decimals in you bid (e.g 20<strong>.00</strong>)!
-                                        </small>
-                                    </p>            
-                                    <form method="POST" action="{% url 'place_bid' auction.id  %}">
-                                        {% csrf_token %}
-                                        <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
-                                        <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}" required>
-                                        <button type="submit" class="btn btn-outline-danger">Place your bid</button>
-                                    </form>
-                                </div>                            
-                            {% endif %}
-                        {% endif %}
                         </div>
                         {% endif %}
 
                         <!-- Card footer -->
-                        </div>
-                            <div class="card-footer text-center">
-                                <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'auctions' %}" class="btn btn-outline-danger">Go back to Auctions</a>
                     </div>
                 </div>
             </div>

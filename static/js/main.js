@@ -17,18 +17,18 @@ $(document).ready(function(){
 
 // Countdown timer based on https://www.w3schools.com/howto/howto_js_countdown.asp
 
-let cards = $('.card')
+let cards = $('.card');
 
 for (let i = 0; i < cards.length; i++) {
-  let x = setInterval(function() {
+  setInterval(function() {
 
     let start_date_time = Date.parse(`${document.getElementsByClassName('start_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
     let end_date_time = Date.parse(`${document.getElementsByClassName('end_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
-    let now = Date.now()
+    let now = Date.now();
 
-    let timeleft = ''
+    let timeleft = '';
     
-    let timer = ''
+    let timer = '';
       
     if (start_date_time >= now) {
       timeleft = start_date_time - now;    
@@ -42,7 +42,7 @@ for (let i = 0; i < cards.length; i++) {
     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
     if (timeleft < 1500 && timeleft > -5000) {
-      timer = 0
+      timer = 0;
     } 
 
     if (start_date_time > now) {
@@ -68,8 +68,3 @@ function display_to_none(){
 }
     
 });
-
-
-function update_images() {
-  
-}

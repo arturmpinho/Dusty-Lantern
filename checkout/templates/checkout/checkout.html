@@ -34,7 +34,7 @@
                             <a href="#">
                                 {% for image in auction.product.images.all %}
                                     {% if image.main_image %}
-                                        <img src="{{ image.image.url }}" class="auction_main_image">
+                                        <img src="{{ image.image.url }}" alt="auction-main-image" class="auction_main_image">
                                     {% endif %}
                                 {% endfor %}
                             </a>
@@ -107,7 +107,7 @@
                     </fieldset>
 
                     <div class="submit-button text-right mt-5 mb-2">                    
-						<button id="submit-button" class="btn btn-danger">
+						<button id="submit-button" class="btn btn-danger mb-2">
 							<span class="font-weight-bold">Proceed to payment</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>

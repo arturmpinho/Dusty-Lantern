@@ -18,24 +18,24 @@
                 {% endif %}
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auctionsmng' %}">
-                            <div class="text-center">
-                                <div><i class="fas fa-edit fa-lg"></i></div>
-                                <p class="my-0">Auction Management</p>
-                            </div>
-                        </a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auctions' %}">
-                            <div class="text-center">
-                                <div><i class="fas fa-gavel fa-lg"></i></div>
-                                <p class="my-0 display-lg">Auctions</p>
-                            </div>
-                        </a>
-                    </li>
+                        {% if request.user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'auctionsmng' %}">
+                                    <div class="text-center">
+                                        <div><i class="fas fa-edit fa-lg"></i></div>
+                                        <p class="my-0">Auction Management</p>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'auctions' %}">
+                                <div class="text-center">
+                                    <div><i class="fas fa-gavel fa-lg"></i></div>
+                                    <p class="my-0 display-lg">Auctions</p>
+                                </div>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'profile' %}">
                                 <div class="text-center">
@@ -53,25 +53,24 @@
                             </a>
                         </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">
-                            <div class="text-center">
-                                <div><i class="fas fa-user-edit fa-lg"></i></div>
-                                <p class="my-0 display-lg">Register</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">
-                            <div class="text-center">
-                                <div><i class="fas fa-sign-in-alt fa-lg"></i></div>
-                                <p class="my-0 display-lg">Login</p>
-                            </div>
-                        </a>
-                    </li>
-                {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">
+                                <div class="text-center">
+                                    <div><i class="fas fa-user-edit fa-lg"></i></div>
+                                    <p class="my-0 display-lg">Register</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">
+                                <div class="text-center">
+                                    <div><i class="fas fa-sign-in-alt fa-lg"></i></div>
+                                    <p class="my-0 display-lg">Login</p>
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
-              </div>
             </div>
         </div>
     </nav>

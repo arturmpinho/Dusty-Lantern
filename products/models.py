@@ -10,7 +10,8 @@ class Category(models.Model):
 
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254)
-    fa_icon_class = models.CharField(max_length=150, default='fas fa-exclamation')
+    fa_icon_class = models.CharField(max_length=150, default='\
+        fas fa-exclamation')
 
     def __str__(self):
         return self.name

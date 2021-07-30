@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .forms import AddAuctionForm, AddProductForm, EditAuctionForm, EditProductForm
+from .forms import (AddAuctionForm, AddProductForm,
+                    EditAuctionForm, EditProductForm)
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from products.models import Product, Image
@@ -111,7 +112,7 @@ def edit_product(request, product_id):
 
     if request.method == "POST":
         product_form = EditProductForm(request.POST, request.FILES,
-                                   instance=product)
+                                       instance=product)
         if product_form.is_valid:
             product = product_form.save()
             messages.success(request, f'You have successfully updated \
@@ -149,11 +150,12 @@ def add_auction(request):
 
     if request.method == 'POST':
         auction_form = AddAuctionForm(request.POST)
-        
-        if auction_form["start_date_time"].value() > now.strftime(
-            '%Y-%m-%dT%H:%M'):
-            if auction_form["end_date_time"].value() > auction_form[
-                "start_date_time"].value():
+
+        if auction_form["start_date_time"].value() > (now.strftime(
+                                                     '%Y-%m-%dT%H:%M')):
+            if auction_form["end_date_time"].value() > (auction_form[
+                                                        "start_date_time\
+                                                            "].value()):
                 if auction_form.is_valid():
                     auction = auction_form.save()
                     messages.success(request, f'Auction {auction} has been \
@@ -193,7 +195,7 @@ def edit_auction(request, auction_id):
 
     if request.method == "POST":
         auction_form = EditAuctionForm(request.POST,
-                                   instance=auction)
+                                       instance=auction)
         if auction_form.is_valid:
             auction = auction_form.save()
             messages.success(request, f'You have successfully updated \

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (render, redirect,
+                              reverse, get_object_or_404, HttpResponse)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -80,7 +81,8 @@ def checkout(request):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('\
+                checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -120,7 +122,8 @@ def checkout(request):
         currency=settings.STRIPE_CURRENCY,
     )
 
-    # Attempt to prefill the form with any info the user maintains in their profile
+    # Attempt to prefill the form with any info
+    # that the user maintains in their profile
     if request.user.is_authenticated:
         try:
             user_profile = UserProfile.objects.get(user=request.user)
@@ -204,7 +207,6 @@ def checkout_success(request, order_number):
         auction = Auction.objects.get(pk=item.auction.id)
         auction.is_sold = True
         auction.save()
-
 
     template = 'checkout/checkout_success.html'
     context = {

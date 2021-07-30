@@ -22,17 +22,17 @@ class Order(models.Model):
                               default="")
     phone_number = models.CharField(max_length=20,
                                     null=False, blank=False)
-    country = CountryField(blank_label='Country *',
-                           null=False, blank=False)
-    postcode = models.CharField(max_length=20,
-                                null=False, blank=False)
-    town_or_city = models.CharField(max_length=40,
-                                    null=False, blank=False)
     street_address1 = models.CharField(max_length=80,
                                        null=False, blank=False)
     street_address2 = models.CharField(max_length=80,
                                        null=True, blank=True)
+    postcode = models.CharField(max_length=20,
+                                null=False, blank=False)
+    town_or_city = models.CharField(max_length=40,
+                                    null=False, blank=False)
     county = models.CharField(max_length=80, null=True, blank=True)
+    country = CountryField(blank_label='Country *',
+                           null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
     auction_fee = models.DecimalField(max_digits=6, decimal_places=2,
                                       null=False, default=0)
@@ -54,8 +54,8 @@ class Order(models.Model):
         Update grand total each time an auction is added
         to the bag, including the auction fee.
         """
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
-                                                        'lineitem_total__sum'] or 0
+        self.order_total = self.lineitems.aggregate(Sum('\
+            lineitem_total'))['lineitem_total__sum'] or 0
         if self.order_total < 500:
             self.auction_fee = float(self.order_total) * 0.05
         elif self.order_total < 1000:

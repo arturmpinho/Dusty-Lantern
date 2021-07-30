@@ -33,7 +33,9 @@ def profile(request):
     for bid in bids:
         auctions = Auction.objects.filter(pk=bid.auction.id)
         for auction in auctions:
-            if auction.end_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4]:
+            if auction.end_date_time.strftime('\
+                %Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('\
+                    %Y-%m-%d %H:%M:%S.%s')[:-4]:
                 if auction not in unique_auctions:
                     unique_auctions.append(auction)
 
@@ -72,6 +74,7 @@ def order_history(request, order_number):
         'from_profile': True
     }
     return render(request, template, context)
+
 
 @login_required
 def add_to_cart(request, auction_id):
