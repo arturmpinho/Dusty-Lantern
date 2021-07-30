@@ -151,11 +151,8 @@ def add_auction(request):
     if request.method == 'POST':
         auction_form = AddAuctionForm(request.POST)
 
-        if auction_form["start_date_time"].value() > (now.strftime(
-                                                     '%Y-%m-%dT%H:%M')):
-            if auction_form["end_date_time"].value() > (auction_form[
-                                                        "start_date_time\
-                                                            "].value()):
+        if auction_form["start_date_time"].value() > now.strftime('%Y-%m-%dT%H:%M'):
+            if auction_form["end_date_time"].value() > auction_form["start_date_time"].value():
                 if auction_form.is_valid():
                     auction = auction_form.save()
                     messages.success(request, f'Auction {auction} has been \

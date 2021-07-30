@@ -10,10 +10,11 @@ def index(request):
     ongoing_auctions = []
     now = datetime.datetime.now()
     for auction in auctions:
-        if auction.start_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('\
-            %Y-%m-%d %H:%M:%S.%s')[:-4] and auction.end_date_time.strftime('\
-                %Y-%m-%d %H:%M:%S.%s')[:-4] > now.strftime('\
-                    %Y-%m-%d %H:%M:%S.%s')[:-4]:
+        if auction.start_date_time.strftime(
+            '%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime(
+            '%Y-%m-%d %H:%M:%S.%s')[:-4] and auction.end_date_time.strftime(
+                '%Y-%m-%d %H:%M:%S.%s')[:-4] > now.strftime(
+                    '%Y-%m-%d %H:%M:%S.%s')[:-4]:
             ongoing_auctions.append(auction)
 
     top_5 = ongoing_auctions[:4]

@@ -33,9 +33,7 @@ def profile(request):
     for bid in bids:
         auctions = Auction.objects.filter(pk=bid.auction.id)
         for auction in auctions:
-            if auction.end_date_time.strftime('\
-                %Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('\
-                    %Y-%m-%d %H:%M:%S.%s')[:-4]:
+            if auction.end_date_time.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4] < now.strftime('%Y-%m-%d %H:%M:%S.%s')[:-4]:
                 if auction not in unique_auctions:
                     unique_auctions.append(auction)
 
