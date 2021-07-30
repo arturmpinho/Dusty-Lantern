@@ -18,25 +18,27 @@
                     <div class="h-100 p-5 rounded-3">
                         <h2 class="display-5 fw-bold">Welcome to the Dusty Lantern®</h2>
                         <p class="col fs-2">Because (re)New is always better!</p>
-                        <div>
-                            {% if request.user.is_authenticated %}
-                                <a href="{% url 'auctions' %}" class="btn btn-danger btn-lg mt-3" type="button">See all auctions</a>                     
-                            {% else %}
-                                <a href="{% url 'account_signup' %}" class="btn btn-danger btn-lg" type="button">Register</a>
-                                <a href="{% url 'account_login' %}" class="btn btn-danger btn-lg" type="button">Login</a>
-                            {% endif %}              
+                        <hr>
+                        <div class="container mt-5">
+                            <p>
+                                Dusty Lantern provides like-minded people the best platform to purchase second-hand articles and giving them new life.
+                            </p>
+                                
+                            <p>
+                                Start contributing to a more sustainable society, start biding on your auctions of interest now!
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="cont">
         <div class="row">
             <div class="col-12 col-md-10 offset-md-1">
-                <h2>Ongoing auctions!</h2>
+                <h2>Check some of our ongoing auctions!</h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">
+                    {% if auctions %}
                     {% for auction in auctions %}
                         <div class="card">
                             <div class="card-body">
@@ -76,6 +78,9 @@
                             </div>
                         </div>
                     {% endfor %}
+                    {% else %}
+                        <h3>There are no ongoing auctions.</h3>
+                    {% endif %}
                 </div>  
             </div>
         </div>
