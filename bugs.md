@@ -173,6 +173,8 @@ For this solution to work, I had to split the product form into an add product f
 
 If I wouldn't have split the form and display the custom clearable file input field, it would caused the superuser to loose the previous uploaded images and not being able to proceed with the form submission without uploading those images again.
 
+This approach can result in the superuser deleting all the images in the admin as the images are not required for the edit functionality. in order to forsee this potential issue I have included the "no image", which is the logo of the website, which will be displayed to the user with the informational note that the site owner will upload images for that auction soon. 
+
 
 ### Unselect checkbox to save user's info during checkout is not preventing overwriting the user data in the DB.
 
