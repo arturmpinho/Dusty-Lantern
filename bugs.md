@@ -149,8 +149,34 @@ Therefore, I removed the First and Last Names as a comparison between the 2.
 Being all the rest exactly the same, the order is not being created in a duplicate manner.
 
 
-### Start/End date timesare and images are not being populated on editing the auctions and editing products respectively
+### Start/End date times and images are not being populated on editing the auctions and editing products respectively
 TBF
 
 ### Unselect checkbox to save user's info during checkout is not preventing overwriting the user data in the DB.
-TBF
+
+This bug was a typical case of languages differences.
+
+    JS:
+    var saveInfo = Boolean($('#id-save-info:checked').val())
+
+    Python:
+            username = intent.metadata.username
+        if username != 'AnonymousUser':
+            user_profile = UserProfile.objects.get(user__username=username)
+            cc
+                user_profile.default_phone_number = shipping_details.phone
+                user_profile.default_country = shipping_details.address.country
+                user_profile.default_postcode = (shipping_details.
+                                                 address.postal_code)
+                user_profile.default_town_or_city = (shipping_details.
+                                                     address.city)
+                user_profile.default_street_address1 = (shipping_details.
+                                                        address.line1)
+                user_profile.default_street_address2 = (shipping_details.
+                                                        address.line2)
+                user_profile.default_county = shipping_details.address.state
+                user_profile.save()
+
+During the checkout process, the save info checkbox is being automatically "checked" via a Boolean field in JS. This means that when you need to retreive that value (true/false) in python, it won't retreive it capitalized (True/False), leading the function in the webhookhandler not recognizing the JS value. Therefore, the bug fix was to make the following if statement in order to make the user info to update in the DB: 
+
+    if save_info != "false":
