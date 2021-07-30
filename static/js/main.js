@@ -68,3 +68,8 @@ function display_to_none(){
 }
     
 });
+
+
+function update_images() {
+  
+}

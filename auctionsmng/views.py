@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .forms import AddAuctionForm, ProductForm, EditAuctionForm
+from .forms import AddAuctionForm, AddProductForm, EditAuctionForm, EditProductForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from products.models import Product, Image
@@ -53,9 +53,10 @@ def add_product(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        product_form = ProductForm(request.POST, request.FILES)
+        product_form = AddProductForm(request.POST, request.FILES)
 
         images = request.FILES.getlist('images')
+
         if product_form.is_valid():
             product = product_form.save()
             for image in images:
@@ -65,7 +66,7 @@ def add_product(request):
             first_product_image.main_image = True
             first_product_image.save()
 
-            messages.info(request, f'Product {product} has been \
+            messages.success(request, f'Product {product} has been \
                 successfully added!')
             return redirect('products')
 
@@ -73,7 +74,7 @@ def add_product(request):
             messages.error(request, "Failed to add product. \
             Please ensure the form is valid.")
     else:
-        product_form = ProductForm()
+        product_form = AddProductForm()
         template = 'auctionsmng/add_product.html'
 
         context = {
@@ -109,18 +110,20 @@ def edit_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if request.method == "POST":
-        product_form = ProductForm(request.POST, request.FILES,
+        product_form = EditProductForm(request.POST, request.FILES,
                                    instance=product)
         if product_form.is_valid:
             product = product_form.save()
-            messages.info(request, f'You have successfully updated \
+            messages.success(request, f'You have successfully updated \
                 product {product}.')
             return redirect('products')
         else:
             messages.error(request, 'Failed to update product. \
             Please ensure the form is valid.')
 
-    product_form = ProductForm(instance=product)
+    product_form = EditProductForm(instance=product)
+    product_images = product.images.all()
+
     messages.info(request, f'You are editing product: \
          {product}')
 
@@ -128,7 +131,8 @@ def edit_product(request, product_id):
 
     context = {
         'product_form': product_form,
-        'product': product
+        'product': product,
+        'images': product_images,
     }
     return render(request, template, context)
 
@@ -152,7 +156,7 @@ def add_auction(request):
                 "start_date_time"].value():
                 if auction_form.is_valid():
                     auction = auction_form.save()
-                    messages.info(request, f'Auction {auction} has been \
+                    messages.success(request, f'Auction {auction} has been \
                         successfully added!')
                     return redirect('auctionsmng')
                 else:
@@ -192,7 +196,7 @@ def edit_auction(request, auction_id):
                                    instance=auction)
         if auction_form.is_valid:
             auction = auction_form.save()
-            messages.info(request, f'You have successfully updated \
+            messages.success(request, f'You have successfully updated \
                 auction concerning product {auction}.')
             return redirect('auctionsmng')
         else:

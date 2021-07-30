@@ -21,7 +21,13 @@
                         {% if field.name != 'images' %}
                             {{ field | as_crispy_field }}
                         {% else %}
-                            {{ field }}
+                            <p class="mt-4">Current Images:</p> 
+                            <div class="col-12">
+                                {% for image in images %}
+                                    <img height="auto" width="150" height="150" src="{{ image.image.url }}" alt="image" class="mb-5">
+                                {% endfor %}
+                                <p>* In order to update your images, please proceed to the Django admin page </p>
+                            </div>
                         {% endif %}
                     {% endfor %}
                     <button type="submit" class="btn btn-danger">Update product</button>
@@ -31,6 +37,8 @@
         </div>
     </div>
 
+    
+    
     {% include 'components/footer/footer.html' %}
 
 {% endblock%}

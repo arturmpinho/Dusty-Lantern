@@ -57,6 +57,7 @@ def profile(request):
 
     return render(request, template, context)
 
+
 @login_required
 def order_history(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
@@ -88,7 +89,7 @@ def add_to_cart(request, auction_id):
         if expired_bag:
             for item in expired_bag:
                 item.delete()
-        
+
         bag = Bag(
             auction=auction,
             bid=current_highest_bid,

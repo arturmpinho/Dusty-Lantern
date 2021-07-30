@@ -110,7 +110,7 @@ class StripeWH_Handler:
             try:
                 order = Order.objects.create(
                     first_name=shipping_details.name.split(' ')[0],
-                    last_name=shipping_details.name.split(' ')[1],
+                    last_name=shipping_details.name.split(' ')[1:-1],
                     user_profile=user_profile,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
