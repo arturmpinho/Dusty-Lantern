@@ -41,7 +41,10 @@ To tackle this issue, I have set the time zone settings as such:
 
 
 ### Add to cart functionality
-1st approach: Add to cart via JS
+When bulding the "add to cart" functionality, the first approach was to do it with javascript, as per below shot:
+
+* Add to cart via JS
+
         // Add to cart functionality when auction closes
 
         function addToCart() {
@@ -57,19 +60,50 @@ To tackle this issue, I have set the time zone settings as such:
             .then(function(result) {
             });
         }).fail(function (e) {
-            // just reload the page, the error will be in django messages
             console.log(e)
         })
         };
 
-2nd approach: scheduler
-    1-django-compt
-    2-django-background-tasks
-    3-schedule
+Nontheless, after the functionality was up and running, only then I realized that this option would only be able to be triggered if the user is of course with its browser open. Of course thta is not realistic due to the type os auctions present.
 
-Nonetheless, before reaching this solution I tried, without success to implement, background tasks (like [Django Background Tasks](https://django-background-tasks.readthedocs.io/en/latest/ "Django Background Tasks") and  [Django Compat](https://github.com/arteria/django-compat "Django Compat")) to run synchronous/asynchronous with the database and close the auction in the background. Unfortunately, this was not possible with my current knowledge. 
+Therefore, my second approach was to implement a background task to run this function (based on [Django Background Tasks](https://django-background-tasks.readthedocs.io/en/latest/ "Django Background Tasks"), [Django Compat](https://github.com/arteria/django-compat "Django Compat") and/or [Django Scheduler](https://github.com/llazzaro/django-scheduler "Django Scheduler")) asynchronous with the database and triggered by the previous mentioned countdowntimer. Unfortunately, this was not possible with my current knowledge.
 
-3rd approach: Boolean field in auctions models (is_sold)
+In the end, I came to conclude that the easier approach was merely to start by adding a boolean fild in the auctions model, defining if the auction was sold or not.
+
+The second step was to create the following functionality in Python:
+
+
+    @login_required
+    def add_to_cart(request, auction_id):
+        """ Add auction to cart"""
+
+        auction = get_object_or_404(Auction, pk=auction_id)
+        bids = Bid.objects.filter(auction=auction.id)
+        if bids:
+            current_highest_bid = bids.order_by('-bidding_time')[0]
+            bidder = current_highest_bid.bidder
+
+            # Ensure there is no other bag for this user to ensure proceeding
+            # checkout with 1 auction only
+            expired_bag = Bag.objects.filter(bidder=current_highest_bid.bidder)
+            if expired_bag:
+                for item in expired_bag:
+                    item.delete()
+
+            bag = Bag(
+                auction=auction,
+                bid=current_highest_bid,
+                bidder=bidder
+            )
+            bag.save()
+
+            return redirect(reverse('checkout'))
+
+This function has the capability of, when the user navigates to the profile page, filtering the auctions where he/she was the highest bidder, checking if there is already an existing bag (and deleting it if necessary) and creating the bag.
+
+When this function is called the user will be displayed all the auctions for which he/she had the highest bid and due to the boolean field "is_sold" displaying only the auctions that are pending payment.
+
+Afterwards, this bag is converted into a session bag when the user proceeds with the checkout.
 
 
 ### Countdown timer is not being displayed properly in iphones
