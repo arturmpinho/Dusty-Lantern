@@ -5,7 +5,12 @@
 ### Footer is not fixed to the bottom
 TBF
 
+### Country field select-box arrows are not being displayed
 
+TBF
+
+### Increment and decrement input field arrows not being displayed in mobiles
+TBF
 
 
 ## Functionality
@@ -134,12 +139,18 @@ Therefore, after intense research and realizing that this bug was indeed a world
     
 
 
-### Duplicate order via webhook due to name split
+### Duplicate order via the webhookhandler
+During the payment I have realized that some orders were being duplicate: onw created via the DB and another via the webhookhandler.
 
-### Country field select-box arrows are not being displayed
+Therefore, after debugging the code, I conculded that the webhookhandler was creating a new order as it was not finding that exact same purchase in the DB, and the issue was the name split, meanign that if the user presented 2 first names or 2 last names, the webhook could never find the match as the names were different than the ones created in the DB.
 
-TBF
+Therefore, I removed the First and Last Names as a comparison between the 2.
+
+Being all the rest exactly the same, the order is not being created in a duplicate manner.
+
 
 ### Start/End date timesare and images are not being populated on editing the auctions and editing products respectively
+TBF
 
+### Unselect checkbox to save user's info during checkout is not preventing overwriting the user data in the DB.
 TBF
