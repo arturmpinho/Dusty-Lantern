@@ -106,9 +106,32 @@ When this function is called the user will be displayed all the auctions for whi
 Afterwards, this bag is converted into a session bag when the user proceeds with the checkout.
 
 
-### Countdown timer is not being displayed properly in iphones
+### Countdown timer is not being displayed properly
 
-NaNd NaNh NaNm NaNs
+One of the biggest challenges in a programming environment is without any doubt, working with datetime formats, and building an application where one of the core functionalities is based on this is no less that a great challenge.
+
+Unfortunately, I did not realized the true impact of this until the moment that I started the testing phase. It was then when I realized that the countdowntimer was displaying in Apple's devices the following string: NaNd NaNh NaNm NaNs.
+
+![Bug_NaN_iphone](README-images/bug_NaN_iphone.jpeg "iPhone")
+![Bug_NaN_pixel](README-images/bug_NaN_pixel.png "Google Pixel")
+
+
+While I thought it was mainly an issue of "devices/browsers", the true impact of this bug was extremely bigger than that.
+
+This was in fact originating that some auctions where being displayed as "Ongoing" whilst they were "Closed" across devices.
+
+Therefore, after intense research and realizing that this bug was indeed a worldwide issue, I have read very carefully the following documentation from [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse "Mozilla Developer Network") to fully understand how datetime formating is being comprehended by the browsers, leading me to reconvert the datetime variables type for the countdowntimer to be fully compatible in every device/browser, as per shot below: 
+
+
+    let start_date_time = new Date(document.getElementsByClassName('start_date_time').item(i).textContent);
+    let end_date_time = new Date(document.getElementsByClassName('end_date_time').item(i).textContent);
+    let now = Date.now()
+
+
+    let start_date_time = Date.parse(`${document.getElementsByClassName('start_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
+    let end_date_time = Date.parse(`${document.getElementsByClassName('end_date_time').item(i).textContent.trim().replace(/ /g,"T")}Z`);
+    let now = Date.now()
+    
 
 
 ### Duplicate order via webhook due to name split
