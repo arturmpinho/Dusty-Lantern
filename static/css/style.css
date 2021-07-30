@@ -166,8 +166,8 @@ color: #dc3545;
     color: #EEEEEE;
 }
 
-.mt-55 {
-    margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
+.mt-60 {
+    margin-top: calc(60px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
 }
 
 

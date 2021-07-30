@@ -77,7 +77,6 @@ As per explained above in the Home section of this testing, for each of the auct
 
 As well, on the "See details" button or the auction image, if the user is authenticated it will take him/her to the auction details page. If not authenticated, the user will be redirected to the Sign In page.
 
-
 * Place bid functionality
 When an user is definetly interested in an article, he is guided to the auction details page of that specific auction. Here, on top of the already mentioned information that is displayed to the user and of additional product info, he/she are now able place bids.
 
@@ -93,12 +92,10 @@ In order to meet this user story, I have decided to implement the filtering func
 
 Both functionalities are working porperly, which gives any user the ability of filtering and sorting between all the auctions according to their likes.
 
-
 * I want to place bids on auctions of my interest
 This user story is tackled on the auction detail page where the user has the ability of placing the bids on the auctions of interest.
 
 The bidding functionality is working smoothly and gives the user the feeling of being in control. Unfortunately, there is a minor unresolved bug, which you can read more about [here](https://github.com/arturmpinho/Dusty-Lantern/blob/master/bugs.md), that might not generate the best UX. Nonetheless, I consider that this user story is well attained.
-
 
 * I want to have a good overview of the ongoing auctions
 The main auction page tackles this user story fully by displaying all the ongoing auctions.
@@ -106,18 +103,40 @@ The main auction page tackles this user story fully by displaying all the ongoin
 
 ### Lighthouse report
 
-## User's Dashboard
+## Profile/User's Dashboard
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
 * Broweser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
-* 
+* Pending payments
+* Default Delivery Information
+* Orders
 
 #### Conclusion:
+Despite of this 3 sections being functionally independent, I have managed to integrate them quite nicely. These are separated in large screens between 2 rows (1st for the pending payments and the 2nd for the remaining sections), stacking the default delivery information and orders sections into a full width column in smaller devices.
+
+To display the pending payments and the orders history, I have used a responsive table in order to allow horizontal scroll. This allows the user to have available all the information necessary at this stage. 
+
+
 ### Functionality
+* Pending payments
+
+The user will has available a dedicated space to display all the won auctions. To attain this the best way possible, I first retreive the user's past orders, if any. At the same time, loop through all the bids placed by the user, taking the auction id as a parameter and appending the matches to a unique auctions list, if the bid is not there yet. Afterwards, from the unique auctions list, I retreive the highest bid restricting the search to the only auctions where the user was the highest bidder, and checking if the items has been sold already. 
+
+While testing this 
+
+
+
+* Default Delivery Information
+* Orders
+* Add to bag and proceed to checkout
+
 ### UX
+
+#### User Stories
+
 ### Lighthouse report
 
 ## Auctions Management (for store owners)
@@ -131,9 +150,21 @@ The main auction page tackles this user story fully by displaying all the ongoin
 
 #### Conclusion:
 
+
 ### Functionality
+
+
 ### UX
+#### User Stories
+* I want to add products to auctions
+* I want to delete/edit auctions created 
+* I want to follow my auctions bids live
+* I want to have an overview of the items sold
+
 ### Lighthouse report
+
+
+
 
 ## Checkout
 ### Responsiveness
@@ -150,6 +181,10 @@ The main auction page tackles this user story fully by displaying all the ongoin
 ### UX
 ### Lighthouse report
 
+
+
+
+
 ## Navigation
 ### Responsiveness
 #### Tested on:
@@ -164,6 +199,9 @@ The main auction page tackles this user story fully by displaying all the ongoin
 
 ### UX
 ### Lighthouse report
+
+
+
 
 ## Footer
 ### Responsiveness

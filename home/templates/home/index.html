@@ -7,11 +7,11 @@
     
     <!-- Jumbotron -->
     <div class="p-5 m-4 rounded-3">
-        <div class="container-fluid mt-55 py-5">
+        <div class="container-fluid mt-60 py-5">
             <div class="row align-items-md-stretch">
                 <div class="col-lg-4">
                     <div class="h-100 p-5 rounded-3 text-center">
-                        <img src="{{ MEDIA_URL}}dusty_lantern_logo.png" alt="" class="img-fluid">
+                        <img src="{{ MEDIA_URL}}dusty_lantern_logo.png" alt="logo" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-8 text-center">
@@ -33,18 +33,21 @@
             </div>
         </div>
     </div>
-    <div class="cont">
+
+    <!-- Display of maximum 4 ongoing auctions -->
+    <div class="container">
         <div class="row">
             <div class="col-12 text-center">
                 <a href="{% url 'auctions' %}" class="btn btn-outline-danger">See all auctions</a>
             </div>
             {% if auctions %}
             <div class="col-12 col-md-10 offset-md-1">
-                <h2 class="mt-3 pl-2">Check some of our ongoing auctions!</h2>
+                <h2 class="mt-3 ps-2">Check some of our ongoing auctions!</h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">  
                     {% for auction in auctions %}
                         <div class="card">
                             <div class="card-body">
+                            <!-- Display the image set where main_image is True -->
                             {% if auction.product.images.all %}
                                 {% for image in auction.product.images.all %}
                                     {% if image.main_image %}
@@ -69,6 +72,7 @@
                                 <p class="card-text">{{ auction.product.description}}</p>
                                 <p><i class="fas fa-money-bill-alt fa-2x"></i> Base amount: € {{ auction.base_amount }}</p>
                                 
+                                <!-- When auctions has no bids yet -->
                                 {% for bid in no_bids %}
                                     {% if bid == auction %}
                                         <p><i class="fas fa-gavel fa-2x"></i> There are no bids yet</p>
@@ -76,6 +80,7 @@
                                     {% endif %}
                                 {% endfor %}
 
+                                <!-- Display current highest bid in case there in -->
                                 {% for bid in highest_bids %}
                                     {% if bid.auction == auction %}
                                         <p><i class="fas fa-gavel fa-2x"></i> Highest bid: € {{ bid.bid }}</p>
@@ -87,7 +92,7 @@
 
                                 <p class="countdowntimer"></p>
                             </div>
-                        <!-- Card footer -->
+                            <!-- Card footer -->
                             <div class="card-footer text-center">
                                 <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
                             </div>
@@ -98,7 +103,7 @@
             </div>
             {% else %}
             <div class="col-12 col-md-10 offset-md-1">
-                <h2 class="mt-3 pl-2">There are no ongoing auctions. Come back later to check again!</h2>
+                <h2 class="mt-3 ps-2">There are no ongoing auctions. Come back later to check again!</h2>
             </div>  
             {% endif %}
         </div>

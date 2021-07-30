@@ -11,13 +11,16 @@
             <hr>
         </div>
     </div>
-
+    
+    <!-- Edit Auction Form -->
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <form action="{% url 'edit_auction' auction.id %}" method="POST">
                     {% csrf_token %}
                     {% for field in auction_form %}
+
+                        <!-- If the field is datetimefield, display reminder of required format -->
                         {% if field.name == "start_date_time" %}
                             {{ field | as_crispy_field }}
                             <p class="text-danger my-0">

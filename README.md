@@ -12,7 +12,7 @@ It intends to provide buyers and site owners with an intuitive and appealing pla
 
 With sustainability being the key-driver of innovation and the second-hand market increasing substantially during the past years, combining these contexts generates a great opportunity that must be addressed.
 
-With this in mind the ***Dusty Lantern*** will provide like-minded people the best platform so they can give second-hand articles a new life and start contributing to a more sustainable society, monetizing old and unused items.
+With this in mind, the ***Dusty Lantern*** will provide like-minded people the best platform, so they can give second-hand articles a new life and start contributing to a more sustainable society, monetizing old and unused items.
 
 ---
 <a></a>
@@ -83,11 +83,10 @@ As a user:
 
 1. I want to see second-hand articles of my interest
 1. I want to place bids on auctions of my interest
-1. I want to have a a good overview of the ongoing auctions
+1. I want to have a good overview of the ongoing auctions
 1. I want to have a full overview of how much I will pay for the won auction in the checkout
 1. I want to see my outstanding auctions
-1. I want to see when the auctions will start
-1. I want to see how long until the auction closes
+1. I want to see how long until the auctions start/finish
 1. I want to see my history of won auctions
 
 
@@ -116,9 +115,9 @@ As a site owner:
 * Strong connections with the platform with via a welcoming landing page
 * Links to external pages must open in a new browser tab
 * Navigation system must be working properly
-* When user places a bid and when auction is finished the user must receive a confirmation email if it won the auction
-* For the auctions won, I want to have the immeadiate option of proceeding with the payment of the item
-* As a buyer I want to have a clear overview of the total cost of the item to purchase, including any additional fees
+* When user places a bid and when auction is finished, the user must receive a confirmation email if it won the auction
+* For the auctions won, I want to have the immediate option of proceeding with the payment of the item
+* As a buyer, I want to have a clear overview of the total cost of the item to purchase, including any additional fees
 * A transparent transaction between the buyer and site owners with a payment platform as an intermediate for a safer transaction
 
 [[Back to top]](#table-of-contents)
@@ -169,13 +168,13 @@ The structure of the Dusty Lantern auction website will devided into 7 main sect
 
 ##### **Landing Page**
 
-Regardless of the user being authenticate or not, this page will display a small introduction of the ***Dusty Lantern***, with an appealing design to make the user feel confortable naviating throughout the platform. 
+Regardless of the user being authenticated or not, this page will display a small introduction of the ***Dusty Lantern***, with an appealing design to make the user feel comfortable navigating throughout the platform. 
 
-It will display the current most popular ongoing auctions in order to captivate and engage the user to register/sign in. It will be accompanied by a button for this purpose, if user is not logged in or a "See all auctions" if it is.
+It will display the current most popular ongoing auctions in order to captivate and engage the user to register/sign in. It will be accompanied by a button for this purpose, if the user is not logged in or a "See all auctions" if it is.
 
 #### **Auctions**
 
-The auctions page is intended to list all the ongoing/future auctions. It will only be availabe to the user if it is logged in as a buyer (logged in as seller will not display the page to the user).
+The auctions page is intended to list all the ongoing/future auctions. It will only be available to the user if it is logged in as a buyer (logged in as seller will not display the page to the user).
 
 This page will be powered by a search bar and filter system in order to aid the navigation of the user in finding the desired auction to participate in.
 
@@ -225,19 +224,19 @@ As a site owner, this page will display at first glance the auctions created, to
 
 The auctions will be displayed in a table giving the user a friendly way to display all the auction fields.
 
-The same goes for the products management page, that will be "embeeded" as part of the Auction Management page.
+The same goes for the products management page, that will be "embedded" as part of the Auction Management page.
 
-Depending on if the site owner is visualizing auctions or products, it will have the correspnding buttons/links to the add/edit/delete functionalities, allowing the site owner to manage the auctions products in a more appealing wauy rather than the Django Admin. 
+Depending on if the site owner is visualizing auctions or products, it will have the corresponding buttons/links to the add/edit/delete functionalities, allowing the site owner to manage the auctions products in a more appealing way rather than the Django Admin. 
 
 #### **Payment**
 
 The payment page will be powered by [Stripe](https://stripe.com/ "Stripe"): **Stripe Connect**.
 
-At this stage, the user will be displayed an short overview of the auction to be paid (Highest Bid + Auction Fee). The auction fee will be a variable percentage, depending on the base amount of the order total.
+At this stage, the user will be displayed a short overview of the auction to be paid (Highest Bid + Auction Fee). The auction fee will be a variable percentage, depending on the base amount of the order total.
 
-This systems will allow the auction payment directly from the buyer to the seller, discounting the acution fee, transfering it straight to the site owner's account.
+This system will allow the auction payment directly from the buyer to the seller, discounting the auction fee, transferring it straight to the site owner's account.
 
-Nontheless, if you interact with the platform as a seller, you will have to proceed with the verification of your [Stripe](https://stripe.com/ "Stripe") Connect Account in order to comply with [Stripe](https://stripe.com/ "Stripe") safety procedures. This step can be seen as tedious, especially if your intention is to list an auction of a small amount.
+Nonetheless, if you interact with the platform as a seller, you will have to proceed with the verification of your [Stripe](https://stripe.com/ "Stripe") Connect Account in order to comply with [Stripe](https://stripe.com/ "Stripe") safety procedures. This step can be seen as tedious, especially if your intention is to list an auction of a small amount.
 
 On the other hand, it provides the buyer and the site owner with an extra security feature, generating extra confidence in the auction platform usage.
 
@@ -292,9 +291,10 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 * Auction watchlist so user can follow-up closely auctions of interest
 * Share a specific auction on social networks
 * Auction suggestion based on previous search results / watchlist
-* When auction is about to close (< 1 min) and an user places a bid, the counter shall reset the countdown to 1 min again, in order to motivate last minute bids.
+* When an auction is about to close (< 1 min) and a user places a bid, the counter shall reset the countdown to 1 min again, in order to motivate last minute bids.
 * In case the ongoing auctions list becomes to big, I will include a pagination system ordered by end date time first, in order to improve the UX.
-* Error handling 
+* Customized Error handling 
+* Send email to user when auction closes informing if he/she won the auction or if he/she was overbid 
 
 
 [[Back to top]](#table-of-contents)
@@ -319,19 +319,19 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 
 <a></a>
 
-### **Libraries**
+### **Libraries and payment system**
 * [jQuery](https://jquery.com/ "jQuery")
 * [FontAwesome](https://fontawesome.com/ "FontAwesome")
 * [Google Fonts](https://fonts.google.com/ "Google Fonts")
 * [Unsplash](https://unsplash.com/ "Unsplash")
-* [Stripe](https://stripe.com/ "Stripe")
+* [Bootstrap](https://getbootstrap.com/ "Bootstrap")
+* [Stripe](https://stripe.com/ "Stripe - Payment system")
 
 [[Back to top]](#table-of-contents)
 
 <a></a>
 
 ### **Frameworks and Databases**
-* [Bootstrap](https://getbootstrap.com/ "Bootstrap")
 * [DJango](https://www.djangoproject.com/ "Django")
 
 

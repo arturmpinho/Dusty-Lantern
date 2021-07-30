@@ -12,6 +12,7 @@
         </div>
     </div>
 
+    <!-- Edit Product Form -->
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -22,12 +23,15 @@
                             {{ field | as_crispy_field }}
                         {% else %}
                             
+                            <!-- Display small preview of product images if there are -->
                             {% if images %}
                                 <p class="mt-4">Current Images:</p> 
                                 <div class="col-12">
                                     {% for image in images %}
-                                        <img width="150" height="150" src="{{ image.image.url }}" alt="image">
+                                        <img width="150" height="150" src="{{ image.image.url }}" alt="product-image">
                                     {% endfor %}
+
+                                    <!-- Display reminder to proceed to admin to add / edit / delete images -->
                                     <p class="text-danger my-0">
                                         <span class="icon">
                                             <i class="fas fa-exclamation-circle"></i>
@@ -36,6 +40,8 @@
                                     </p> 
                                 </div>
                                 {% else %}
+                                
+                                <!-- If there aren't any images, display reminder to go to the admin page to add images -->
                                 <div class="col-12">
                                     <p class="text-danger my-0">
                                         <span class="icon">

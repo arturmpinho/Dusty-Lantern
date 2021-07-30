@@ -60,9 +60,12 @@ def add_product(request):
 
         if product_form.is_valid():
             product = product_form.save()
+            # For each image that was uploaded, create a an Image object
             for image in images:
                 Image.objects.create(product=product, image=image)
             images = Image.objects.filter(product=product)
+
+            # Set the first image to the main_image
             first_product_image = images[0]
             first_product_image.main_image = True
             first_product_image.save()
@@ -123,6 +126,8 @@ def edit_product(request, product_id):
             Please ensure the form is valid.')
 
     product_form = EditProductForm(instance=product)
+
+    # Get all the product images to display on the edit form
     product_images = product.images.all()
 
     messages.info(request, f'You are editing product: \
@@ -151,7 +156,9 @@ def add_auction(request):
     if request.method == 'POST':
         auction_form = AddAuctionForm(request.POST)
 
+        # Check if the auction start date time is later than 'now'
         if auction_form["start_date_time"].value() > now.strftime('%Y-%m-%dT%H:%M'):
+            # Check if the end date time is later than the start date time
             if auction_form["end_date_time"].value() > auction_form["start_date_time"].value():
                 if auction_form.is_valid():
                     auction = auction_form.save()

@@ -28,6 +28,8 @@ def auctions(request):
     highest_bids = []
     no_bids = []
 
+    # Retrieve the highest bids for each auction
+    # In case of no bids, add auctions to no_bids list
     for auction in auctions:
         filtered_bids = Bid.objects.filter(auction=auction.id)
         if filtered_bids:
@@ -36,14 +38,14 @@ def auctions(request):
         else:
             no_bids.append(auction)
 
+    # Sorting functionality
     if request.GET:
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
-            if sortkey == 'name':
-                sortkey = 'lower_name'
-                auctions = auctions.annotate(lower_name=Lower('name'))
-
+            if sortkey == 'category':
+                sortkey = 'category__name'
+                
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
@@ -56,6 +58,7 @@ def auctions(request):
             auctions = auctions.filter(product__category__name=category)
             category = Category.objects.filter(name__in=category)
 
+        # Search functionality
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -90,13 +93,18 @@ def auction_detail(request, auction_id):
     View to return the specific details of an auction
     """
 
+    # Get auction and its bids
     auction = get_object_or_404(Auction, pk=auction_id)
     bids = Bid.objects.filter(auction=auction.id)
+
+    # Get the highest bid for the auction
+    # Set current value to the highest bid + bidding increment
     if bids:
         current_highest_bid = bids.order_by('-bidding_time')[0]
         current_value = current_highest_bid.bid + auction.bidding_increment
     else:
-        current_value = auction.base_amount
+        # if no bids, current value is set to the base amount + bidding increment
+        current_value = auction.base_amount + auction.bidding_increment
         current_highest_bid = None
 
     context = {
@@ -120,8 +128,12 @@ def place_bid(request, auction_id):
 
         bids = Bid.objects.filter(auction=auction.id)
         if bids:
+            # Get the current highest bid
             current_highest_bid = bids.order_by('-bidding_time')[0]
 
+            # Confirm that the value of the bid is higher than
+            # the previous highest bid
+            # If good, save the bid and send confirmation email
             if float(bidding_value) > current_highest_bid.bid:
                 bid = Bid()
                 bid.bidder = request.user
@@ -138,6 +150,8 @@ def place_bid(request, auction_id):
                                     your bid and try again!")
                 return redirect(reverse('auction_detail', args=[auction.id]))
         else:
+            # if there were no bids yet, just save the bid 
+            # and send confirmation email
             bid = Bid()
             bid.bidder = request.user
             bid.auction = auction

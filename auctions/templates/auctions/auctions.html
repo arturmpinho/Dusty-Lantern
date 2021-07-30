@@ -15,10 +15,11 @@
     {% now "Y-m-d H:i:s" as current_date_time %}
     <div class="current_date_time" hidden>{{ current_date_time }}</div>
 
-    <!-- Category filter nav -->
+    <!-- Category filter navigation -->
     <div class="container text-center mb-5">
       <ul class="nav justify-content-center">
 
+        <!-- Display of the various categories available -->
         {% for category in categories %}
           <li class="nav-item">
             <a class="category-filter" href="{% url 'auctions' %}?category={{category}}"><i class="{{ category.fa_icon_class}}"></i> {{category.friendly_name}}</a>
@@ -26,10 +27,12 @@
         {% endfor %}
 
       </ul>
+
+      <!-- Display of the available sorting filter in select box -->
       <select id="sort-selector">
         <option value="reset" {% if sorting == 'None_None' %}selected{% endif %}>Sorty by...</option>
-        <option value="product__category,desc" {% if sorting == 'product__category_desc' %}selected{% endif %}>Category (A-Z)</option>
-        <option value="product__category,asc" {% if sorting == 'product__category_asc' %}selected{% endif %}>Category (Z-A)</option>
+        <option value="product__category,asc" {% if sorting == 'product__category_asc' %}selected{% endif %}>Category (A-Z)</option>
+        <option value="product__category,desc" {% if sorting == 'product__category_desc' %}selected{% endif %}>Category (Z-A)</option>
         <option value="product__condition,asc" {% if sorting == 'product__condition_asc' %}selected{% endif %}>Condition (New-To Be Fixed)</option>
         <option value="product__condition,desc" {% if sorting == 'product__condition_desc' %}selected{% endif %}>Condition (To Be Fixed-New) </option>
         <option value="end_date_time,asc" {% if sorting == 'end_date_time_asc' %}selected{% endif %}>First closing</option>
@@ -51,20 +54,24 @@
     <div class="col-12 col-md-10 offset-md-1">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-1">
         {% for auction in auctions %}
+
+          <!-- If the user is the superuser, display all the auctions -->
           {% if request.user.is_superuser %}
-
-            <!-- Ongoing Auctions (decide to leave or not auctions closed to superuser) -->
-
               <div class="card">
                 <div class="card-body">
 
-                {% for image in auction.product.images.all %}
-                  {% if image.main_image %}
-                  <a href="{% url 'auction_detail' auction.id %}">
-                    <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
-                  </a>
-                  {% endif %}
-                {% endfor %}
+                <!-- Display of the main image of the product -->
+                {% if auction.product.images.all %}
+                  {% for image in auction.product.images.all %}
+                    {% if image.main_image %}
+                    <a href="{% url 'auction_detail' auction.id %}">
+                      <img class = "card-img-top card-img-preview" src="{{image.image.url}}" alt="{{ product.title }}">
+                    </a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <img class = "card-img-top card-img-preview" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo">
+                {% endif %}
 
                 <hr>
                 <p class="text-end">
@@ -79,7 +86,7 @@
                 {% endif %}
                 <p class="card-text">{{ auction.product.description}}</p>
                 <p><i class="fas fa-money-bill-alt fa-2x"></i> € {{ auction.base_amount }}</p>
-                      
+                
                 {% for bid in no_bids %}
                   {% if bid == auction %}
                   <p><i class="fas fa-gavel fa-2x"></i> There are no bids yet</p>
@@ -97,11 +104,10 @@
                 <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
                 <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
 
-                <p>
-                  <i class="fas fa-clock fa-2x"></i> 
-                  <span class="countdowntimer"></span>
-                </p>
+                <p class="countdowntimer"></p>
+
                 </div>
+
               <!-- Card footer -->
                 <div class="card-footer text-center">
                     <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
@@ -110,10 +116,10 @@
  
           <!-- Ongoing Auctions if not superuser   -->
           {% else %}
-            
             {% if current_date_time < auction.end_date_time|date:"Y-m-d H:i:s" %}
               <div class="card">
                 <div class="card-body">
+                  <!-- Display of the main image of the product -->
                   {% if auction.product.images.all %}
                     {% for image in auction.product.images.all %}
                       {% if image.main_image %}
@@ -127,11 +133,9 @@
                   {% endif %}
                   <hr>
                   <p class="text-end">
-                    <span class="badge bg-secondary">{{ auction.product.category }}</span>
+                    <span class="badge bg-secondary">{{ auction.product.category.friendly_name }}</span>
                     <span class="badge bg-secondary">{{ auction.product.condition.friendly_description}}</span>
-                  </p>
-
-                  
+                  </p>  
                   {% if auction.product.brand %}
                     <h2 class="card-title">{{ auction.product.title }} | {{ auction.product.brand }}</h2>
                   {% else %}
@@ -166,11 +170,11 @@
                   {% endif %}
 
                   <!-- Card footer -->
-                  </div>
-                  <div class="card-footer text-center">
-                      <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
-                  </div>
                 </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-danger">See details</a>
+                </div>
+              </div>
             {% endif %}
           {% endif %}
         {% endfor %}
