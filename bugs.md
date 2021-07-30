@@ -145,7 +145,6 @@ Therefore, after intense research and realizing that this bug was indeed a world
     let now = Date.now()
     
 
-
 ### Duplicate order via the webhookhandler
 During the payment I have realized that some orders were being duplicate: onw created via the DB and another via the webhookhandler.
 
@@ -157,7 +156,14 @@ Being all the rest exactly the same, the order is not being created in a duplica
 
 
 ### Start/End date times are not being populated on editing the auctions
-TBF
+In order to give the user a friendly experience interacting with the add form, I have created a custom datetime input widget. This, to display the datetime picker for the start and end datetime instead of an empty input field.
+On the other hand, on the edit auction form these fields were not being prepopulated. I have done various researches to tackle this issue when I came across the datetime widget from django, which I have decided to use on the form.
+
+This brought up an known issue with Django, which is that the datetime local input time is not supported, as can be seen [here](https://github.com/jazzband/django-floppyforms/issues/125 "DateTimeInput widget format #125").
+
+Datetime is being supported by the widget but not anymore by the browsers. Therefore, I have decided to implement 2 seperate forms (add & edit auction) using the custom widget for a better UX when creating the auction and the edit auction form with the Django widget in order to prepopulate those fields. 
+
+The main issue with this approach is that on the edit auction form the datetime picker is not being displayed, but a string of datetime instead. The superuser can update the datetime by manually updating the text. Important note here is that the exact same format has to be kept. 
 
 ### Uploaded Images are not being recognized by the editing product form 
 TBF
