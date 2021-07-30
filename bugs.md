@@ -1,13 +1,6 @@
 # Bugs
 
-## Responsiveness
-
-### Footer is not fixed to the bottom
-TBF
-
-### Country field select-box arrows are not being displayed
-
-TBF
+## Responsiveness/Design
 
 ### Increment and decrement input field arrows not being displayed in mobiles
 During the testing phase, I have been alerted to the fact that the input field where you define the bid amount that you want to place was not displaying the increment/decrement arrows.
@@ -19,6 +12,7 @@ This bug is caused due to browser compatibility, which differ widely in between 
 Nonetheless, in the future, I want to tackle this form of form validation as per warning of the [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number "Mozilla Developer Network"), doing it so on the server-side due to security reasons.
 
 ![Bug_Input_Field](README-images/bug_input_field_warning.png "Input Field Warning")
+
 
 ## Functionality
 
@@ -132,7 +126,7 @@ While I thought it was mainly an issue of "devices/browsers", the true impact of
 
 This was in fact originating that some auctions where being displayed as "Ongoing" whilst they were "Closed" across devices.
 
-Therefore, after intense research and realizing that this bug was indeed a worldwide issue, I have read very carefully the following documentation from [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse "Mozilla Developer Network") to fully understand how datetime formating is being comprehended by the browsers, leading me to reconvert the datetime variables type for the countdowntimer to be fully compatible in every device/browser, as per shot below: 
+Therefore, after intense research and realizing that this bug was indeed a worldwide issue, I have read very carefully the following documentation from [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse "Mozilla Developer Network") to fully understand how datetime formating is being comprehended by the browsers, leading me to reconvert the datetime variables type for the countdowntimer in order to make them fully compatible in every device/browser, as per shot below: 
 
 
     let start_date_time = new Date(document.getElementsByClassName('start_date_time').item(i).textContent);
@@ -155,7 +149,7 @@ Therefore, I removed the First and Last Names as a comparison between the 2.
 Being all the rest exactly the same, the order is not being created in a duplicate manner.
 
 
-### Start/End date times are not being populated on editing the auctions
+### Start/End date times are not being populated on editing the auctions (admin)
 In order to give the user a friendly experience interacting with the add form, I have created a custom datetime input widget. This, to display the datetime picker for the start and end datetime instead of an empty input field.
 On the other hand, on the edit auction form these fields were not being prepopulated. I have done various researches to tackle this issue when I came across the datetime widget from django, which I have decided to use on the form.
 
@@ -165,8 +159,20 @@ Datetime is being supported by the widget but not anymore by the browsers. There
 
 The main issue with this approach is that on the edit auction form the datetime picker is not being displayed, but a string of datetime instead. The superuser can update the datetime by manually updating the text. Important note here is that the exact same format has to be kept. 
 
-### Uploaded Images are not being recognized by the editing product form 
-TBF
+### Superuser is not able to add/edit/delete images via the product edit form
+
+When the superuser is editing a prodcut, out of the many fields available, he/she cannot add/edit/delete the products images. This bug is caused by the multiple attribute set to true on the clearable file input widget.
+
+I was able to implement this functionality in case the multiple attribute was not set, but I did not manage to include it in case multiple images were allowed. 
+
+Therefore, I have decided to allow the superuser to upload multiple images, giving the end user the best UX possible, instead of the superuser experience. The disadvantage of this option is that the superuser is not able to upload/edit new images in the edit product form.
+
+In order to still give the superuser a good UX, I have was able to implement the pictures preview where the superuser can find a small warning, in case he needs to upload new pictures/delete current ones, to proceed with this task via the Django Admin.
+
+For this solution to work, I had to split the product form into an add product form and an edit product form as on the add product form the image is a required field while on the edit product form it cannot be required as the user cannot manipulate the images.
+
+If I wouldn't have split the form and display the custom clearable file input field, it would caused the superuser to loose the previous uploaded images and not being able to proceed with the form submission without uploading those images again.
+
 
 ### Unselect checkbox to save user's info during checkout is not preventing overwriting the user data in the DB.
 
@@ -196,3 +202,11 @@ This bug was a typical case of languages differences.
 During the checkout process, the save info checkbox is being automatically "checked" via a Boolean field in JS. This means that when you need to retreive that value (true/false) in python, it won't retreive it capitalized (True/False), leading the function in the webhookhandler not recognizing the JS value. Therefore, the bug fix was to make the following if statement in order to make the user info to update in the DB: 
 
     if save_info != "false":
+
+
+## Unresolved bugs
+
+### Information is not automatically refreshed when a new bid comes in
+When a user is biding on a product, he/she can see who which user has the highest bid. Nonethless, if the user is the current highest bidder and someone else bids on the auction that he/she has open, the highest bidder field will not update automatically, neither the highest bidder amount. This may induce the user in thinking that he/she still is the highest bidder when actually he/she has been outbidded.
+
+I still have to think in a better approach to solve this bug, but on the same line as my secondt attempt of solving the add to cart functionality, opting for a background task seems, at the moment, the way to go.
