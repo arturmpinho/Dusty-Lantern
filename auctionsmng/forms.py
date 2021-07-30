@@ -26,14 +26,11 @@ class AddProductForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             if field_name == "category":
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
             elif field_name == "condition":
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
             else:
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
 
 
 class EditProductForm(forms.ModelForm):
@@ -51,14 +48,11 @@ class EditProductForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             if field_name == "category":
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
             elif field_name == "condition":
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4 form-select'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4 form-select'
             else:
-                field.widget.attrs['class'] = 'border-black rounded-0 \
-                    mt-2 fs-4'
+                field.widget.attrs['class'] = 'border-black rounded-0 mt-2 fs-4'
 
 
 class AddAuctionForm(forms.ModelForm):
