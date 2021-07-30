@@ -21,17 +21,37 @@
                         {% if field.name != 'images' %}
                             {{ field | as_crispy_field }}
                         {% else %}
-                            <p class="mt-4">Current Images:</p> 
-                            <div class="col-12">
-                                {% for image in images %}
-                                    <img height="auto" width="150" height="150" src="{{ image.image.url }}" alt="image" class="mb-5">
-                                {% endfor %}
-                                <p>* In order to update your images, please proceed to the Django admin page </p>
+                            
+                            {% if images %}
+                                <p class="mt-4">Current Images:</p> 
+                                <div class="col-12">
+                                    {% for image in images %}
+                                        <img height="auto" width="150" height="150" src="{{ image.image.url }}" alt="image">
+                                    {% endfor %}
+                                    <p class="text-danger my-0">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </span>
+                                        <small>In order to update your images, please proceed to the Django admin page</small>
+                                    </p> 
+                                </div>
+                                {% else %}
+                                <div class="col-12">
+                                    <p class="text-danger my-0">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </span>
+                                        <small>This products has no images yet. Please proceed to the Django admin page to add images.</small>
+                                    </p> 
+                                </div>
+                                {% endif %}
                             </div>
                         {% endif %}
                     {% endfor %}
-                    <button type="submit" class="btn btn-danger">Update product</button>
-                    <a href="{% url 'products' %}" class="btn btn-outline-danger">Go Back</a>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-danger">Update product</button>
+                        <a href="{% url 'products' %}" class="btn btn-outline-danger">Go Back</a>
+                    </div>
                 </form>
             </div>
         </div>

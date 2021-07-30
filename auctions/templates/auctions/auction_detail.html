@@ -23,8 +23,9 @@
                 <div class="row g-0">
                     <div class="col-md-4">
                         <div class="p-5 rounded-3">
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
+                            {% if auction.product.images.all %}
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
                                   {% for image in auction.product.images.all %}
                                     {% if image.main_image %}
                                         <div class="carousel-item active">
@@ -36,6 +37,7 @@
                                         </div>
                                       {% endif %}
                                     {% endfor %}
+                                
                                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                       <span class="visually-hidden">Previous</span>
@@ -46,6 +48,15 @@
                                 </button>
                                 </div>
                             </div>
+                            {% else %}
+                                <img class = "card-img-top card-img-preview" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo">
+                                <p class="text-danger my-0 mt-3">
+                                    <span class="icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </span>
+                                    <small>The store owner will add images soon! Come back later.</small>
+                                </p> 
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-8 align-self-center">
@@ -79,10 +90,7 @@
                         <div class="current_date_time" hidden>{{ current_date_time }} </div>
                         <div class="start_date_time" hidden>{{ auction.start_date_time|date:"Y-m-d H:i:s" }} </div>
                         <div class="end_date_time" hidden>{{ auction.end_date_time|date:"Y-m-d H:i:s" }} </div>
-                            <p>
-                                <i class="fas fa-clock fa-2x"></i>
-                                <span class="countdowntimer"></span>
-                            </p>
+                        <p class="countdowntimer"></p>
 
                         {% if request.user.is_superuser %}
 
@@ -91,10 +99,17 @@
                             {% if current_date_time >= auction.start_date_time|date:"Y-m-d H:i:s" %}
                                 <div class="col-12 mb-5" id="place-bid">
                                     <p class="mt-3"><strong>Next bid (€):</strong></p>
+                                    <p class="text-danger my-0">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </span>
+                                        <small>Please ensure you include decimals in you bid (e.g 20<strong>.00</strong>)!
+                                        </small>
+                                    </p>            
                                     <form method="POST" action="{% url 'place_bid' auction.id  %}">
                                         {% csrf_token %}
                                         <input type="text" name="auction_id" id="auction_id" hidden value="{{auction.id}}">
-                                        <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}">
+                                        <input type="number" name="bidding_amount" id="{{auction.id}}" min="{{ current_value }}" value="{{ current_value }}" step="{{ auction.bidding_increment }}" required>
                                         <button type="submit" class="btn btn-outline-danger">Place your bid</button>
                                     </form>
                                 </div>                            

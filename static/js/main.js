@@ -46,7 +46,7 @@ for (let i = 0; i < cards.length; i++) {
     } 
 
     if (start_date_time > now) {
-      document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Starting in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s "; 
+      document.getElementsByClassName("countdowntimer").item(i).innerHTML = "<i class='fas fa-clock fa-2x'></i><span> Starting in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s </span>" + "<p class='mt-4'>This auction will close on " + document.getElementsByClassName('end_date_time').item(i).textContent + ". </p>"; 
 
     } else if (end_date_time < now) {
       document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Auction Closed";
@@ -58,7 +58,7 @@ for (let i = 0; i < cards.length; i++) {
     } 
      
       else {
-        document.getElementsByClassName("countdowntimer").item(i).innerHTML = "Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        document.getElementsByClassName("countdowntimer").item(i).innerHTML = "<i class='fas fa-clock fa-2x'></i> Closing in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       }
   }, 1000);
 }

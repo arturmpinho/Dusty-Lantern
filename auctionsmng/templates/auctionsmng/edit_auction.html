@@ -17,9 +17,31 @@
             <div class="col-12">
                 <form action="{% url 'edit_auction' auction.id %}" method="POST">
                     {% csrf_token %}
-                    {{ auction_form | crispy }}
-                    <button type="submit" class="btn btn-danger">Update auction</button>
-                    <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Go Back</a>
+                    {% for field in auction_form %}
+                        {% if field.name == "start_date_time" %}
+                            {{ field | as_crispy_field }}
+                            <p class="text-danger my-0">
+                                <span class="icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                                <small>Please ensure you keep the following format: yyyy-mm-dd hh:mm:ss</small>
+                            </p> 
+                        {% elif field.name == "end_date_time" %}
+                            {{ field | as_crispy_field }}
+                            <p class="text-danger my-0">
+                                <span class="icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                                <small>Please ensure you keep the following format: yyyy-mm-dd hh:mm:ss</small>
+                            </p> 
+                        {% else %}
+                            {{ field | as_crispy_field }}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-danger">Update auction</button>
+                        <a href="{% url 'auctionsmng' %}" class="btn btn-outline-danger">Go Back</a>
+                    </div>
                 </form>
             </div>
         </div>
