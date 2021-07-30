@@ -54,15 +54,25 @@
                         <p class="card-text">{{ auction.product.measurements}}</p>
                         <p class="card-text">
                             <i class="fas fa-money-bill-alt fa-2x"></i> 
-                            € {{ auction.base_amount }}
-                        </p>            
+                            Bidding starts from: € {{ auction.base_amount }}
+                        </p>        
+                        {% if current_highest_bid %}    
                         <p class="card-text">
                             <i class="fas fa-gavel fa-2x"></i>
-                            € {{ current_highest_bid.bid }}
+                            Current highest bid: € {{ current_highest_bid.bid }}
                         </p>
+                        {% endif %}
                         <p class="card-text">
                             <i class="fas fa-user fa-2x"></i> 
-                            Last bid from: {{ current_highest_bid.bidder }}
+                            {% if current_highest_bid %}
+                                Last bid from: {{ current_highest_bid.bidder }}
+                            {% else %}
+                                There are no bids yet!
+                            {% endif %}
+                        </p>
+                        <p class="card-text">
+                            <i class="fas fa-plus-circle fa-2x"></i>
+                            Minimum increment: € {{ auction.bidding_increment }}
                         </p>
 
                         {% now "Y-m-d H:i:s" as current_date_time %}
