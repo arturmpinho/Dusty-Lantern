@@ -45,7 +45,7 @@ def auctions(request):
             sort = sortkey
             if sortkey == 'category':
                 sortkey = 'category__name'
-                
+
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':

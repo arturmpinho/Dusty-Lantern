@@ -32,11 +32,15 @@
                                 <tr>
                                     <td scope="row">        
                                         <!-- Display main image of the product -->
-                                        {% for image in bid.auction.product.images.all %}
-                                            {% if image.main_image %}
-                                                <img class = "card-img-top auction_main_image" src="{{image.image.url}}" alt="{{ product.title }}">
-                                            {% endif %}
-                                        {% endfor %}
+                                        {% if bid.auction.product.images.all %}
+                                            {% for image in bid.auction.product.images.all %}
+                                                {% if image.main_image %}
+                                                    <img class = "card-img-top auction_main_image" src="{{image.image.url}}" alt="{{ product.title }}">
+                                                {% endif %}
+                                            {% endfor %}    
+                                        {% else %}
+                                            <img class = "card-img-top auction_main_image" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo">
+                                        {% endif %}
                                     </td>
                                     <td scope="row">{{ bid.auction }}</td>
                                     <td scope="row">
@@ -100,11 +104,15 @@
                                     {% for order in orders %}
                                         <tr>
                                             {% for item in order.lineitems.all %}
-                                                {% for image in item.auction.product.images.all %}
-                                                    {% if image.main_image %}
-                                                        <td><img src="{{ image.image.url }}" class="auction_main_image" alt="auction-main-image"></td>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if item.auction.product.images.all %}
+                                                    {% for image in item.auction.product.images.all %}
+                                                        {% if image.main_image %}
+                                                            <td><img src="{{ image.image.url }}" class="auction_main_image" alt="auction-main-image"></td>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            {% else %}
+                                                <td><img class = "auction_main_image" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo"></td>
+                                            {% endif %}
                                             <td scope="row">
                                                 <a href="{% url 'order_history' order %}" id="order_num" title="{{order }}">{{ order | truncatechars:10 }}</a>
                                             </td>

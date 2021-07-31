@@ -1,7 +1,7 @@
 ![Logo](media/images/dusty_lantern_logo.png)
 # **DUSTY LANTERN**
 
-![Mockup Image](wireframes/mockup.png)
+![Mockup Image](README-images/mock-up.jpg)
 
 ---
 
@@ -25,11 +25,11 @@ With this in mind, the ***Dusty Lantern*** will provide like-minded people the b
 
     1.2 [User Requirements and Expectations](#user-requirements-and-expectations)
     
-    1.3 [Site Owners Goals](#company-goals)
+    1.3 [Site Owners Goals](#site-owners-goals)
     
     1.4 [Design Choices](#design-choices)
 
-2. [Wireframes and DB structure](#wireframes-and-DB-structure)
+2. [Wireframes and DB structure](#wireframes-and-db-structure)
 3. [Features](#features)
  
     3.1 [Existing Features](#existing-features)
@@ -40,7 +40,7 @@ With this in mind, the ***Dusty Lantern*** will provide like-minded people the b
  
     4.1 [Languages](#languages)
  
-    4.2 [Libraries](#libraries)
+    4.2 [Libraries and payment system](#libraries-and-payment-system)
  
     4.3 [Frameworks and Databases](#frameworks-and-databases)
  
@@ -249,6 +249,7 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 ## **Wireframes and DB Structure**
 [[Back to top]](#table-of-contents)
 
+
 ### **Wireframes**
 
 [Small devices](wireframes/small-devices.png)
@@ -258,7 +259,7 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 [Large devices](wireframes/large-devices.png)
 
 ### **DB Structure**
-![DB Structure](static/images/dusty_lantern_dbstructure.png) 
+![DB Structure](README-images/database-setup.png) 
 
 [[Back to top]](#table-of-contents)
 <a></a>
@@ -353,7 +354,7 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 * [TinyPNG](https://tinypng.com/ "Tiny PNG")
 * [Favicon](https://favicon.io/favicon-converter/ "Favcicon")
 * [RandomKeygen](https://randomkeygen.com/ "RandomKeygen")
-* [Techsini](http://techsini.com/multi-mockup/ "Techsini")
+* [Smartmockups](https://smartmockups.com/ "Smartmockup")
 * [W3C-Markup-validation](https://validator.w3.org/ "Markup Validator")
 * [W3C-Jigsaw](https://jigsaw.w3.org/css-validator/ "Jigsaw Validator")
 * [W3C-Spell Checker](https://www.w3.org/2002/01/spellchecker "Spell Checker")
@@ -368,20 +369,9 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 
 ## **Testing and Debugging**
 
-[[Back to top]](#table-of-contents)
+Testing of this site can be found [here](https://github.com/arturmpinho/Dusty-Lantern/blob/master/testing.md).
 
-<a></a>
-
-
----
-
-[[Back to top]](#table-of-contents)
-
-<a></a>
-
-### **Debugging**
-
-
+Bugs encountered while testing can be found [here](https://github.com/arturmpinho/Dusty-Lantern/blob/master/bugs.md).
 
 [[Back to top]](#table-of-contents)
 
@@ -391,10 +381,7 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 
 ## **Deployment**
 
-### Local Deployment
-
-    
-### To deploy your project on Heroku, use the following steps: 
+More information about the local deployment as well as deployment on Heroku can be found [here](https://github.com/arturmpinho/Dusty-Lantern/blob/master/deployment.md).
 
 
 [[Back to top]](#table-of-contents)
@@ -414,16 +401,22 @@ On the other hand, it provides the buyer and the site owner with an extra securi
 * [MDN WebDocs](https://developer.mozilla.org/ "MDN WebDocs")
 
 #### **Media**
-* 
-
-#### **Content**
-* 
-
-[[Back to top]](#table-of-contents)
+* You can find all the images sources through the Unslplash collection prepared here.
 
 <a></a>
 
 ### **Acknowledgments**
 
+To [Stackoverflow](https://stackoverflow.com/) community and to [W3Schools](https://www.w3schools.com/) for all the content made publicly available.
+
+To [David Walsh](https://davidwalsh.name/always-show-arrows-for-number-input) for your sharing your knowledge.
+
+Thank you as well to the creator(s) of the [Datatables CDN](https://cdn.datatables.net/). This cdn has been a big help for the auctions management section.
+
+To my mentor, Anna_Villanueva, for all the inputs and guidance throughout this project.
+
+To my friends and family that took time to test the website and for their valuable recommendations and insights.
+
+A special thanks to Anouk, for all the support and additional guidance during the development of this project.
 
 [[Back to top]](#table-of-contents)

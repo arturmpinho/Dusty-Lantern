@@ -17,6 +17,9 @@ from profiles.forms import UserProfileForm
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache checkout data
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -34,10 +37,15 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
+        """
+            Creates order and orderlineitems when
+            the order form has been submitted
+        """
         bag = Bag.objects.filter(bidder=request.user)
         checkout_bag = request.session.get('bag', {})
 
@@ -79,7 +87,7 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_profile'))
 
-            # Save the info to the user's profile if all is well
+            # Save the info to the user's profile if set to true
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
                 'checkout_success', args=[order.order_number]))
@@ -91,6 +99,7 @@ def checkout(request):
     if 'bag' in request.session:
         del request.session['bag']
 
+
     bag = Bag.objects.filter(bidder=request.user)
     checkout_bag = request.session.get('bag', {})
     auctions = []
@@ -100,12 +109,18 @@ def checkout(request):
     for item in bag:
         auction = get_object_or_404(Auction, pk=item.auction.id)
         bid = get_object_or_404(Bid, pk=item.bid.id)
+
+        # Add the auction and bid to the session
         checkout_bag[item.auction.id] = item.bid.id
+
+        # Add bidding amount to the order_total
         order_total += bid.bid
         auctions.append(auction)
         bids.append(bid)
+
     request.session['bag'] = checkout_bag
 
+    # Calculate the auction fee depending on order_total
     if order_total < 500:
         auction_fee = float(order_total) * 0.05
     elif order_total < 1000:
@@ -122,7 +137,7 @@ def checkout(request):
         currency=settings.STRIPE_CURRENCY,
     )
 
-    # Attempt to prefill the form with any info
+    # Prefill the form with any info
     # that the user maintains in their profile
     if request.user.is_authenticated:
         try:
@@ -192,17 +207,21 @@ def checkout_success(request, order_number):
             if user_profile_form.is_valid():
                 user_profile_form.save()
 
+
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
 
+    # Remove all Bag items for request.user
     bag = Bag.objects.filter(bidder=request.user)
     for item in bag:
         item.delete()
 
+    # Clear the bag from the session
     if 'bag' in request.session:
         del request.session['bag']
 
+    # Set the auction to is_sol
     for item in order.lineitems.all():
         auction = Auction.objects.get(pk=item.auction.id)
         auction.is_sold = True

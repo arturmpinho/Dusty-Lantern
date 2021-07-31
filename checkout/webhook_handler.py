@@ -60,6 +60,7 @@ class StripeWH_Handler:
             if value == "":
                 shipping_details.address[field] = None
 
+        # Save user info when set to True
         user_profile = None
         username = intent.metadata.username
         if username != 'AnonymousUser':
@@ -78,6 +79,7 @@ class StripeWH_Handler:
                 user_profile.default_county = shipping_details.address.state
                 user_profile.save()
 
+        # Check if the order already exists in the database for 5 times
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -138,10 +140,13 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
+
+        # Remove all bags for user
         bag = Bag.objects.filter(bidder=user_profile.user)
         for item in bag:
             item.delete()
 
+        # Set the auction to is_sold
         for item in order.lineitems.all():
             auction = Auction.objects.get(pk=item.auction.id)
             auction.is_sold = True

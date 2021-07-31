@@ -13,21 +13,21 @@ The full application has been checked in the following validators and all the er
 
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Jumbotron including logo and intro text
 * Overview of ongoing auctions
 
 #### Conclusion:
-On large screens and above the jumbotron is nicely displayed in 2 columns of 4 and 8 with text centered within the corresponding column.
+On large screens and above the jumbotron is nicely displayed in 2 columns of 4 and 8 with text centred within the corresponding column.
 As of tablets and below, these columns become full width leaving a nice white border around the jumbotron.
 Regarding the ongoing auctions preview, these are nicely displayed in large screens in 4 columns, adjusting to 2 in tablets and into 1 full-width column in mobile devices, as planned.
 
 ### Functionality
-In order to be able to display the ongoing auctions preview, I have decided to reuse the same functionality used to display all the auctions but filtering the results to 4. The auctions are displayed in the order that these are appendend to the ongoing_auctions list.
+In order to be able to display the ongoing auctions preview, I have decided to reuse the same functionality used to display all the auctions but filtering the results to 4. The auctions are displayed in the order that these are appended to the ongoing_auctions list.
 
-For each of the auctions, I retreive the corresponding info to display to the user, namely: product image, product category, product condition, product title, product brand, auction base amount, the start/end datetimes and its unique countdowntimer.
+For each of the auctions, I retrieve the corresponding info to display to the user, namely: product image, product category, product condition, product title, product brand, auction base amount, the start/end datetimes and its unique countdowntimer.
 
 Moreover, for each of them I also check the current highest bid by getting all the bids for that specific auction, ordering them by most recent first, and only saving the most recent bid as it is always the highest one.
 
@@ -37,7 +37,7 @@ When clicking on the "See details" button or the auction image, if the user is a
 #### User Goal
 * The homepage must be clear, intuitive and self-explanatory about the purpose of the website
 
-When the user enters the landing page, he/she is confrontated with a visually appealing website, with a minimalistic design, confortable and captivating colors, without overwhelming the user with tons of information.
+When the user enters the landing page, he/she is confronted with a visually appealing website, with a minimalistic design, comfortableand captivating colors, without overwhelming the user with tons of information.
 
 The landing page has a small intro text, describing its core intent and uses the ongoing auctions preview as the perfect explanatory tool of the website to the user.
 
@@ -46,17 +46,17 @@ The landing page has a small intro text, describing its core intent and uses the
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Display of the various categories
-* DIsplay of the select box with sorting possibilities
+* Display of the select box with sorting possibilities
 * Display of the ongoing auctions
 
 #### Conclusion:
 The **category filters**, represented via FontAwesome icons and the category name, are displayed on large screens in a row, stacking in a nicely manner when moving to smaller screens, as intended.
 
-The sorting functionality is represented by a centered select box, below the categories filter that maintains the same format across devices.
+The sorting functionality is represented by a centred select box, below the categories filter that maintains the same format across devices.
 
 Regarding the auctions, these are, as well as in the homepage, nicely displayed in large screens in 4 columns, adjusting to 2 in tablets and into 1 full-width column in mobile devices, as planned.
 
@@ -65,19 +65,19 @@ Regarding the auctions, these are, as well as in the homepage, nicely displayed 
 These categories are the product of a for loop in the categories model, retreiving all the current categories available and adjusting automatically when a new category is added via the django admin. Whenever the user clicks in one of the categories, the corresponding auctions are being displayed.
 
 * Sort auctions by category, product condition and end datetime
-The select box is powered by a sort filter and direction which displays the auctions in the correct order. Whne filtering on First closing/last closing, the auctions that are to be started are also part of the equation. This might be confusing for the user and therefore I have decided for the auctions that still have to start, to include a sentence mentioning the end datetime of the auction.
+The select box is powered by a sort filter and direction which displays the auctions in the correct order. When filtering on First closing/last closing, the auctions that are to be started are also part of the equation. This might be confusing for the user and therefore I have decided for the auctions that still have to start, to include a sentence mentioning the end datetime of the auction.
 
 * Auctions counter
-This functionality is intended to retreive the number of ongoing auctions to the user. To attain this, I have used javascript to count all the card elements and depending on the length (0,1 or more than 1) I append the approriate sentance to the cards-counter element.
+This functionality is intended to retrieve the number of ongoing auctions to the user. To attain this, I have used javascript to count all the card elements and depending on the length (0,1 or more than 1) I append the appropriate sentence to the cards-counter element.
 
 * List of ongoing auctions
 
-As per explained above in the Home section of this testing, for each of the auctions, I retreive the corresponding info to display to the user and also checking for the current highest bid by getting all the bids for that specific auction, ordering them by most recent first, and only saving the most recent bid.
+As per explained above in the Home section of this testing, for each of the auctions, I retrieve the corresponding info to display to the user and also checking for the current highest bid by getting all the bids for that specific auction, ordering them by most recent first, and only saving the most recent bid.
 
 As well, on the "See details" button or the auction image, if the user is authenticated it will take him/her to the auction details page. If not authenticated, the user will be redirected to the Sign In page.
 
 * Place bid functionality
-When an user is definetly interested in an article, he is guided to the auction details page of that specific auction. Here, on top of the already mentioned information that is displayed to the user and of additional product info, he/she are now able place bids.
+When an user is definitely interested in an article, he is guided to the auction details page of that specific auction. Here, on top of the already mentioned information that is displayed to the user and of additional product info, he/she are now able place bids.
 
 For this, the user has available a place bid button that submits the input field number to the DB. To accomplish this, I get a list of all the bids for that specific auction, if they exist, and once again order them by the bidding time (as it is always the highest bid). If the amount of the bid that the user submitted already exists, this will trigger an error message with the appropriate explanation of why the bid did not go through. If the bid goes through, it will be saved in the DB and a confirmation email sent to the user.
 
@@ -87,9 +87,9 @@ After several tests I conclude that the functionality is working properly and wi
 ### UX
 #### User stories: 
 * I want to see second-hand articles of my interest
-In order to meet this user story, I have decided to implement the filtering functionality and the sorting based on different criterias.
+In order to meet this user story, I have decided to implement the filtering functionality and the sorting based on different criteria.
 
-Both functionalities are working porperly, which gives any user the ability of filtering and sorting between all the auctions according to their likes.
+Both functionalities are working properly, which gives any user the ability of filtering and sorting between all the auctions according to their likes.
 
 * I want to place bids on auctions of my interest
 This user story is tackled on the auction detail page where the user has the ability of placing the bids on the auctions of interest.
@@ -104,7 +104,7 @@ The main auction page tackles this user story fully by displaying all the ongoin
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Pending payments
@@ -121,9 +121,9 @@ To display the pending payments and the orders history, I have used a responsive
 
 * Pending payments
 
-The user will has available a dedicated space to display all the won auctions. To attain this the best way possible, I first retreive the user's past orders, if any. At the same time, loop through all the bids placed by the user, taking the auction id as a parameter and appending the matches to a unique auctions list, if the bid is not there yet. Afterwards, from the unique auctions list, I retreive the highest bid restricting the search to the only auctions where the user was the highest bidder, and checking if those items have been already sold. 
+The user will has available a dedicated space to display all the won auctions. To attain this the best way possible, I first retrieve the user's past orders, if any. At the same time, loop through all the bids placed by the user, taking the auction id as a parameter and appending the matches to a unique auctions list, if the bid is not there yet. Afterwards, from the unique auctions list, I retrieve the highest bid restricting the search to the only auctions where the user was the highest bidder, and checking if those items have been already sold. 
 
-This functionality has passed all the tests and is working as intended, only displaying the current pending to be paid auctions ti the user, if he/she has them, or a cheering sentence if all payments are up to date.
+This functionality has passed all the tests and is working as intended, only displaying the current pending to be paid auctions to the user, if he/she has them, or a cheering sentence if all payments are up to date.
 
 
 * Default Delivery Information
@@ -148,11 +148,11 @@ The order detail page is shared with the checkout success page, adapting to the 
 
 To attain this functionality, I first get all the auctions and all the bids linked to each one of them, if any bid was placed in the auction. 
 
-If no bids were placed, the functionality ends here. If bids do exist, than before creating the new bag, I first rensure that no other bag, for that specific auction with that specific highest bid from that specific user does not exist. If that specific bag do exists, it will be deleted, and the new bag created instead.
+If no bids were placed, the functionality ends here. If bids do exist, than before creating the new bag, I first reinsure that no other bag, for that specific auction with that specific highest bid from that specific user does not exist. If that specific bag do exists, it will be deleted, and the new bag created instead.
 
 This option only allows the user to proceed to the checkout 1 item at a time, meaning that he/she won't be able to make bulk payments. This choice has been thought carefully in order and the reason why I picked this way is to not force the user to have to pay for a big amount if at the moment that is not possible, due to several reasons. This way, the user has the option to pay for the articles that he/she can pay at that moment. 
 
-In the future, I intend to implement bulk payments, giving the user the option to choose which items they want to pay, for via checkboxex displayed in the table.
+In the future, I intend to implement bulk payments, giving the user the option to choose which items they want to pay, for via checkboxes displayed in the table.
 
 The functionality is fully working, no bags are being displayed duplicate and only the ones not paid yet are shown. The checkout button takes the user to the checkout.
 
@@ -160,20 +160,20 @@ The functionality is fully working, no bags are being displayed duplicate and on
 
 #### User Stories
 * I want to see my outstanding auctions
-When the user goes to his/hers dashboard/profile page, he/she is confrontated with the pending payments table. If auctions are outstanding, they will be displayed in that table, if not the table displays a cheering message that no outstanding payments are available.
+When the user goes to his/hers dashboard/profile page, he/she is confronted with the pending payments table. If auctions are outstanding, they will be displayed in that table, if not the table displays a cheering message that no outstanding payments are available.
 
 This user story is tackled perfectly in this approach.
 
 
 * I want to see my history of won auctions
-On the same line as the previous point, the user is also shown a table with the summary of all the auctions that he/she won. This table not only meets but exceededs the user story, giving the usert he option to see the full details of the won aution.
+On the same line as the previous point, the user is also shown a table with the summary of all the auctions that he/she won. This table not only meets but exceeds the user story, giving the user the option to see the full details of the won auction.
 
 
 ## Auctions Management (for store owners)
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Data tables for auctions/products
@@ -181,11 +181,11 @@ On the same line as the previous point, the user is also shown a table with the 
 
 #### Conclusion:
 
-Due to the high amount of data to be displayed in these 2 sections (acutions & products), I have decided to use the DataTables from jQuery in order to guarantee the best responsiveness and UX for the site owners.
+Due to the high amount of data to be displayed in these 2 sections (auctions  & products), I have decided to use the DataTables from jQuery in order to guarantee the best responsiveness and UX for the site owners.
 
 The tables are displaying the most important corresponding info com with a search and pagination functionality. This approach has saved me a lot of time during the development phase.
 
-On small and medium devices, due to the amount of information, the tables auto generate an horizontal scroll but on large devices all the info is displayed without it in one good-looking and easily readble table.
+On small and medium devices, due to the amount of information, the tables auto generate an horizontal scroll but on large devices all the info is displayed without it in one good-looking and easily readable table.
 
 The forms are displayed full width across devices and are fully responsive and the images stack nicely in smaller devices when there are more than 1 and no issues are present.
 
@@ -198,7 +198,7 @@ These tables also contain an edit/delete button per line to give the super user 
 
 To delete an auction or product these functions get that specific auction/product and delete it from the DB. This is not done without a prior reconfirmation displayed through a modal.
 
-If the superuser decides to edit the auction/product, he/she is redirected to the specific form, which is being prepolupated with the current info stored in the DB. On change of the forms and submiting the forms, the new info is stored in the DB and the user redirected to the respective DataTable with a nice message confirming the editing was susscessfuly. If not, an error message is displayed.
+If the superuser decides to edit the auction/product, he/she is redirected to the specific form, which is being prepopulated with the current info stored in the DB. On change of the forms and submitting the forms, the new info is stored in the DB and the user redirected to the respective DataTable with a nice message confirming the editing was successfully. If not, an error message is displayed.
 
 Still during the editing, a form validation of the required fields is done, not allowing the user to proceed without completing these.
 
@@ -206,11 +206,11 @@ Moreover, as explained before, this edit form does not give the user the option 
 
 Back to the Auctions Management page, the user is shown a button to add new auctions, which will take him/her to the add auction form.
 
-In the form, upon submission, a datetime verification is done. If the auction start datetime is later than the current time and if the end datetime is later than the start enddate time, it allows the user to create the auction, if not, an error message will pop up with the corresponding message guiding the user to what the problem was during the submission. If submission is successfull, the user is redirected to the auctions management page with the success message in the toast.
+In the form, upon submission, a datetime verification is done. If the auction start datetime is later than the current time and if the end datetime is later than the start enddate time, it allows the user to create the auction, if not, an error message will pop up with the corresponding message guiding the user to what the problem was during the submission. If submission is successful, the user is redirected to the auctions management page with the success message in the toast.
 
 The add product follows the exact same logic, but instead of dealing with the datetime conditions, it has the multiple images twist. This means that for each image that is uploaded to the form, it creates an Image object and sets the first image as the main image.
 
-On save, the product is added to the DB, the user successfully informed and redirected to the product management section. If not, an error message is displayed. Form validation does not allow the user to proceed withou filling all the required fields first.
+On save, the product is added to the DB, the user successfully informed and redirected to the product management section. If not, an error message is displayed. Form validation does not allow the user to proceed without filling all the required fields first.
 
 CRUD functionality is fully met in this approach.
 
@@ -218,7 +218,7 @@ CRUD functionality is fully met in this approach.
 #### Site owner's stories
 * I want to add products to auctions
 
-Whenever, the store owner wants to add a product to the auctions, he goes has to go to the auctions manegement page. Here, he can proceed to the auction creation page, if the product he wants to sell already exists, or move to the products management if not.
+Whenever, the store owner wants to add a product to the auctions, he goes has to go to the auctions management page. Here, he can proceed to the auction creation page, if the product he wants to sell already exists, or move to the products management if not.
 In case the the product already exists, he enters the add auction form and form all the products list in the select box, he can select the desired product to be sold. After going through all the fields in the form, he is able to submit the form and the auction is created and the product put for auction.
 
 With this, this store owner's story is fully met.
@@ -248,7 +248,7 @@ This is tackled by the is_sold boolean field in the auctions are displayed in th
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Checkout form
@@ -258,7 +258,7 @@ This is tackled by the is_sold boolean field in the auctions are displayed in th
 
 On small and medium devices, these two sections are displayed on top of each other, being the first one the order summary, containing the most important info for the user, followed then by the payment form. In large devices these are placed next to each other.
 
-No responsivness issues were detected.
+No responsiveness issues were detected.
 
 ### Functionality
 * Checkout bag/Order summary
@@ -297,7 +297,7 @@ This summary meets this user story fully.
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 #### Tested for:
 * Logo display across devices
 * Nav links display
@@ -307,14 +307,14 @@ This summary meets this user story fully.
 #### Conclusion:
 The logo responds well in all devices, adapting its size responsively depending on the type of device.
 
-Nav links are displayed on the right side of the page in large screens and compacted into an hamburguer icon in small and medium devices where on toggle these are nicely displayed in the center of the dropdown menu.
+Nav links are displayed on the right side of the page in large screens and compacted into an hamburger icon in small and medium devices where on toggle these are nicely displayed in the center of the dropdown menu.
 
 The auction search bar, giving the user the ability to search for a particular item, is placed in the navbar on purpose, allowing helping the user to find any particular auction regardless of the step he is taking at any given moment. It also responds well in every device format.
 
 
 ### Functionality
 All navlinks and buttons work as intended, not broken and take the user to the wanted page.
-The logo responsiveness is powered by the follwoing piece of CSS, adjsuting the font-size automatically:
+The logo responsiveness is powered by the following piece of CSS, adjusting the font-size automatically:
 
     #dlbrand{
         font-size: min(max(2rem, 7vw), 5rem);
@@ -342,7 +342,7 @@ These requirement are fully met
 ### Responsiveness
 #### Tested on:
 * Devices: Acer Spin, MacBook Pro, iPhone8, iPhone11, iPhone12 mini and iPad
-* Broweser: Google Chrome, Firefox, Opera and Safari
+* Browser: Google Chrome, Firefox, Opera and Safari
 
 #### Tested for:
 * Broken links
@@ -351,7 +351,7 @@ These requirement are fully met
 #### Conclusion:
 The footer does not present any broken link and responds well across devices.
 
-It is devided in 2 rows, each one of them in 3 columns that stack nicely and smoothly in small devices. 
+It is divided in 2 rows, each one of them in 3 columns that stack nicely and smoothly in small devices. 
 
 ### Functionality
 ### UX
@@ -434,9 +434,9 @@ Nonetheless it would be ideal if all the page would scores above 90 for mobile a
 
 To achieve this in the future, I would implement the following:
 
-* Serve images that are appropriately-sized to save cellular data and improve load tim by using responsive images
+* Serve images that are appropriately-sized to save cellular data and improve load time by using responsive images
 
-* Serve static assets with an efficient cache policy. I have already added metadata to my AWS Bucket, setting the max age for th eCache-Control for all static files and media files to max-age=94608000 but it is still mentioned as a point of improvement for the performance. I will research this more in order to improve this.
+* Serve static assets with an efficient cache policy. I have already added metadata to my AWS Bucket, setting the max age for the Cache-Control for all static files and media files to max-age=94608000 but it is still mentioned as a point of improvement for the performance. I will research this more in order to improve this.
 
 
 * Minify all the files in order to improve the loading time

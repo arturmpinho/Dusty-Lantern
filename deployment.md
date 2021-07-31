@@ -2,20 +2,23 @@
 
 ## Local Deployment
 
-I have created the project using Github, from there I used [Gitpod](https://gitpod.io/) to write my code. 
-Then I used commits to git followed by "git push" to my GitHub repository. 
-I've deployed this project to Heroku and used "git push heroku master" to make sure my pushes to GitHub were also made to Heroku. 
+I have created Dusty Lantern using Github and Gitpod to write my code.
 
-For this project you need to create an account on Stripe for the reservation module as well as an account on AWS in order to store your static and media files.
+Then, I used commits to git followed by "git push" to my GitHub repository.
 
-This project can be ran locally by following the following steps: 
-I used Gitpod for development, so the following steps will be specific to Gitpod. 
-You will need to adjust them depending on your IDE. You can find more information about installing packages using pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+This project has been deployed to Heroku which was previously connected with the Speranza Repository in Github to automatically get all the pushes done in Github.
+
+For this project you will need to create an account on Stripe for the checkout module as well as an account on AWS in order to store your static and media files.
+
+### To run this project locally, follow the next steps:
+
+This project can be run locally by following the following steps: ( as I have user used Gitpod for development, the next steps are specific to it. Adjustment may be necessary depending on your IDE. More information about installing packages using pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+
 
 To clone the project: 
 
-1. From the application's repository, click the "code" button and download the zip of the repository.
-    Alternatively, you can clone the repository using the following line in your terminal:
+1. From the application's repository, click the "code" button and download the zip of the repository. 
+    You can also clone the repository using the following command in your terminal:
 
     ``` 
     git clone https://github.com/arturmpinho/Dusty-Lantern.git
@@ -27,8 +30,8 @@ To clone the project:
     pip3 install -r requirements.txt
     ```
 
-1. In your IDE, create a file containing your environmental variables called env.py at the root level of the application. 
-    It will need to contain the following lines and variables:
+1. In your IDE, create your env.py file at the root level of the application, containing the following lines and variables:
+
     ```
     import os
 
@@ -43,12 +46,21 @@ To clone the project:
     os.environ["STRIPE_CURRENCY"] = "EUR"
 
     ```
-    
+
+    Please note that you will need to update the "YOUR_SECRET_KEY" with your own secret key, as well as the STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY and STRIPE_WH_SECRET with values provided by Stripe.
+
     If you're not sure how to get the above Stripe variables, please visit the [Stripe Documentation](https://stripe.com/docs)
 
-    If you plan on pushing this application to a public repository, ensure that env.py is added to your .gitignore file.
+    Tip for your YOUR_SECRET_KEY: you can use a [Password Generator](https://randomkeygen.com/) in order to have a secure secret key.
 
-1. Migrate the database models with the following command
+    It is recommended to use minimum the 'Fort Knox Passwords'.
+
+    To find your YOUR_MONGODB_URI, go to your clusters and click on 'connect'. Choose 'connect' your application and copy the link provided. Don't forget to update the necessary fields such as password and database name.
+
+    If you plan on pushing this application to a public repository, ensure that env.py is added to your .gitignore file in order to safeguard your sensitive information.
+
+
+1. Migrate the database models by executing the following command in your terminal
     ```
     python3 manage.py migrate
     ```
@@ -56,22 +68,26 @@ To clone the project:
     ```
     python3 manage.py createsuperuser
     ```
-1. Run the app with the following command
+1. Run the application with the following command
     ```
     python manage.py runserver
     ```
+    
     The address to access the website is displayed in the terminal  
-    Add /admin to the end to access the admin panel with your superuser credentials
+    Add /admin to the end to access the Django admin panel with your superuser credentials
 
     
 ## Heroku Deployment 
 
-1. Login to your Heroku account and create a new app. Choose your region. 
-1. Once the app is created click on the resources button and under Add-ons, look for the Heroku Postgres to attach a postgres database to your project.
-    Select the Hobby Dev - Free plan and click 'Submit order form'
+1. Login to your [Heroku](https://www.heroku.com/) account and create a new app. Preferably, choose the region where you are located.
 
-1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py ():
-    !You shouldn't set the DEBUG variable in under config vars, only in your env.py to prevent DEBUG being active on live website. 
+1. Once the app is created click on the resources button and under Add-ons, look for the Heroku Postgres to attach a postgres database to your project.
+    
+    ``` Select the Hobby Dev - Free plan and click 'Submit order form' ```
+
+1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py :
+
+    ! You shouldn't set the DEBUG variable in under config vars, only in your env.py to prevent DEBUG being active on live website. 
 
     ```
     AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
@@ -89,7 +105,7 @@ To clone the project:
     STRIPE_WH_SECRET = "STRIPE_WH_SECRET"
     STRIPE_CURRENCY = EUR
 
-    DEFAULT_FROM_EMAIL = "DEFAULT_FROM_EMAIL"
+    DEFAULT_FROM_EMAIL = "your email address"
     EMAIL_HOST = "smtp.gmail.com"
     EMAIL_HOST_PASS = "EMAIL_HOST_PASS"
     EMAIL_HOST_USER = "EMAIL_HOST_USER"
@@ -100,16 +116,25 @@ To clone the project:
 1. After this go to your settings.py the dusty_lantern directory and comment out the default database configuration and add:
     ```
     DATABASES = {
-        'default': dj_database_url.parse('Put your DATABASE_URL here'))
+        'default': dj_database_url.parse('DATABASE_URL you have just copied'))
     }
     ```
+
+1. Login in to heroku via your terminal by using the following command 
+
+```
+ heroku login -i
+```
+
+In case you have set up two factor authentication on Heroku, you will need an API in order to proceed with the login
+
 1. Migrate again with the following command
     ```
     python3 manage.py migrate
     ```
 
 
-1. Create a superuser for the postgres database so you can have access to the django admin by setting up the credentials with the following command
+1. Create a superuser for the postgres database so you can have access to the Django admin by setting up the credentials with the following command
     ```
     python3 manage.py createsuperuser
     ```
@@ -141,7 +166,8 @@ To clone the project:
 This set up will allow your site to use Postgres in deployment and sqlite3 in development.
 
 
-1. Make sure you have your requirements.txt file and your Procfile. In case you don't, follow the below steps:
+1. Ensure the Procfile and requirements.txt files are created and updated in your local repository.
+
     Requirements:
     ```
     pip3 freeze --local > requirements.txt
@@ -168,19 +194,20 @@ This set up will allow your site to use Postgres in deployment and sqlite3 in de
     ```
     heroku config:set DISABLE_COLLECTSTATIC=1
     ```
-1. Go back to HEROKU and click "Deploy" in the navigation. 
-1. Scroll down to Deployment method and Select Github. 
-1. Look for your repository and click connect. 
-1. Under automatic deploys, click 'Enable automatic deploys'
 
-1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
-1. In order to commit your changes to the branch, use git push to push your changes. 
+1. Go back to Heroku and proceed to "Deploy" in the navigation. 
+1. Go to your "deployment method"-section and Choose "Github" for automatic deployment.
+1. Below, make sure your Github user is selected, and then enter the name of your repository. Click "search". When it finds the repository, then click the "connect" button.
+1. Scroll down and click "Enable automatic deployment".
+1. Just beneath, click "Deploy branch". Heroku will now start building the app.
+1. When Heroku finishes the build, click "view app" to open it.
+1. In order to commit your changes to the branch, use git push to push your changes via your IDE.
 
 
-1. Store your static files and media files on AWS. You can find more information about this on [Amazon S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).
-    If you would like to follow a tutorial instead, visit [this tutorial on Youtube from Amazon Web Services](https://youtube.com/watch?v=e6w9LwZJFIA)
+1. Tp store your static files and media files on AWS, you can find more information about this on [Amazon S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).
+    If you would prefer to follow a tutorial instead, visit [this tutorial on Youtube from Amazon Web Services](https://youtube.com/watch?v=e6w9LwZJFIA)
 
-1. Set up email service to send confirmation email and user verification email to the users. You can do this by following the next steps (Gmail only)
+1. Set up your email service to send the bidding confirmation email, order confirmation email and user verification email to the users. You can do this by following the next steps (The following steps are specificely for Gmail)
 
 (Be aware that this migth be different for other providers or the process might have changed over time)
 
@@ -214,3 +241,5 @@ This set up will allow your site to use Postgres in deployment and sqlite3 in de
         EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
         DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 ```
+
+

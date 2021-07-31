@@ -16,31 +16,43 @@
                 <hr>
             </div>
         </div>
+    </div>
 
+        <!-- Display of the order summary -->
+    <div class="container">
         <div class="row mt-5">
             <div class="col-12 col-lg-6 order-lg-last mb-5">
                 <p>Order Summary</p>
                 <div class="row">
-                    <div class="col-7 offset-2">
+                    <div class="col-4">
+                        <p class="mb-1 mt-0">Image</p>
+                    </div>
+                    <div class="col-4">
                         <p class="mb-1 mt-0">Auction</p>
                     </div>
-                    <div class="col-3 text-right">
+                    <div class="col-4 ">
                         <p class="mb-1 mt-0">Subtotal</p>
                     </div>
                 </div>
                 {% for auction in auctions %}
                     <div class="row">
-                        <div class="col-2 mb-1">
-                            {% for image in auction.product.images.all %}
-                                {% if image.main_image %}
-                                    <img src="{{ image.image.url }}" alt="auction-main-image" class="auction_main_image">
-                                {% endif %}
-                            {% endfor %}
+                        <div class="col-4 mb-2">
+                            <!-- Display of the main image if exists -->
+                            {% if auction.product.images.all %}
+                                {% for image in auction.product.images.all %}
+                                    {% if image.main_image %}
+                                        <img src="{{ image.image.url }}" alt="auction-main-image" class="auction_main_image">
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <!-- Display of logo when no image has been uploaded -->
+                                <img class = "auction_main_image" src="{{MEDIA_URL}}dusty_lantern_logo.png" alt="No image - display logo">
+                            {% endif %}
                         </div>
-                        <div class="col-7">
+                        <div class="col-4">
                             <p class="my-0"><strong>{{ auction.product }}</strong></p>
                         </div>
-                        <div class="col-3 text-right">
+                        <div class="col-4">
                             {% for bid in bids %}
                                 {% if bid.auction == auction %}
                             <p class="my-0">€ {{ bid.bid }}</p>
@@ -63,6 +75,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Order form to proceed with checkout -->
             <div class="col-12 col-lg-6">
                 <p>Please fill out the form below to complete your order</p>
                 <form action="{% url 'checkout' %}" method="POST" id="checkout-form">
@@ -123,6 +137,7 @@
         </div>
     </div>
 
+    <!-- Display of loading overlay when the payment is being done -->
     <div id="loading-overlay">
         <h1 class="text-light logo-font loading-spinner">
             <span class="icon">

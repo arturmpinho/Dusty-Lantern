@@ -1,5 +1,5 @@
 {% load static %}
-
+<!-- Navigation for the website -->
 <header>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark p-0">
         <div class="container-fluid py-3">
@@ -10,6 +10,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDustyLantern">
+                
+                <!-- When the user is logged in, display a search bar in the navbar -->
+
                 {% if request.user.is_authenticated %}
                 <form method="GET" action="{% url 'auctions' %}" class="d-flex">
                     <input class="form-control me-2 fs-4" type="search" name="q" placeholder="Search Auctions" aria-label="Search Auctions">
