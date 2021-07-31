@@ -401,7 +401,7 @@ More information about the local deployment as well as deployment on Heroku can 
 * [MDN WebDocs](https://developer.mozilla.org/ "MDN WebDocs")
 
 #### **Media**
-* You can find all the images sources through the Unslplash collection prepared here.
+* You can find all the images sources through the Unslplash collection prepared [here](https://unsplash.com/collections/cf1_UHDmb8c/dusty-lantern/aba2b966f9b41ed3481bedf0f8f5174e "Unsplash").
 
 <a></a>
 
