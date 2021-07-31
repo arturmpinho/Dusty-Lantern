@@ -112,7 +112,7 @@ The main auction page tackles this user story fully by displaying all the ongoin
 #### Tested for:
 * Pending payments
 * Default Delivery Information
-* Orders
+* Orders history
 
 #### Conclusion:
 Despite of this 3 sections being functionally independent, I have managed to integrate them quite nicely. These are separated in large screens between 2 rows (1st for the pending payments and the 2nd for the remaining sections), stacking the default delivery information and orders sections into a full width column in smaller devices.
@@ -123,19 +123,53 @@ To display the pending payments and the orders history, I have used a responsive
 ### Functionality
 * Pending payments
 
-The user will has available a dedicated space to display all the won auctions. To attain this the best way possible, I first retreive the user's past orders, if any. At the same time, loop through all the bids placed by the user, taking the auction id as a parameter and appending the matches to a unique auctions list, if the bid is not there yet. Afterwards, from the unique auctions list, I retreive the highest bid restricting the search to the only auctions where the user was the highest bidder, and checking if the items has been sold already. 
+The user will has available a dedicated space to display all the won auctions. To attain this the best way possible, I first retreive the user's past orders, if any. At the same time, loop through all the bids placed by the user, taking the auction id as a parameter and appending the matches to a unique auctions list, if the bid is not there yet. Afterwards, from the unique auctions list, I retreive the highest bid restricting the search to the only auctions where the user was the highest bidder, and checking if those items have been already sold. 
 
-While testing this 
-
+This functionality has passed all the tests and is working as intended, only displaying the current pending to be paid auctions ti the user, if he/she has them, or a cheering sentence if all payments are up to date.
 
 
 * Default Delivery Information
-* Orders
+
+The default delivery information is working as planned. The form is being prepopulated with the default user info straight from the DB and on click of update my info button, the user receives a success message stating the profile has correctly updated or and error message if profile fails to be updated.
+
+
+* Orders history
+
+The orders history section is merely displaying the orders list for a given authenticated user. The orders are created at a later stage during the checkout phase.
+
+On click of the order number, the user is redirected to a new page, displaying the full detail of their past order. The user is, as well, alerted to the fact that he/she is looking into a past order.
+
+The testing succeeded for this functionality as it is working as planned, only displaying the concluded orders for that specific user.
+
+The order detail page is shared with the checkout success page, adapting to the situation if the user just finished a payment or, in this case, he/she comes from the profile page. All redirects are working properly.
+
+
 * Add to bag and proceed to checkout
+
+***For the sake of clarification, the words bag and cart are being displayed in the code interchangeably.***
+
+To attain this functionality, I first get all the auctions and all the bids linked to each one of them, if any bid was placed in the auction. 
+
+If no bids were placed, the functionality ends here. If bids do exist, than before creating the new bag, I first rensure that no other bag, for that specific auction with that specific highest bid from that specific user does not exist. If that specific bag do exists, it will be deleted, and the new bag created instead.
+
+This option only allows the user to proceed to the checkout 1 item at a time, meaning that he/she won't be able to make bulk payments. This choice has been thought carefully in order and the reason why I picked this way is to not force the user to have to pay for a big amount if at the moment that is not possible, due to several reasons. This way, the user has the option to pay for the articles that he/she can pay at that moment. 
+
+In the future, I intend to implement bulk payments, giving the user the option to choose which items they want to pay, for via checkboxex displayed in the table.
+
+The functionality is fully working, no bags are being displayed duplicate and only the ones not paid yet are shown. The checkout button takes the user to the checkout.
 
 ### UX
 
 #### User Stories
+* I want to see my outstanding auctions
+When the user goes to his/hers dashboard/profile page, he/she is confrontated with the pending payments table. If auctions are outstanding, they will be displayed in that table, if not the table displays a cheering message that no outstanding payments are available.
+
+This user story is tackled perfectly in this approach.
+
+
+* I want to see my history of won auctions
+On the same line as the previous point, the user is also shown a table with the summary of all the auctions that he/she won. This table not only meets but exceededs the user story, giving the usert he option to see the full details of the won aution.
+
 
 ### Lighthouse report
 
